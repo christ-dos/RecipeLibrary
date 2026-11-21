@@ -30,12 +30,7 @@ import androidx.compose.ui.unit.sp
 import com.example.recipelibrary.data.Recipe
 import java.util.UUID
 
-private val CATEGORIES = listOf(
-    "Apéritifs", "Biscuits et petits gâteaux", "Boissons",
-    "Accompagnements", "Desserts", "Entrées", "Gâteaux", "Goûters",
-    "Pâtes et riz", "Petits-déjeuners", "Plats principaux", "Salades",
-    "Sandwichs et wraps", "Sauces", "Soupes", "Tartes et quiches"
-)
+private val CATEGORIES = com.example.recipelibrary.data.RecipeCategories.ALL
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -55,6 +50,7 @@ fun AddEditRecipeScreen(
     var categoryExpanded by remember { mutableStateOf(false) }
     var tags  by remember { mutableStateOf(existing?.tags?.joinToString(", ") ?: "") }
     var notes by remember { mutableStateOf(existing?.notes ?: "") }
+    var servingsText by remember { mutableStateOf(existing?.servings?.toString() ?: "") }
 
     var onSpeechResult by remember { mutableStateOf<((String) -> Unit)?>(null) }
 
@@ -96,8 +92,10 @@ fun AddEditRecipeScreen(
         else null
     }
     val categoryError = if (category.isBlank()) "Choisissez une catégorie." else null
+    val servingsValue = parseServings(servingsText)
+    val servingsError = if (servingsText.isNotBlank() && servingsValue == null) "Entrez un nombre de parts de 1 à 100." else null
     val isValid = titleError == null && ingredientsError == null && stepsError == null &&
-                  urlError == null && categoryError == null
+                  urlError == null && categoryError == null && servingsError == null
 
     Scaffold(
         backgroundColor = ColorScreenBg,
@@ -121,6 +119,26 @@ fun AddEditRecipeScreen(
                     .padding(16.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
+                // Recette importée incomplète : rappel des champs encore « À compléter »
+                val toComplete = com.example.recipelibrary.data.ImportedRecipe
+                    .missingFields(title, ingredients, steps)
+                if (toComplete.isNotEmpty()) {
+                    Card(
+                        backgroundColor = Color(0xFFFFF4E0),
+                        elevation = 0.dp,
+                        shape = RoundedCornerShape(10.dp),
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text(
+                            "Champs à compléter : ${toComplete.joinToString(", ")}.\n" +
+                                "Tu peux enregistrer maintenant et les remplir plus tard.",
+                            modifier = Modifier.padding(10.dp),
+                            color = Color(0xFF8A5A00),
+                            fontSize = 13.sp
+                        )
+                    }
+                }
+
                 // Titre
                 FormCard {
                     FieldLabel(
@@ -190,6 +208,26 @@ fun AddEditRecipeScreen(
                         Text("Liste triée par ordre alphabétique", fontSize = 12.sp, color = ColorInactiveText)
                     }
                     if (categoryError != null) ErrorText(categoryError)
+                }
+
+                // Nombre de parts
+                FormCard {
+                    FieldLabel(
+                        label = "Nombre de parts",
+                        optional = true,
+                        subtitle = "Laissez vide si vous ne savez pas : il sera estimé"
+                    )
+                    Spacer(Modifier.height(8.dp))
+                    FormTextField(
+                        value = servingsText,
+                        onValueChange = { servingsText = it.take(4) },
+                        placeholder = "Ex. : 4",
+                        singleLine = true,
+                        isError = servingsError != null,
+                        keyboardType = androidx.compose.ui.text.input.KeyboardType.Number,
+                        modifier = Modifier.semantics(mergeDescendants = true) { testTag = "form_servings" }
+                    )
+                    if (servingsError != null) ErrorText(servingsError)
                 }
 
                 // Ingrédients
@@ -295,20 +333,31 @@ fun AddEditRecipeScreen(
                 text = "Enregistrer",
                 onClick = {
                     val now = System.currentTimeMillis()
+                    val lines = ingredients.lines().map { it.trim() }.filter { it.isNotEmpty() }
+                    // Origine des parts : inchangée si la valeur n'a pas bougé, USER si elle a changé.
+                    val servingsSource = when {
+                        servingsValue == null -> null
+                        servingsValue == existing?.servings -> existing.servingsSource ?: Recipe.SERVINGS_USER
+                        else -> Recipe.SERVINGS_USER
+                    }
                     onSave(
                         Recipe(
                             id          = existing?.id ?: UUID.randomUUID().toString(),
                             title       = title.trim(),
                             sourceUrl   = sourceUrl.trim().ifEmpty { null },
                             description = description.trim().ifEmpty { null },
-                            ingredients = ingredients.lines().map { it.trim() }.filter { it.isNotEmpty() },
+                            ingredients = lines,
                             steps       = steps.lines().map { it.trim() }.filter { it.isNotEmpty() },
                             category    = category.trim().ifEmpty { null },
                             tags        = tags.split(",").map { it.trim().lowercase() }.filter { it.isNotEmpty() },
                             notes       = notes.trim().ifEmpty { null },
                             imageUrl    = existing?.imageUrl,
                             createdAt   = existing?.createdAt ?: now,
-                            updatedAt   = now
+                            updatedAt   = now,
+                            servings    = servingsValue,
+                            servingsSource = servingsSource,
+                            // Poids corrigés ou estimés conservés ; seules les lignes disparues perdent leur entrée.
+                            ingredientWeights = com.example.recipelibrary.data.IngredientWeights.keepForLines(existing?.ingredientWeights.orEmpty(), lines)
                         )
                     )
                 },
@@ -388,11 +437,13 @@ private fun FormTextField(
     placeholder: String,
     modifier: Modifier = Modifier,
     singleLine: Boolean = false,
-    isError: Boolean = false
+    isError: Boolean = false,
+    keyboardType: androidx.compose.ui.text.input.KeyboardType = androidx.compose.ui.text.input.KeyboardType.Text
 ) {
     OutlinedTextField(
         value = value,
         onValueChange = onValueChange,
+        keyboardOptions = androidx.compose.foundation.text.KeyboardOptions(keyboardType = keyboardType),
         placeholder = { Text(placeholder, color = ColorInactiveText, fontSize = 14.sp) },
         isError = isError,
         singleLine = singleLine,

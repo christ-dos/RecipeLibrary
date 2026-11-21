@@ -6,7 +6,13 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import android.widget.Toast
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
+import com.example.recipelibrary.data.FileTextExtractor
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -23,12 +29,22 @@ fun FileImportScreen(
     onFilePicked: (String) -> Unit
 ) {
     val context = LocalContext.current
-    val launcher = rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+    val scope = rememberCoroutineScope()
+    val launcher = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
         if (uri != null) {
-            val text = try {
-                context.contentResolver.openInputStream(uri)?.bufferedReader()?.readText()
-            } catch (e: Exception) { null }
-            if (!text.isNullOrBlank()) onFilePicked(text)
+            scope.launch {
+                val result = withContext(Dispatchers.IO) {
+                    runCatching { FileTextExtractor.extract(context, uri) }
+                }
+                val text = result.getOrNull()
+                when {
+                    result.exceptionOrNull() is FileTextExtractor.UnsupportedFormatException ->
+                        Toast.makeText(context, "Format non pris en charge (TXT, PDF ou DOCX)", Toast.LENGTH_LONG).show()
+                    text.isNullOrBlank() ->
+                        Toast.makeText(context, "Aucun texte trouvé dans ce fichier", Toast.LENGTH_LONG).show()
+                    else -> onFilePicked(text)
+                }
+            }
         }
     }
 
@@ -51,7 +67,7 @@ fun FileImportScreen(
             color = Color(0xFF4A16C6)
         )
         Text(
-            "Importez un fichier depuis votre appareil (PDF, TXT, DOCX, etc.) pour créer une recette.",
+            "Importez un fichier depuis votre appareil (PDF, TXT ou DOCX) pour créer une recette.",
             fontSize = 14.sp,
             color = Color(0xFF625B70),
             textAlign = TextAlign.Center
@@ -85,7 +101,7 @@ fun FileImportScreen(
             }
         }
         Button(
-            onClick = { launcher.launch("text/plain") },
+            onClick = { launcher.launch(FileTextExtractor.SUPPORTED_MIME_TYPES) },
             shape = RoundedCornerShape(24.dp),
             colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF7A2CF6)),
             modifier = Modifier.fillMaxWidth().height(52.dp)

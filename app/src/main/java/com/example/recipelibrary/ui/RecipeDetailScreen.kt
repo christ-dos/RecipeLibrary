@@ -71,9 +71,27 @@ fun RecipeDetailScreen(
     onDuplicate: () -> Unit = {},
     onImageChange: (String) -> Unit = {},
     pendingImageUrl: String? = null,
-    onOpenImageSearch: () -> Unit = {}
+    onOpenImageSearch: () -> Unit = {},
+    /** Table des aliments ; null tant qu'elle n'est pas chargée (pas de bandeau). */
+    foodTable: com.example.recipelibrary.data.nutrition.FoodTable? = null,
+    /** Nombre de parts saisi depuis la fiche (story 5). */
+    onServingsChange: ((Int) -> Unit)? = null,
+    /** Poids corrigé d'une ligne d'ingrédients (story 2). */
+    onWeightChange: ((String, com.example.recipelibrary.data.IngredientWeight) -> Unit)? = null
 ) {
     val context = LocalContext.current
+    // Calcul mémorisé : refait seulement si la recette ou la table change (SC-004).
+    val nutrition = remember(recipe, foodTable) {
+        foodTable?.let { com.example.recipelibrary.data.nutrition.NutritionCalculator(it).estimate(recipe) }
+    }
+    var showNutritionDetail by remember { mutableStateOf(false) }
+    if (showNutritionDetail && nutrition != null && onWeightChange != null) {
+        NutritionDetailSheet(
+            estimate = nutrition,
+            onDismiss = { showNutritionDetail = false },
+            onWeightChange = onWeightChange
+        )
+    }
     val scope = rememberCoroutineScope()
     var showDeleteDialog by remember { mutableStateOf(false) }
     var showImageDialog by remember { mutableStateOf(false) }
@@ -508,6 +526,17 @@ fun RecipeDetailScreen(
                             )
                         }
                     }
+                }
+            }
+
+            // Calories par part
+            if (nutrition != null) {
+                item {
+                    NutritionBanner(
+                        estimate = nutrition,
+                        onOpenDetail = if (onWeightChange != null) ({ showNutritionDetail = true }) else null,
+                        onServingsChange = onServingsChange
+                    )
                 }
             }
 

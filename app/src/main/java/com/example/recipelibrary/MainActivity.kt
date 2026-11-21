@@ -47,8 +47,16 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Build
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import com.example.recipelibrary.data.DatabaseProvider
+import com.example.recipelibrary.data.ImportQueue
+import com.example.recipelibrary.data.PendingImport
 import com.example.recipelibrary.data.Recipe
+import com.example.recipelibrary.data.RecipeCategories
 import com.example.recipelibrary.data.RecipeRepository
 import com.example.recipelibrary.ui.*
 import com.google.gson.stream.JsonReader
@@ -202,6 +210,20 @@ private fun RecipeBottomNav(currentRoute: String?, onTabSelected: (String) -> Un
     }
 }
 
+// ── Navigation entre onglets ──────────────────────────────────────────────────
+/**
+ * Ouvre un onglet de la barre du bas. Toute ouverture d'onglet (barre, bandeau, notification)
+ * doit passer par ici : si un onglet est ouvert autrement, la navigation mémorise son état
+ * sous "list" et y renvoie à chaque fois qu'on veut revenir aux recettes.
+ */
+internal fun NavHostController.navigateToTab(route: String) {
+    navigate(route) {
+        popUpTo("list") { saveState = true }
+        launchSingleTop = true
+        restoreState = true
+    }
+}
+
 // ── String helper ─────────────────────────────────────────────────────────────
 private fun String.normalizeTitle(): String =
     if (length > 1 && this == this.uppercase()) lowercase().replaceFirstChar { it.uppercase() } else this
@@ -213,15 +235,49 @@ class MainActivity : ComponentActivity() {
     private var pendingImport: Recipe? = null
     private var pendingOcrText: String? = null
     private var pendingImageUrl: String? = null
+    /** Lien de la file d'attente en cours de validation : supprimé de la file une fois la recette enregistrée. */
+    private var pendingQueueId: Long? = null
+    /** Ouvrir l'écran de la file d'attente (depuis la notification). */
+    private var openQueueRequested by mutableStateOf(false)
+
+    private val notificationPermission =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { }
+
+    /** Demandée la première fois qu'un lien est mis en file, pour pouvoir prévenir quand la recette est prête. */
+    private fun askNotificationPermissionIfNeeded() {
+        if (Build.VERSION.SDK_INT >= 33 &&
+            ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED
+        ) {
+            notificationPermission.launch(Manifest.permission.POST_NOTIFICATIONS)
+        }
+    }
+
+    /** Table des aliments chargée au démarrage ; null tant que le chargement n'est pas fini. */
+    private var foodTable by androidx.compose.runtime.mutableStateOf<com.example.recipelibrary.data.nutrition.FoodTable?>(null)
+
+    override fun onResume() {
+        super.onResume()
+        // De retour dans l'app (souvent à la maison) : on relance tout de suite les liens en attente
+        lifecycleScope.launch { runCatching { ImportQueue.kickIfWaiting(applicationContext) } }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
+        com.example.recipelibrary.data.LanNetwork.init(applicationContext)
+        // Table des aliments (calories) : chargée une fois, hors du fil principal.
+        lifecycleScope.launch {
+            val table = kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.IO) {
+                runCatching { com.example.recipelibrary.data.nutrition.FoodTable.load(applicationContext) }.getOrNull()
+            }
+            foodTable = table
+        }
         val db      = DatabaseProvider.getDatabase(applicationContext)
         val repo    = RecipeRepository(db.recipeDao())
         val factory = RecipeViewModelFactory(repo)
         val listVm  = ViewModelProvider(this, factory).get(RecipeListViewModel::class.java)
+        val queueFlow = db.pendingImportDao().observeAll()
 
         handleIncomingIntent(intent)
 
@@ -231,11 +287,20 @@ class MainActivity : ComponentActivity() {
             val context = LocalContext.current
             val backStack by navController.currentBackStackEntryAsState()
             val currentRoute = backStack?.destination?.route
+            val queue by queueFlow.collectAsState(initial = emptyList())
+            val readyCount = queue.count { it.status == PendingImport.READY }
+            val openQueueScreen = { navController.navigate("queue") { launchSingleTop = true } }
 
             LaunchedEffect(Unit) {
                 pendingImport?.let {
                     pendingImport = null
                     navController.navigate("add")
+                }
+            }
+            LaunchedEffect(openQueueRequested) {
+                if (openQueueRequested) {
+                    openQueueRequested = false
+                    openQueueScreen()
                 }
             }
 
@@ -264,13 +329,35 @@ class MainActivity : ComponentActivity() {
                                 }
                             }
                         ) { innerPadding ->
-                            HomeScreen(
-                                recipes = recipes,
-                                onNavigateToDetail = { id -> navController.navigate("detail/$id") },
-                                onNavigateToEdit = { id -> navController.navigate("edit/$id") },
-                                onDeleteRecipe = { id -> listVm.delete(id) },
-                                modifier = Modifier.padding(innerPadding)
-                            )
+                            Column(Modifier.padding(innerPadding)) {
+                                if (queue.isNotEmpty()) {
+                                    Card(
+                                        backgroundColor = ActiveSurface,
+                                        elevation = 0.dp,
+                                        shape = RoundedCornerShape(12.dp),
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .padding(horizontal = 16.dp, vertical = 8.dp)
+                                            .clickable { openQueueScreen() }
+                                    ) {
+                                        Text(
+                                            (if (readyCount > 0) "📥 " else "⏳ ") +
+                                                "File d'attente : ${queueSummary(queue)} — toucher pour voir",
+                                            modifier = Modifier.padding(12.dp),
+                                            color = ActiveLabel,
+                                            fontWeight = FontWeight.SemiBold,
+                                            fontSize = 14.sp
+                                        )
+                                    }
+                                }
+                                HomeScreen(
+                                    recipes = recipes,
+                                    onNavigateToDetail = { id -> navController.navigate("detail/$id") },
+                                    onNavigateToEdit = { id -> navController.navigate("edit/$id") },
+                                    onDeleteRecipe = { id -> listVm.delete(id) },
+                                    modifier = Modifier.weight(1f)
+                                )
+                            }
                         }
                     }
 
@@ -283,15 +370,55 @@ class MainActivity : ComponentActivity() {
                             Box(Modifier.padding(innerPadding)) {
                                 UrlImportScreen(
                                     onImport = { recipe ->
-                                        pendingImport = recipe
+                                        pendingImport = RecipeCategories.keepKnown(recipe)
                                         navController.navigate("add") {
                                             popUpTo("url_import") { inclusive = true }
                                         }
                                     },
                                     onBack = { navController.popBackStack() },
-                                    parseJson = { text -> parseRecipeJson(text) }
+                                    parseJson = { text -> parseRecipeJson(text) },
+                                    onQueue = { url ->
+                                        askNotificationPermissionIfNeeded()
+                                        lifecycleScope.launch { ImportQueue.add(applicationContext, url) }
+                                    },
+                                    pending = queue,
+                                    onOpenQueue = openQueueScreen
                                 )
                             }
+                        }
+                    }
+
+                    // ── File d'attente ────────────────────────────────────────
+                    composable("queue") {
+                        Scaffold(
+                            backgroundColor = ScreenBg,
+                            topBar = { RecipeTopBar("File d'attente", showBack = true) { navController.popBackStack() } }
+                        ) { innerPadding ->
+                            ImportQueueScreen(
+                                pending = queue,
+                                parseJson = { text -> parseRecipeJson(text) },
+                                modifier = Modifier.padding(innerPadding),
+                                onOpen = { item ->
+                                        val recipe = item.recipeJson?.let { parseRecipeJson(it) }
+                                        if (recipe == null) {
+                                            Toast.makeText(context, "Impossible de lire cette recette", Toast.LENGTH_SHORT).show()
+                                        } else {
+                                            pendingImport = RecipeCategories.keepKnown(recipe)
+                                            pendingQueueId = item.id
+                                            navController.navigate("add")
+                                        }
+                                    },
+                                onRetry = { item ->
+                                    lifecycleScope.launch { ImportQueue.retry(applicationContext, item) }
+                                },
+                                onDelete = { item ->
+                                    lifecycleScope.launch { ImportQueue.remove(applicationContext, item.id) }
+                                },
+                                onRunNow = {
+                                    lifecycleScope.launch { ImportQueue.kick(applicationContext) }
+                                    Toast.makeText(context, "Import relancé (Wi-Fi de la maison nécessaire)", Toast.LENGTH_SHORT).show()
+                                }
+                            )
                         }
                     }
 
@@ -397,18 +524,35 @@ class MainActivity : ComponentActivity() {
                             onOpenImageSearch = {
                                 val query = Uri.encode(recipe.title)
                                 startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/search?q=$query&tbm=isch")))
+                            },
+                            foodTable = foodTable,
+                            onServingsChange = { n ->
+                                listVm.upsert(com.example.recipelibrary.data.RecipeEdits.withServings(recipe, n))
+                            },
+                            onWeightChange = { line, w ->
+                                // Correction à la main : prioritaire, enregistrée avec la recette (SC-005)
+                                listVm.upsert(com.example.recipelibrary.data.RecipeEdits.withUserWeight(recipe, line, w))
                             }
                         )
                     }
 
                     // ── Add ───────────────────────────────────────────────────
                     composable("add") {
-                        val preloaded = remember { pendingImport.also { pendingImport = null } }
+                        // Recette importée : les champs obligatoires vides deviennent « À compléter »
+                        val preloaded = remember {
+                            pendingImport.also { pendingImport = null }
+                                ?.let(com.example.recipelibrary.data.ImportedRecipe::fillMissing)
+                        }
+                        val queueId = remember { pendingQueueId.also { pendingQueueId = null } }
                         AddEditRecipeScreen(
                             existing = preloaded,
                             onSave = { recipe ->
                                 listVm.upsert(recipe) {
                                     navController.popBackStack()
+                                }
+                                // Recette validée depuis la file d'attente : on la retire de la file
+                                if (queueId != null) {
+                                    lifecycleScope.launch { ImportQueue.remove(applicationContext, queueId) }
                                 }
                                 Toast.makeText(context, "Recette enregistrée", Toast.LENGTH_SHORT).show()
                             },
@@ -456,13 +600,7 @@ class MainActivity : ComponentActivity() {
                             .fillMaxWidth()
                     ) {
                         RecipeBottomNav(currentRoute) { route ->
-                            if (route != currentRoute) {
-                                navController.navigate(route) {
-                                    popUpTo("list") { saveState = true }
-                                    launchSingleTop = true
-                                    restoreState = true
-                                }
-                            }
+                            if (route != currentRoute) navController.navigateToTab(route)
                         }
                     }
                 }
@@ -477,6 +615,10 @@ class MainActivity : ComponentActivity() {
 
     private fun handleIncomingIntent(intent: Intent?) {
         if (intent == null) return
+        if (intent.getBooleanExtra(ImportQueue.EXTRA_OPEN_QUEUE, false)) {
+            openQueueRequested = true
+            return
+        }
         val type = intent.type ?: ""
         when {
             type.startsWith("image/") && intent.action == Intent.ACTION_SEND -> {

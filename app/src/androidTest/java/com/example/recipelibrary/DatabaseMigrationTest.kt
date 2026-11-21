@@ -7,6 +7,10 @@ import com.example.recipelibrary.data.AppDatabase
 import com.example.recipelibrary.data.MIGRATION_1_2
 import com.example.recipelibrary.data.MIGRATION_2_3
 import com.example.recipelibrary.data.MIGRATION_3_4
+import com.example.recipelibrary.data.MIGRATION_4_5
+import com.example.recipelibrary.data.MIGRATION_5_6
+import com.example.recipelibrary.data.IngredientWeight
+import com.example.recipelibrary.data.PendingImport
 import com.example.recipelibrary.data.Recipe
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
@@ -38,7 +42,7 @@ class DatabaseMigrationTest {
     fun createDb() {
         val ctx = InstrumentationRegistry.getInstrumentation().targetContext
         db = Room.inMemoryDatabaseBuilder(ctx, AppDatabase::class.java)
-            .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4)
+            .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5)
             .allowMainThreadQueries()
             .build()
     }
@@ -136,6 +140,123 @@ class DatabaseMigrationTest {
         db.recipeDao().deleteById("r-del")
 
         assertEquals(null, db.recipeDao().getById("r-del"))
+    }
+
+    // ── 7. Migration 4 → 5 : les recettes existantes survivent, la file d'attente apparaît ──
+
+    @Test
+    fun migration_4_to_5_keepsRecipes_andCreatesQueueTable() = runBlocking {
+        val ctx = InstrumentationRegistry.getInstrumentation().targetContext
+        val name = "migration-test-v4.db"
+        ctx.deleteDatabase(name)
+
+        // Base au format v4, telle que Room la créait avant la file d'attente
+        ctx.openOrCreateDatabase(name, android.content.Context.MODE_PRIVATE, null).use { raw ->
+            raw.execSQL("CREATE TABLE IF NOT EXISTS `recipes` (`id` TEXT NOT NULL, `title` TEXT NOT NULL, `source_url` TEXT, `description` TEXT, `ingredients` TEXT NOT NULL, `steps` TEXT NOT NULL, `category` TEXT, `tags` TEXT NOT NULL, `notes` TEXT, `image_url` TEXT, `created_at` INTEGER NOT NULL, `updated_at` INTEGER NOT NULL, PRIMARY KEY(`id`))")
+            raw.execSQL(
+                "INSERT INTO recipes (id, title, ingredients, steps, category, tags, created_at, updated_at) " +
+                    "VALUES ('keep-1', 'Quiche lorraine', '[\"3 oeufs\"]', '[\"Cuire\"]', 'Tartes et quiches', '[]', 1000, 2000)"
+            )
+            raw.version = 4
+        }
+
+        val migrated = Room.databaseBuilder(ctx, AppDatabase::class.java, name)
+            .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6)
+            .allowMainThreadQueries()
+            .build()
+        try {
+            val kept = migrated.recipeDao().getById("keep-1")
+            assertNotNull("La recette existante doit survivre à la migration", kept)
+            assertEquals("Quiche lorraine", kept!!.title)
+            assertEquals(listOf("3 oeufs"), kept.ingredients)
+            assertEquals("Tartes et quiches", kept.category)
+
+            val dao = migrated.pendingImportDao()
+            val id = dao.insert(PendingImport(url = "https://insta/reel/1"))
+            assertEquals(1, dao.countWaiting())
+            assertEquals("https://insta/reel/1", dao.nextWaiting()?.url)
+            dao.update(dao.nextWaiting()!!.copy(status = PendingImport.READY, recipeJson = "{}"))
+            assertEquals(0, dao.countWaiting())
+            dao.deleteById(id)
+            assertEquals(null, dao.findByUrl("https://insta/reel/1"))
+        } finally {
+            migrated.close()
+            ctx.deleteDatabase(name)
+        }
+    }
+
+    // ── 8. Migration 5 → 6 : recettes relues à l'identique, nouvelles colonnes vides ──
+
+    @Test
+    fun migration_5_to_6_keepsRecipesIdentical_newColumnsEmpty() = runBlocking {
+        val ctx = InstrumentationRegistry.getInstrumentation().targetContext
+        val name = "migration-test-v5.db"
+        ctx.deleteDatabase(name)
+
+        // Base au format v5, telle que Room la créait avant les calories
+        ctx.openOrCreateDatabase(name, android.content.Context.MODE_PRIVATE, null).use { raw ->
+            raw.execSQL("CREATE TABLE IF NOT EXISTS `recipes` (`id` TEXT NOT NULL, `title` TEXT NOT NULL, `source_url` TEXT, `description` TEXT, `ingredients` TEXT NOT NULL, `steps` TEXT NOT NULL, `category` TEXT, `tags` TEXT NOT NULL, `notes` TEXT, `image_url` TEXT, `created_at` INTEGER NOT NULL, `updated_at` INTEGER NOT NULL, PRIMARY KEY(`id`))")
+            raw.execSQL("CREATE TABLE IF NOT EXISTS `pending_imports` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `url` TEXT NOT NULL, `status` TEXT NOT NULL, `recipe_json` TEXT, `error` TEXT, `created_at` INTEGER NOT NULL)")
+            raw.execSQL(
+                "INSERT INTO recipes VALUES ('v5-full', 'Tarte aux pommes', 'https://youtu.be/abc', 'Classique', " +
+                    "'[\"3 pommes\",\"200 g de farine\"]', '[\"Éplucher\",\"Cuire 30 min\"]', 'Desserts', " +
+                    "'[\"fruits\",\"facile\"]', 'Servir tiède', 'https://example.com/img.jpg', 1000, 2000)"
+            )
+            raw.execSQL(
+                "INSERT INTO recipes (id, title, ingredients, steps, tags, created_at, updated_at) " +
+                    "VALUES ('v5-min', 'Minimal', '[]', '[]', '[]', 3000, 4000)"
+            )
+            raw.execSQL("INSERT INTO pending_imports (url, status, created_at) VALUES ('https://insta/reel/2', 'WAITING', 5000)")
+            raw.version = 5
+        }
+
+        val migrated = Room.databaseBuilder(ctx, AppDatabase::class.java, name)
+            .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6)
+            .allowMainThreadQueries()
+            .build()
+        try {
+            val full = migrated.recipeDao().getById("v5-full")
+            assertEquals(
+                Recipe(
+                    id = "v5-full", title = "Tarte aux pommes", sourceUrl = "https://youtu.be/abc",
+                    description = "Classique", ingredients = listOf("3 pommes", "200 g de farine"),
+                    steps = listOf("Éplucher", "Cuire 30 min"), category = "Desserts",
+                    tags = listOf("fruits", "facile"), notes = "Servir tiède",
+                    imageUrl = "https://example.com/img.jpg", createdAt = 1000L, updatedAt = 2000L,
+                    servings = null, servingsSource = null, ingredientWeights = emptyMap()
+                ),
+                full
+            )
+            val min = migrated.recipeDao().getById("v5-min")
+            assertNotNull(min)
+            assertEquals("Minimal", min!!.title)
+            assertEquals(3000L, min.createdAt)
+            assertEquals(null, min.servings)
+            assertEquals(emptyMap<String, IngredientWeight>(), min.ingredientWeights)
+            assertEquals(2, migrated.recipeDao().getAll().first().size)
+            assertEquals("https://insta/reel/2", migrated.pendingImportDao().nextWaiting()?.url)
+        } finally {
+            migrated.close()
+            ctx.deleteDatabase(name)
+        }
+    }
+
+    // ── 9. Parts et poids : écrits puis relus à l'identique ─────────────────
+
+    @Test
+    fun schema_v6_servingsAndWeightsRoundtrip() = runBlocking {
+        val weights = mapOf(
+            "1 noix de beurre" to IngredientWeight(10.0, IngredientWeight.USER),
+            "2 pommes" to IngredientWeight(300.0, IngredientWeight.PC),
+            "1 pincée de safran" to IngredientWeight(null, IngredientWeight.PC)
+        )
+        db.recipeDao().upsert(
+            Recipe(id = "w1", title = "Avec poids", servings = 6, servingsSource = Recipe.SERVINGS_SOURCE, ingredientWeights = weights)
+        )
+        val loaded = db.recipeDao().getById("w1")!!
+        assertEquals(6, loaded.servings)
+        assertEquals(Recipe.SERVINGS_SOURCE, loaded.servingsSource)
+        assertEquals(weights, loaded.ingredientWeights)
     }
 
     // ── 6. Upsert (REPLACE) — mise à jour préserve l'id ─────────────────────

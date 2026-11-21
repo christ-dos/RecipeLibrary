@@ -1,0 +1,5866 @@
+{
+ "source": "Anses, table de composition nutritionnelle des aliments Ciqual 2020",
+ "version": 1,
+ "foods": [
+  {
+   "code": "19042",
+   "name": "Lait demi-écrémé, pasteurisé",
+   "aliases": [
+    "lait",
+    "lait demi-ecreme",
+    "lait demi ecreme"
+   ],
+   "kcal": 46.4,
+   "protein": 3.19,
+   "carbs": 4.9,
+   "fat": 1.54,
+   "pieceG": null,
+   "density": 1.03,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "19024",
+   "name": "Lait entier, pasteurisé",
+   "aliases": [
+    "lait entier"
+   ],
+   "kcal": 56.5,
+   "protein": 3.3,
+   "carbs": 3.47,
+   "fat": 3.3,
+   "pieceG": null,
+   "density": 1.03,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "19051",
+   "name": "Lait écrémé, pasteurisé",
+   "aliases": [
+    "lait ecreme"
+   ],
+   "kcal": 34.5,
+   "protein": 3.28,
+   "carbs": 4.99,
+   "fat": 0.19,
+   "pieceG": null,
+   "density": 1.03,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "19027",
+   "name": "Lait concentré sucré, entier",
+   "aliases": [
+    "lait concentre sucre",
+    "lait concentre"
+   ],
+   "kcal": 323.0,
+   "protein": 7.7,
+   "carbs": 55.6,
+   "fat": 7.87,
+   "pieceG": null,
+   "density": 1.3,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "19054",
+   "name": "Lait en poudre, écrémé",
+   "aliases": [
+    "lait en poudre"
+   ],
+   "kcal": 361.0,
+   "protein": 35.3,
+   "carbs": 54.0,
+   "fat": 0.7,
+   "pieceG": null,
+   "density": 0.5,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "18041",
+   "name": "Lait de coco ou Crème de coco",
+   "aliases": [
+    "lait de coco",
+    "creme de coco"
+   ],
+   "kcal": 188.0,
+   "protein": 1.77,
+   "carbs": 3.4,
+   "fat": 18.4,
+   "pieceG": null,
+   "density": 1.0,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "19410",
+   "name": "Crème de lait, 30% MG, épaisse, rayon frais",
+   "aliases": [
+    "creme fraiche",
+    "creme fraiche epaisse",
+    "creme epaisse",
+    "creme"
+   ],
+   "kcal": 304.0,
+   "protein": 3.0,
+   "carbs": 2.8,
+   "fat": 30.7,
+   "pieceG": null,
+   "density": 1.0,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "19415",
+   "name": "Crème de lait, 30% MG, semi-épaisse, UHT",
+   "aliases": [
+    "creme liquide",
+    "creme fleurette",
+    "creme entiere",
+    "creme fraiche liquide",
+    "creme fluide"
+   ],
+   "kcal": 297.0,
+   "protein": 2.49,
+   "carbs": 1.94,
+   "fat": 30.7,
+   "pieceG": null,
+   "density": 1.0,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "19430",
+   "name": "Crème de lait, 15 à 20% MG, légère, semi-épaisse, UHT",
+   "aliases": [
+    "creme legere",
+    "creme fraiche legere",
+    "creme allegee"
+   ],
+   "kcal": 194.0,
+   "protein": 2.62,
+   "carbs": 2.89,
+   "fat": 18.7,
+   "pieceG": null,
+   "density": 1.0,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "19420",
+   "name": "Crème chantilly, sous pression, UHT",
+   "aliases": [
+    "chantilly",
+    "creme chantilly"
+   ],
+   "kcal": 308.0,
+   "protein": 2.11,
+   "carbs": 10.6,
+   "fat": 28.2,
+   "pieceG": null,
+   "density": 0.4,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "16400",
+   "name": "Beurre à 82% MG, doux",
+   "aliases": [
+    "beurre",
+    "beurre doux",
+    "beurre mou",
+    "beurre fondu",
+    "beurre pommade"
+   ],
+   "kcal": 753.0,
+   "protein": 0.7,
+   "carbs": 0.9,
+   "fat": 82.9,
+   "pieceG": null,
+   "density": 0.95,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "16402",
+   "name": "Beurre à 80% MG, demi-sel",
+   "aliases": [
+    "beurre demi-sel",
+    "beurre demi sel",
+    "beurre sale"
+   ],
+   "kcal": 738.0,
+   "protein": 0.72,
+   "carbs": 0.55,
+   "fat": 81.4,
+   "pieceG": null,
+   "density": 0.95,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "16412",
+   "name": "Beurre ou assimilé allégé (léger ou à teneur reduite en matière grasse), doux (aliment moyen)",
+   "aliases": [
+    "beurre allege"
+   ],
+   "kcal": 368.0,
+   "protein": 0.33,
+   "carbs": 3.73,
+   "fat": 38.9,
+   "pieceG": null,
+   "density": 0.95,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "16615",
+   "name": "Matière grasse végétale ou margarine, 80% MG, doux",
+   "aliases": [
+    "margarine"
+   ],
+   "kcal": 726.0,
+   "protein": 0.39,
+   "carbs": 0.3,
+   "fat": 80.4,
+   "pieceG": null,
+   "density": 0.95,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "19593",
+   "name": "Yaourt, lait fermenté ou spécialité laitière, nature",
+   "aliases": [
+    "yaourt",
+    "yaourt nature",
+    "yogourt"
+   ],
+   "kcal": 45.5,
+   "protein": 3.96,
+   "carbs": 2.65,
+   "fat": 1.5,
+   "pieceG": 125.0,
+   "density": 1.03,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "19860",
+   "name": "Yaourt à la grecque, nature",
+   "aliases": [
+    "yaourt grec",
+    "yaourt a la grecque"
+   ],
+   "kcal": 113.1,
+   "protein": 3.32,
+   "carbs": 4.21,
+   "fat": 9.22,
+   "pieceG": 150.0,
+   "density": 1.03,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "19646",
+   "name": "Fromage blanc nature, 3% MG environ",
+   "aliases": [
+    "fromage blanc"
+   ],
+   "kcal": 76.9,
+   "protein": 8.03,
+   "carbs": 3.46,
+   "fat": 3.26,
+   "pieceG": null,
+   "density": 1.03,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "19644",
+   "name": "Fromage blanc nature, 0% MG",
+   "aliases": [
+    "fromage blanc 0%",
+    "fromage blanc 0 %",
+    "skyr"
+   ],
+   "kcal": 49.4,
+   "protein": 7.95,
+   "carbs": 3.89,
+   "fat": 0.04,
+   "pieceG": null,
+   "density": 1.03,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "19664",
+   "name": "Fromage frais type petit suisse, nature, 4% MG environ",
+   "aliases": [
+    "petit suisse",
+    "petit-suisse"
+   ],
+   "kcal": 88.8,
+   "protein": 9.95,
+   "carbs": 2.84,
+   "fat": 4.0,
+   "pieceG": 60.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "19641",
+   "name": "Faisselle, 6% MG environ",
+   "aliases": [
+    "faisselle"
+   ],
+   "kcal": 84.2,
+   "protein": 4.47,
+   "carbs": 3.57,
+   "fat": 5.5,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "19584",
+   "name": "Mascarpone",
+   "aliases": [
+    "mascarpone"
+   ],
+   "kcal": 384.5,
+   "protein": 4.38,
+   "carbs": 4.0,
+   "fat": 39.0,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "19585",
+   "name": "Ricotta",
+   "aliases": [
+    "ricotta"
+   ],
+   "kcal": 158.3,
+   "protein": 8.79,
+   "carbs": 4.0,
+   "fat": 11.9,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "19590",
+   "name": "Mozzarella au lait de vache",
+   "aliases": [
+    "mozzarella"
+   ],
+   "kcal": 227.0,
+   "protein": 16.5,
+   "carbs": 0.75,
+   "fat": 17.7,
+   "pieceG": 125.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "12115",
+   "name": "Emmental ou emmenthal",
+   "aliases": [
+    "emmental",
+    "emmental rape",
+    "gruyere rape",
+    "fromage rape"
+   ],
+   "kcal": 373.0,
+   "protein": 27.9,
+   "carbs": 0.0,
+   "fat": 28.8,
+   "pieceG": null,
+   "density": 0.4,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "12114",
+   "name": "Gruyère",
+   "aliases": [
+    "gruyere"
+   ],
+   "kcal": 423.0,
+   "protein": 28.4,
+   "carbs": 0.0,
+   "fat": 34.6,
+   "pieceG": null,
+   "density": 0.4,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "12110",
+   "name": "Comté",
+   "aliases": [
+    "comte"
+   ],
+   "kcal": 418.0,
+   "protein": 27.2,
+   "carbs": 0.0,
+   "fat": 34.6,
+   "pieceG": null,
+   "density": 0.4,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "12120",
+   "name": "Parmesan",
+   "aliases": [
+    "parmesan",
+    "parmigiano"
+   ],
+   "kcal": 406.0,
+   "protein": 31.1,
+   "carbs": 0.0,
+   "fat": 31.0,
+   "pieceG": null,
+   "density": 0.4,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "12726",
+   "name": "Cheddar",
+   "aliases": [
+    "cheddar"
+   ],
+   "kcal": 399.0,
+   "protein": 24.0,
+   "carbs": 0.0,
+   "fat": 33.8,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "12066",
+   "name": "Feta AOP",
+   "aliases": [
+    "feta"
+   ],
+   "kcal": 285.0,
+   "protein": 15.1,
+   "carbs": 0.65,
+   "fat": 24.3,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "12804",
+   "name": "Fromage de chèvre frais, au lait cru (type palet ou crottin frais)",
+   "aliases": [
+    "chevre frais",
+    "fromage de chevre frais"
+   ],
+   "kcal": 212.6,
+   "protein": 13.1,
+   "carbs": 2.03,
+   "fat": 16.9,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "12812",
+   "name": "Fromage de chèvre bûche",
+   "aliases": [
+    "fromage de chevre",
+    "chevre",
+    "buche de chevre"
+   ],
+   "kcal": 285.0,
+   "protein": 18.8,
+   "carbs": 0.0,
+   "fat": 23.3,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "12006",
+   "name": "Camembert au lait cru",
+   "aliases": [
+    "camembert"
+   ],
+   "kcal": 267.0,
+   "protein": 20.7,
+   "carbs": 0.0,
+   "fat": 20.3,
+   "pieceG": 250.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "12021",
+   "name": "Brie de Meaux",
+   "aliases": [
+    "brie"
+   ],
+   "kcal": 271.0,
+   "protein": 21.4,
+   "carbs": 0.0,
+   "fat": 20.7,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "12500",
+   "name": "Roquefort",
+   "aliases": [
+    "roquefort"
+   ],
+   "kcal": 384.0,
+   "protein": 19.5,
+   "carbs": 0.0,
+   "fat": 33.9,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "12521",
+   "name": "Fromage bleu d'Auvergne",
+   "aliases": [
+    "bleu",
+    "bleu d'auvergne"
+   ],
+   "kcal": 343.0,
+   "protein": 22.4,
+   "carbs": 0.0,
+   "fat": 28.4,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "12045",
+   "name": "Reblochon",
+   "aliases": [
+    "reblochon"
+   ],
+   "kcal": 326.0,
+   "protein": 20.4,
+   "carbs": 0.0,
+   "fat": 27.4,
+   "pieceG": 450.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "12749",
+   "name": "Raclette (fromage)",
+   "aliases": [
+    "raclette",
+    "fromage a raclette"
+   ],
+   "kcal": 342.0,
+   "protein": 23.4,
+   "carbs": 0.0,
+   "fat": 27.5,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "12735",
+   "name": "Mimolette jeune",
+   "aliases": [
+    "mimolette"
+   ],
+   "kcal": 331.0,
+   "protein": 28.9,
+   "carbs": 0.0,
+   "fat": 24.2,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "12300",
+   "name": "Fromage fondu en tranchettes",
+   "aliases": [
+    "fromage fondu",
+    "vache qui rit",
+    "fromage a tartiner"
+   ],
+   "kcal": 246.0,
+   "protein": 14.1,
+   "carbs": 5.34,
+   "fat": 18.5,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "12758",
+   "name": "Tomme ou tome de vache",
+   "aliases": [
+    "tomme"
+   ],
+   "kcal": 350.0,
+   "protein": 21.6,
+   "carbs": 0.0,
+   "fat": 29.4,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "12743",
+   "name": "Morbier",
+   "aliases": [
+    "morbier"
+   ],
+   "kcal": 355.0,
+   "protein": 22.8,
+   "carbs": 0.0,
+   "fat": 29.2,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "12039",
+   "name": "Munster",
+   "aliases": [
+    "munster"
+   ],
+   "kcal": 344.0,
+   "protein": 21.2,
+   "carbs": 0.0,
+   "fat": 29.0,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "22000",
+   "name": "Oeuf, cru",
+   "aliases": [
+    "oeuf",
+    "oeuf entier"
+   ],
+   "kcal": 140.0,
+   "protein": 12.7,
+   "carbs": 0.27,
+   "fat": 9.83,
+   "pieceG": 55.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "22001",
+   "name": "Oeuf, blanc (blanc d'oeuf), cru",
+   "aliases": [
+    "blanc d'oeuf",
+    "blanc d oeuf",
+    "blanc"
+   ],
+   "kcal": 48.1,
+   "protein": 10.8,
+   "carbs": 0.85,
+   "fat": 0.19,
+   "pieceG": 30.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "22002",
+   "name": "Oeuf, jaune (jaune d'oeuf), cru",
+   "aliases": [
+    "jaune d'oeuf",
+    "jaune d oeuf",
+    "jaune"
+   ],
+   "kcal": 307.0,
+   "protein": 15.5,
+   "carbs": 1.09,
+   "fat": 26.7,
+   "pieceG": 18.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "22050",
+   "name": "Oeuf de caille, cru",
+   "aliases": [
+    "oeuf de caille"
+   ],
+   "kcal": 154.0,
+   "protein": 13.1,
+   "carbs": 0.41,
+   "fat": 11.1,
+   "pieceG": 10.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "17270",
+   "name": "Huile d'olive vierge extra",
+   "aliases": [
+    "huile d'olive",
+    "huile d olive"
+   ],
+   "kcal": 900.0,
+   "protein": 0.0,
+   "carbs": 0.0,
+   "fat": 99.9,
+   "pieceG": null,
+   "density": 0.92,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "17440",
+   "name": "Huile de tournesol",
+   "aliases": [
+    "huile",
+    "huile de tournesol",
+    "huile neutre",
+    "huile vegetale"
+   ],
+   "kcal": 901.0,
+   "protein": 0.0,
+   "carbs": 0.0,
+   "fat": 100.0,
+   "pieceG": null,
+   "density": 0.92,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "17130",
+   "name": "Huile de colza",
+   "aliases": [
+    "huile de colza"
+   ],
+   "kcal": 900.0,
+   "protein": 0.0,
+   "carbs": 0.0,
+   "fat": 100.0,
+   "pieceG": null,
+   "density": 0.92,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "17040",
+   "name": "Huile d'arachide",
+   "aliases": [
+    "huile d'arachide",
+    "huile d arachide"
+   ],
+   "kcal": 900.0,
+   "protein": 0.0,
+   "carbs": 0.0,
+   "fat": 99.9,
+   "pieceG": null,
+   "density": 0.92,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "17400",
+   "name": "Huile de sésame",
+   "aliases": [
+    "huile de sesame"
+   ],
+   "kcal": 900.0,
+   "protein": 0.0,
+   "carbs": 0.0,
+   "fat": 100.0,
+   "pieceG": null,
+   "density": 0.92,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "17220",
+   "name": "Huile de noix",
+   "aliases": [
+    "huile de noix"
+   ],
+   "kcal": 900.0,
+   "protein": 0.0,
+   "carbs": 0.0,
+   "fat": 100.0,
+   "pieceG": null,
+   "density": 0.92,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "16060",
+   "name": "Huile ou graisse de coco (coprah), raffinée",
+   "aliases": [
+    "huile de coco"
+   ],
+   "kcal": 900.0,
+   "protein": 0.0,
+   "carbs": 0.0,
+   "fat": 100.0,
+   "pieceG": null,
+   "density": 0.92,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "17350",
+   "name": "Huile de pépins de raisin",
+   "aliases": [
+    "huile de pepin de raisin",
+    "huile de pepins de raisin"
+   ],
+   "kcal": 900.0,
+   "protein": 0.0,
+   "carbs": 0.0,
+   "fat": 100.0,
+   "pieceG": null,
+   "density": 0.92,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "16128",
+   "name": "Huile pour friture, sans précision",
+   "aliases": [
+    "huile de friture",
+    "huile pour friture",
+    "bain de friture",
+    "bain d'huile"
+   ],
+   "kcal": 900.0,
+   "protein": 0.0,
+   "carbs": 0.0,
+   "fat": 100.0,
+   "pieceG": null,
+   "density": 0.92,
+   "kind": "FRYING"
+  },
+  {
+   "code": "16520",
+   "name": "Saindoux",
+   "aliases": [
+    "saindoux"
+   ],
+   "kcal": 896.0,
+   "protein": 0.0,
+   "carbs": 0.0,
+   "fat": 99.5,
+   "pieceG": null,
+   "density": 0.9,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "16550",
+   "name": "Graisse de canard",
+   "aliases": [
+    "graisse de canard",
+    "graisse d'oie"
+   ],
+   "kcal": 898.0,
+   "protein": 0.0,
+   "carbs": 0.0,
+   "fat": 99.8,
+   "pieceG": null,
+   "density": 0.9,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "9440",
+   "name": "Farine de blé tendre ou froment T45 (pour pâtisserie)",
+   "aliases": [
+    "farine",
+    "farine de ble",
+    "farine t45",
+    "farine de ble t45",
+    "farine de froment",
+    "farine blanche"
+   ],
+   "kcal": 356.0,
+   "protein": 9.06,
+   "carbs": 75.9,
+   "fat": 0.82,
+   "pieceG": null,
+   "density": 0.55,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "9436",
+   "name": "Farine de blé tendre ou froment T55 (pour pains)",
+   "aliases": [
+    "farine t55",
+    "farine de ble t55"
+   ],
+   "kcal": 350.0,
+   "protein": 9.03,
+   "carbs": 73.7,
+   "fat": 1.0,
+   "pieceG": null,
+   "density": 0.55,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "9435",
+   "name": "Farine de blé tendre ou froment T65",
+   "aliases": [
+    "farine t65"
+   ],
+   "kcal": 346.0,
+   "protein": 13.6,
+   "carbs": 67.6,
+   "fat": 1.0,
+   "pieceG": null,
+   "density": 0.55,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "9445",
+   "name": "Farine de blé tendre ou froment T80",
+   "aliases": [
+    "farine t80",
+    "farine bise"
+   ],
+   "kcal": 355.0,
+   "protein": 9.95,
+   "carbs": 73.2,
+   "fat": 1.18,
+   "pieceG": null,
+   "density": 0.55,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "9415",
+   "name": "Farine de blé tendre ou froment T150",
+   "aliases": [
+    "farine complete",
+    "farine t150"
+   ],
+   "kcal": 342.0,
+   "protein": 11.4,
+   "carbs": 64.9,
+   "fat": 1.52,
+   "pieceG": null,
+   "density": 0.55,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "9437",
+   "name": "Farine de blé tendre ou froment avec levure incorporée",
+   "aliases": [
+    "farine a gateau",
+    "farine avec levure incorporee",
+    "farine fluide"
+   ],
+   "kcal": 350.0,
+   "protein": 9.12,
+   "carbs": 74.0,
+   "fat": 1.0,
+   "pieceG": null,
+   "density": 0.55,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "9532",
+   "name": "Farine de seigle T85",
+   "aliases": [
+    "farine de seigle"
+   ],
+   "kcal": 344.0,
+   "protein": 8.12,
+   "carbs": 70.7,
+   "fat": 1.37,
+   "pieceG": null,
+   "density": 0.55,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "9540",
+   "name": "Farine de sarrasin",
+   "aliases": [
+    "farine de sarrasin",
+    "farine de ble noir"
+   ],
+   "kcal": 348.0,
+   "protein": 11.5,
+   "carbs": 68.4,
+   "fat": 2.19,
+   "pieceG": null,
+   "density": 0.55,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "9520",
+   "name": "Farine de riz",
+   "aliases": [
+    "farine de riz"
+   ],
+   "kcal": 357.0,
+   "protein": 7.62,
+   "carbs": 73.9,
+   "fat": 2.5,
+   "pieceG": null,
+   "density": 0.6,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "9545",
+   "name": "Farine de maïs",
+   "aliases": [
+    "farine de mais"
+   ],
+   "kcal": 361.0,
+   "protein": 6.23,
+   "carbs": 78.1,
+   "fat": 2.1,
+   "pieceG": null,
+   "density": 0.6,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "9580",
+   "name": "Farine de pois chiche",
+   "aliases": [
+    "farine de pois chiche"
+   ],
+   "kcal": 359.0,
+   "protein": 22.4,
+   "carbs": 47.0,
+   "fat": 6.69,
+   "pieceG": null,
+   "density": 0.5,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "9570",
+   "name": "Farine de châtaigne",
+   "aliases": [
+    "farine de chataigne"
+   ],
+   "kcal": 360.4,
+   "protein": 5.69,
+   "carbs": 70.4,
+   "fat": 3.43,
+   "pieceG": null,
+   "density": 0.5,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "9510",
+   "name": "Amidon de maïs ou fécule de maïs",
+   "aliases": [
+    "maizena",
+    "fecule de mais",
+    "amidon de mais"
+   ],
+   "kcal": 362.0,
+   "protein": 0.43,
+   "carbs": 89.2,
+   "fat": 0.25,
+   "pieceG": null,
+   "density": 0.6,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "4090",
+   "name": "Fécule de pomme de terre",
+   "aliases": [
+    "fecule",
+    "fecule de pomme de terre"
+   ],
+   "kcal": 348.0,
+   "protein": 0.0,
+   "carbs": 86.3,
+   "fat": 0.2,
+   "pieceG": null,
+   "density": 0.6,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "9313",
+   "name": "Flocons d'avoine, bouillis/cuits à l'eau",
+   "aliases": [
+    "flocon d'avoine",
+    "flocons d'avoine",
+    "flocon d avoine",
+    "avoine"
+   ],
+   "kcal": 75.5,
+   "protein": 2.54,
+   "carbs": 11.9,
+   "fat": 1.52,
+   "pieceG": null,
+   "density": 0.4,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "9610",
+   "name": "Semoule de blé dur, crue",
+   "aliases": [
+    "semoule",
+    "semoule de ble",
+    "couscous",
+    "graine de couscous"
+   ],
+   "kcal": 352.0,
+   "protein": 10.9,
+   "carbs": 71.6,
+   "fat": 1.25,
+   "pieceG": null,
+   "density": 0.7,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "9690",
+   "name": "Boulgour de blé, cru",
+   "aliases": [
+    "boulgour",
+    "boulghour"
+   ],
+   "kcal": 351.0,
+   "protein": 11.5,
+   "carbs": 66.8,
+   "fat": 1.71,
+   "pieceG": null,
+   "density": 0.7,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "9340",
+   "name": "Quinoa, cru",
+   "aliases": [
+    "quinoa"
+   ],
+   "kcal": 358.0,
+   "protein": 13.2,
+   "carbs": 58.1,
+   "fat": 6.07,
+   "pieceG": null,
+   "density": 0.75,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "9614",
+   "name": "Polenta ou semoule de maïs, précuite, sèche",
+   "aliases": [
+    "polenta",
+    "semoule de mais"
+   ],
+   "kcal": 350.0,
+   "protein": 7.88,
+   "carbs": 74.0,
+   "fat": 1.8,
+   "pieceG": null,
+   "density": 0.7,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "9100",
+   "name": "Riz blanc, cru",
+   "aliases": [
+    "riz",
+    "riz blanc",
+    "riz long",
+    "riz rond",
+    "riz arborio",
+    "riz pour risotto",
+    "riz a risotto"
+   ],
+   "kcal": 352.0,
+   "protein": 7.04,
+   "carbs": 78.0,
+   "fat": 0.91,
+   "pieceG": null,
+   "density": 0.85,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "9102",
+   "name": "Riz complet, cru",
+   "aliases": [
+    "riz complet"
+   ],
+   "kcal": 350.0,
+   "protein": 7.02,
+   "carbs": 71.4,
+   "fat": 2.8,
+   "pieceG": null,
+   "density": 0.85,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "9119",
+   "name": "Riz thaï ou basmati, cru",
+   "aliases": [
+    "riz basmati",
+    "riz thai"
+   ],
+   "kcal": 353.0,
+   "protein": 7.67,
+   "carbs": 77.8,
+   "fat": 0.84,
+   "pieceG": null,
+   "density": 0.85,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "9810",
+   "name": "Pâtes sèches standard, crues",
+   "aliases": [
+    "pate",
+    "pates",
+    "spaghetti",
+    "spaghettis",
+    "penne",
+    "tagliatelle",
+    "tagliatelles",
+    "macaroni",
+    "coquillette",
+    "fusilli",
+    "farfalle",
+    "linguine",
+    "nouille",
+    "pates seches",
+    "lasagne",
+    "feuille de lasagne",
+    "plaque de lasagne"
+   ],
+   "kcal": 336.0,
+   "protein": 11.5,
+   "carbs": 65.8,
+   "fat": 1.79,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "9870",
+   "name": "Pâtes sèches, au blé complet, crues",
+   "aliases": [
+    "pates completes",
+    "pate complete"
+   ],
+   "kcal": 353.0,
+   "protein": 11.8,
+   "carbs": 67.6,
+   "fat": 2.2,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "9821",
+   "name": "Pâtes sèches, aux oeufs, crues",
+   "aliases": [
+    "pates aux oeufs",
+    "pate aux oeufs"
+   ],
+   "kcal": 381.0,
+   "protein": 14.0,
+   "carbs": 68.0,
+   "fat": 4.72,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "9815",
+   "name": "Pâtes fraîches, aux oeufs, crues",
+   "aliases": [
+    "pates fraiches",
+    "pate fraiche",
+    "tagliatelles fraiches",
+    "gnocchi"
+   ],
+   "kcal": 283.0,
+   "protein": 10.1,
+   "carbs": 53.8,
+   "fat": 1.87,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "9900",
+   "name": "Vermicelle de riz, sèche",
+   "aliases": [
+    "vermicelle de riz",
+    "nouille de riz"
+   ],
+   "kcal": 365.0,
+   "protein": 7.44,
+   "carbs": 80.5,
+   "fat": 1.0,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "7500",
+   "name": "Chapelure",
+   "aliases": [
+    "chapelure",
+    "panure"
+   ],
+   "kcal": 374.0,
+   "protein": 11.6,
+   "carbs": 70.0,
+   "fat": 3.77,
+   "pieceG": null,
+   "density": 0.45,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "7200",
+   "name": "Pain de mie, courant",
+   "aliases": [
+    "pain de mie"
+   ],
+   "kcal": 278.0,
+   "protein": 7.13,
+   "carbs": 52.3,
+   "fat": 3.6,
+   "pieceG": 25.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "7001",
+   "name": "Pain, baguette, courante",
+   "aliases": [
+    "pain",
+    "baguette",
+    "pain blanc"
+   ],
+   "kcal": 287.0,
+   "protein": 8.27,
+   "carbs": 58.3,
+   "fat": 1.4,
+   "pieceG": 250.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "7110",
+   "name": "Pain complet ou intégral (à la farine T150)",
+   "aliases": [
+    "pain complet"
+   ],
+   "kcal": 244.0,
+   "protein": 8.38,
+   "carbs": 44.3,
+   "fat": 1.8,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "7100",
+   "name": "Pain, baguette ou boule, de campagne",
+   "aliases": [
+    "pain de campagne"
+   ],
+   "kcal": 253.0,
+   "protein": 7.52,
+   "carbs": 50.0,
+   "fat": 1.3,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "7259",
+   "name": "Pain pour hamburger ou hot dog (bun), préemballé",
+   "aliases": [
+    "pain burger",
+    "pain a burger",
+    "pain a hamburger",
+    "bun"
+   ],
+   "kcal": 293.0,
+   "protein": 9.07,
+   "carbs": 49.7,
+   "fat": 5.35,
+   "pieceG": 60.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "7180",
+   "name": "Pain pita",
+   "aliases": [
+    "pain pita",
+    "pita"
+   ],
+   "kcal": 259.0,
+   "protein": 7.53,
+   "carbs": 53.0,
+   "fat": 0.92,
+   "pieceG": 70.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "7815",
+   "name": "Tortilla souple (à garnir), à base de blé",
+   "aliases": [
+    "tortilla",
+    "wrap",
+    "galette de ble"
+   ],
+   "kcal": 327.0,
+   "protein": 8.34,
+   "carbs": 52.1,
+   "fat": 8.2,
+   "pieceG": 40.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "7300",
+   "name": "Biscotte classique",
+   "aliases": [
+    "biscotte"
+   ],
+   "kcal": 409.0,
+   "protein": 9.8,
+   "carbs": 76.6,
+   "fat": 5.9,
+   "pieceG": 8.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "7740",
+   "name": "Brioche, préemballée",
+   "aliases": [
+    "brioche"
+   ],
+   "kcal": 354.0,
+   "protein": 8.13,
+   "carbs": 52.7,
+   "fat": 11.8,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "7602",
+   "name": "Croissant, sans précision",
+   "aliases": [
+    "croissant"
+   ],
+   "kcal": 375.0,
+   "protein": 6.65,
+   "carbs": 40.4,
+   "fat": 20.0,
+   "pieceG": 55.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "23421",
+   "name": "Pâte feuilletée, surgelée, crue",
+   "aliases": [
+    "pate feuilletee"
+   ],
+   "kcal": 400.0,
+   "protein": 3.28,
+   "carbs": 33.3,
+   "fat": 27.4,
+   "pieceG": 230.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "23410",
+   "name": "Pâte brisée, crue",
+   "aliases": [
+    "pate brisee"
+   ],
+   "kcal": 377.0,
+   "protein": 5.35,
+   "carbs": 43.6,
+   "fat": 19.5,
+   "pieceG": 230.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "23440",
+   "name": "Pâte sablée, crue",
+   "aliases": [
+    "pate sablee"
+   ],
+   "kcal": 404.0,
+   "protein": 5.3,
+   "carbs": 51.0,
+   "fat": 19.6,
+   "pieceG": 230.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "37001",
+   "name": "Pâte à pizza crue",
+   "aliases": [
+    "pate a pizza"
+   ],
+   "kcal": 240.0,
+   "protein": 7.05,
+   "carbs": 44.2,
+   "fat": 3.45,
+   "pieceG": 250.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "23430",
+   "name": "Feuille de brick, cuite à sec sans matière grasse",
+   "aliases": [
+    "feuille de brick",
+    "brick"
+   ],
+   "kcal": 378.0,
+   "protein": 6.16,
+   "carbs": 82.4,
+   "fat": 1.76,
+   "pieceG": 15.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "24430",
+   "name": "Biscuit sec aux oeufs à la cuillère (cuiller) ou Boudoir",
+   "aliases": [
+    "boudoir",
+    "biscuit a la cuillere"
+   ],
+   "kcal": 388.2,
+   "protein": 7.98,
+   "carbs": 79.9,
+   "fat": 3.77,
+   "pieceG": 5.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "24015",
+   "name": "Biscuit sec petit beurre",
+   "aliases": [
+    "petit beurre",
+    "biscuit sec",
+    "biscuit"
+   ],
+   "kcal": 443.7,
+   "protein": 8.06,
+   "carbs": 74.5,
+   "fat": 12.1,
+   "pieceG": 8.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "24009",
+   "name": "Spéculoos",
+   "aliases": [
+    "speculoos"
+   ],
+   "kcal": 480.9,
+   "protein": 5.94,
+   "carbs": 69.0,
+   "fat": 19.7,
+   "pieceG": 7.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "32014",
+   "name": "Pétales de maïs natures (non enrichis en vitamines et minéraux)",
+   "aliases": [
+    "corn flakes",
+    "cornflakes"
+   ],
+   "kcal": 380.0,
+   "protein": 8.14,
+   "carbs": 82.8,
+   "fat": 1.05,
+   "pieceG": null,
+   "density": 0.15,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "32004",
+   "name": "Muesli (aliment moyen)",
+   "aliases": [
+    "muesli",
+    "granola"
+   ],
+   "kcal": 418.0,
+   "protein": 7.49,
+   "carbs": 66.6,
+   "fat": 12.2,
+   "pieceG": null,
+   "density": 0.4,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "31016",
+   "name": "Sucre blanc",
+   "aliases": [
+    "sucre",
+    "sucre en poudre",
+    "sucre semoule",
+    "sucre blanc",
+    "sucre cristal",
+    "sucre glace",
+    "sucre perle",
+    "sucre en grain"
+   ],
+   "kcal": 399.2,
+   "protein": 0.0,
+   "carbs": 99.8,
+   "fat": 0.0,
+   "pieceG": null,
+   "density": 0.85,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "31017",
+   "name": "Sucre roux",
+   "aliases": [
+    "sucre roux",
+    "cassonade",
+    "vergeoise",
+    "sucre brun",
+    "sucre complet",
+    "rapadura"
+   ],
+   "kcal": 389.7,
+   "protein": 0.12,
+   "carbs": 97.3,
+   "fat": 0.0,
+   "pieceG": null,
+   "density": 0.8,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "31044",
+   "name": "Sucre vanillé",
+   "aliases": [
+    "sucre vanille",
+    "sucre vanillee"
+   ],
+   "kcal": 400.1,
+   "protein": 0.1,
+   "carbs": 99.0,
+   "fat": 0.33,
+   "pieceG": null,
+   "density": 0.85,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "31008",
+   "name": "Miel",
+   "aliases": [
+    "miel"
+   ],
+   "kcal": 329.0,
+   "protein": 0.56,
+   "carbs": 81.7,
+   "fat": 0.0,
+   "pieceG": null,
+   "density": 1.4,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "31034",
+   "name": "Sirop d'érable",
+   "aliases": [
+    "sirop d'erable",
+    "sirop d erable"
+   ],
+   "kcal": 269.1,
+   "protein": 0.04,
+   "carbs": 67.1,
+   "fat": 0.06,
+   "pieceG": null,
+   "density": 1.32,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "31089",
+   "name": "Sirop d'agave",
+   "aliases": [
+    "sirop d'agave",
+    "sirop d agave"
+   ],
+   "kcal": 316.9,
+   "protein": 0.0,
+   "carbs": 78.1,
+   "fat": 0.5,
+   "pieceG": null,
+   "density": 1.35,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "31024",
+   "name": "Confiture de fraise (extra ou classique)",
+   "aliases": [
+    "confiture"
+   ],
+   "kcal": 251.0,
+   "protein": 0.0,
+   "carbs": 60.5,
+   "fat": 0.5,
+   "pieceG": null,
+   "density": 1.3,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "31032",
+   "name": "Pâte à tartiner chocolat et noisette",
+   "aliases": [
+    "pate a tartiner",
+    "nutella",
+    "pate a tartiner chocolat"
+   ],
+   "kcal": 549.7,
+   "protein": 5.02,
+   "carbs": 57.9,
+   "fat": 32.4,
+   "pieceG": null,
+   "density": 1.2,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "31046",
+   "name": "Caramel liquide ou nappage caramel",
+   "aliases": [
+    "caramel",
+    "sauce caramel"
+   ],
+   "kcal": 324.0,
+   "protein": 0.0,
+   "carbs": 81.0,
+   "fat": 0.0,
+   "pieceG": null,
+   "density": 1.3,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "31074",
+   "name": "Chocolat noir à 70% cacao minimum, extra, dégustation, tablette",
+   "aliases": [
+    "chocolat noir",
+    "chocolat patissier",
+    "chocolat a cuire",
+    "chocolat dessert",
+    "chocolat",
+    "pepite de chocolat",
+    "pepites de chocolat"
+   ],
+   "kcal": 591.0,
+   "protein": 10.4,
+   "carbs": 26.9,
+   "fat": 46.3,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "31004",
+   "name": "Chocolat au lait, tablette",
+   "aliases": [
+    "chocolat au lait"
+   ],
+   "kcal": 537.0,
+   "protein": 7.5,
+   "carbs": 55.6,
+   "fat": 30.8,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "31010",
+   "name": "Chocolat blanc, tablette",
+   "aliases": [
+    "chocolat blanc"
+   ],
+   "kcal": 562.8,
+   "protein": 6.16,
+   "carbs": 57.1,
+   "fat": 34.2,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "18100",
+   "name": "Cacao, non sucré, poudre soluble",
+   "aliases": [
+    "cacao",
+    "cacao en poudre",
+    "cacao amer",
+    "poudre de cacao",
+    "cacao non sucre"
+   ],
+   "kcal": 387.0,
+   "protein": 22.4,
+   "carbs": 11.6,
+   "fat": 20.6,
+   "pieceG": null,
+   "density": 0.45,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "18101",
+   "name": "Poudre cacaotée ou au chocolat pour boisson, sucrée",
+   "aliases": [
+    "chocolat en poudre",
+    "poudre chocolatee"
+   ],
+   "kcal": 379.0,
+   "protein": 6.65,
+   "carbs": 75.6,
+   "fat": 3.29,
+   "pieceG": null,
+   "density": 0.5,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "15201",
+   "name": "Pâte d'amande, préemballée",
+   "aliases": [
+    "pate d'amande",
+    "pate d amande",
+    "massepain"
+   ],
+   "kcal": 432.0,
+   "protein": 5.8,
+   "carbs": 70.3,
+   "fat": 13.5,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "15013",
+   "name": "Crème de marrons",
+   "aliases": [
+    "creme de marron",
+    "creme de marrons"
+   ],
+   "kcal": 233.8,
+   "protein": 1.28,
+   "carbs": 55.0,
+   "fat": 0.67,
+   "pieceG": null,
+   "density": 1.3,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "11007",
+   "name": "Gélatine, sèche",
+   "aliases": [
+    "gelatine",
+    "feuille de gelatine"
+   ],
+   "kcal": 348.0,
+   "protein": 86.9,
+   "carbs": 0.0,
+   "fat": 0.1,
+   "pieceG": 2.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "11084",
+   "name": "Agar (algue), cru",
+   "aliases": [
+    "agar-agar",
+    "agar agar",
+    "agar"
+   ],
+   "kcal": 28.4,
+   "protein": 0.54,
+   "carbs": 6.25,
+   "fat": 0.03,
+   "pieceG": null,
+   "density": 0.6,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "11046",
+   "name": "Levure chimique ou Poudre à lever",
+   "aliases": [
+    "levure chimique",
+    "poudre a lever",
+    "sachet de levure"
+   ],
+   "kcal": 146.2,
+   "protein": 1.96,
+   "carbs": 33.2,
+   "fat": 0.2,
+   "pieceG": null,
+   "density": 0.9,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "11010",
+   "name": "Levure de boulanger, compressée",
+   "aliases": [
+    "levure de boulanger",
+    "levure boulangere",
+    "levure fraiche",
+    "levure seche",
+    "levure"
+   ],
+   "kcal": 111.9,
+   "protein": 8.23,
+   "carbs": 11.9,
+   "fat": 1.9,
+   "pieceG": null,
+   "density": 0.7,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "11507",
+   "name": "Bicarbonate de soude",
+   "aliases": [
+    "bicarbonate",
+    "bicarbonate de soude",
+    "bicarbonate alimentaire"
+   ],
+   "kcal": 0.4,
+   "protein": 0.1,
+   "carbs": 0.0,
+   "fat": 0.0,
+   "pieceG": null,
+   "density": 1.2,
+   "kind": "SEASONING"
+  },
+  {
+   "code": "13620",
+   "name": "Pomme Golden, pulpe et peau, crue",
+   "aliases": [
+    "pomme",
+    "pomme golden",
+    "pomme granny",
+    "pomme reinette"
+   ],
+   "kcal": 57.1,
+   "protein": 0.0,
+   "carbs": 12.8,
+   "fat": 0.0,
+   "pieceG": 150.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "13037",
+   "name": "Poire, pulpe et peau, crue",
+   "aliases": [
+    "poire"
+   ],
+   "kcal": 53.8,
+   "protein": 0.49,
+   "carbs": 10.9,
+   "fat": 0.27,
+   "pieceG": 160.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "13005",
+   "name": "Banane, pulpe, crue",
+   "aliases": [
+    "banane"
+   ],
+   "kcal": 90.5,
+   "protein": 1.06,
+   "carbs": 19.7,
+   "fat": 0.0,
+   "pieceG": 120.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "13034",
+   "name": "Orange, pulpe, crue",
+   "aliases": [
+    "orange"
+   ],
+   "kcal": 45.5,
+   "protein": 0.75,
+   "carbs": 8.03,
+   "fat": 0.0,
+   "pieceG": 150.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "13009",
+   "name": "Citron, pulpe, cru",
+   "aliases": [
+    "citron",
+    "citron jaune"
+   ],
+   "kcal": 27.6,
+   "protein": 0.0,
+   "carbs": 1.56,
+   "fat": 0.0,
+   "pieceG": 120.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "13067",
+   "name": "Citron vert ou Lime, pulpe, cru",
+   "aliases": [
+    "citron vert",
+    "lime"
+   ],
+   "kcal": 40.2,
+   "protein": 1.13,
+   "carbs": 3.14,
+   "fat": 0.0,
+   "pieceG": 70.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "2007",
+   "name": "Jus de citron, maison",
+   "aliases": [
+    "jus de citron",
+    "jus d'un citron"
+   ],
+   "kcal": 14.4,
+   "protein": 0.49,
+   "carbs": 2.41,
+   "fat": 0.24,
+   "pieceG": null,
+   "density": 1.03,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "2070",
+   "name": "Jus d'orange, pur jus",
+   "aliases": [
+    "jus d'orange",
+    "jus d orange"
+   ],
+   "kcal": 45.4,
+   "protein": 0.61,
+   "carbs": 9.61,
+   "fat": 0.11,
+   "pieceG": null,
+   "density": 1.04,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "2074",
+   "name": "Jus de pomme, pur jus",
+   "aliases": [
+    "jus de pomme"
+   ],
+   "kcal": 48.9,
+   "protein": 0.17,
+   "carbs": 11.4,
+   "fat": 0.14,
+   "pieceG": null,
+   "density": 1.04,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "13024",
+   "name": "Clémentine ou Mandarine, pulpe, crue",
+   "aliases": [
+    "clementine",
+    "mandarine"
+   ],
+   "kcal": 47.3,
+   "protein": 0.81,
+   "carbs": 9.17,
+   "fat": 0.0,
+   "pieceG": 70.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "13040",
+   "name": "Pomelo (dit Pamplemousse), pulpe, cru",
+   "aliases": [
+    "pamplemousse"
+   ],
+   "kcal": 39.8,
+   "protein": 0.0,
+   "carbs": 8.02,
+   "fat": 0.0,
+   "pieceG": 250.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "13014",
+   "name": "Fraise, crue",
+   "aliases": [
+    "fraise",
+    "fraises"
+   ],
+   "kcal": 38.6,
+   "protein": 0.63,
+   "carbs": 6.03,
+   "fat": 0.0,
+   "pieceG": 15.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "13015",
+   "name": "Framboise, crue",
+   "aliases": [
+    "framboise"
+   ],
+   "kcal": 49.2,
+   "protein": 1.19,
+   "carbs": 5.83,
+   "fat": 0.8,
+   "pieceG": 4.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "13028",
+   "name": "Myrtille, crue",
+   "aliases": [
+    "myrtille",
+    "bleuet"
+   ],
+   "kcal": 57.7,
+   "protein": 0.87,
+   "carbs": 10.6,
+   "fat": 0.33,
+   "pieceG": null,
+   "density": 0.6,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "13029",
+   "name": "Mûre (de ronce), crue",
+   "aliases": [
+    "mure"
+   ],
+   "kcal": 47.3,
+   "protein": 1.13,
+   "carbs": 6.53,
+   "fat": 0.7,
+   "pieceG": 5.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "13007",
+   "name": "Cassis, cru",
+   "aliases": [
+    "cassis"
+   ],
+   "kcal": 63.4,
+   "protein": 1.33,
+   "carbs": 9.68,
+   "fat": 0.86,
+   "pieceG": null,
+   "density": 0.6,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "13019",
+   "name": "Groseille, crue",
+   "aliases": [
+    "groseille"
+   ],
+   "kcal": 68.5,
+   "protein": 1.56,
+   "carbs": 7.06,
+   "fat": 0.7,
+   "pieceG": null,
+   "density": 0.6,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "13008",
+   "name": "Cerise, dénoyautée, crue",
+   "aliases": [
+    "cerise"
+   ],
+   "kcal": 55.7,
+   "protein": 0.81,
+   "carbs": 13.0,
+   "fat": 0.0,
+   "pieceG": 7.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "13000",
+   "name": "Abricot, dénoyauté, cru",
+   "aliases": [
+    "abricot"
+   ],
+   "kcal": 45.9,
+   "protein": 0.81,
+   "carbs": 9.01,
+   "fat": 0.0,
+   "pieceG": 45.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "13193",
+   "name": "Pêche blanche, pulpe et peau, crue",
+   "aliases": [
+    "peche"
+   ],
+   "kcal": 47.2,
+   "protein": 0.69,
+   "carbs": 9.48,
+   "fat": 0.0,
+   "pieceG": 150.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "13148",
+   "name": "Nectarine ou brugnon, jaune, pulpe et peau, crue",
+   "aliases": [
+    "nectarine",
+    "brugnon"
+   ],
+   "kcal": 51.3,
+   "protein": 0.69,
+   "carbs": 11.3,
+   "fat": 0.0,
+   "pieceG": 150.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "13041",
+   "name": "Prune Reine-Claude, crue",
+   "aliases": [
+    "prune",
+    "quetsche",
+    "mirabelle"
+   ],
+   "kcal": 71.3,
+   "protein": 0.94,
+   "carbs": 16.4,
+   "fat": 0.0,
+   "pieceG": 35.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "13044",
+   "name": "Raisin blanc, à gros grain (type Italia ou Dattier), cru",
+   "aliases": [
+    "raisin",
+    "raisin blanc",
+    "grain de raisin"
+   ],
+   "kcal": 73.4,
+   "protein": 0.75,
+   "carbs": 16.6,
+   "fat": 0.0,
+   "pieceG": 5.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "13046",
+   "name": "Raisin, sec",
+   "aliases": [
+    "raisin sec",
+    "raisins secs",
+    "sultanine"
+   ],
+   "kcal": 321.0,
+   "protein": 3.0,
+   "carbs": 73.2,
+   "fat": 0.9,
+   "pieceG": null,
+   "density": 0.6,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "13002",
+   "name": "Ananas, pulpe, cru",
+   "aliases": [
+    "ananas"
+   ],
+   "kcal": 54.4,
+   "protein": 0.0,
+   "carbs": 11.7,
+   "fat": 0.0,
+   "pieceG": 900.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "13025",
+   "name": "Mangue, pulpe, crue",
+   "aliases": [
+    "mangue"
+   ],
+   "kcal": 73.9,
+   "protein": 0.63,
+   "carbs": 14.3,
+   "fat": 0.0,
+   "pieceG": 350.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "13021",
+   "name": "Kiwi, pulpe et graines, cru",
+   "aliases": [
+    "kiwi"
+   ],
+   "kcal": 60.5,
+   "protein": 0.88,
+   "carbs": 11.0,
+   "fat": 0.6,
+   "pieceG": 75.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "13026",
+   "name": "Melon cantaloup (par ex.: Charentais, de Cavaillon) pulpe, cru",
+   "aliases": [
+    "melon"
+   ],
+   "kcal": 62.7,
+   "protein": 1.13,
+   "carbs": 14.8,
+   "fat": 0.0,
+   "pieceG": 800.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "13036",
+   "name": "Pastèque, pulpe, crue",
+   "aliases": [
+    "pasteque"
+   ],
+   "kcal": 38.9,
+   "protein": 0.69,
+   "carbs": 8.33,
+   "fat": 0.0,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "13016",
+   "name": "Fruit de la passion ou maracudja, pulpe et pépins, cru",
+   "aliases": [
+    "fruit de la passion",
+    "maracuja"
+   ],
+   "kcal": 101.0,
+   "protein": 2.13,
+   "carbs": 10.9,
+   "fat": 3.0,
+   "pieceG": 35.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "13018",
+   "name": "Grenade, pulpe et pépins, crue",
+   "aliases": [
+    "grenade"
+   ],
+   "kcal": 80.6,
+   "protein": 1.44,
+   "carbs": 14.3,
+   "fat": 1.2,
+   "pieceG": 250.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "13012",
+   "name": "Figue, crue",
+   "aliases": [
+    "figue"
+   ],
+   "kcal": 69.4,
+   "protein": 1.19,
+   "carbs": 13.5,
+   "fat": 0.0,
+   "pieceG": 50.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "13013",
+   "name": "Figue, sèche",
+   "aliases": [
+    "figue seche"
+   ],
+   "kcal": 256.4,
+   "protein": 2.99,
+   "carbs": 54.3,
+   "fat": 0.87,
+   "pieceG": 20.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "13011",
+   "name": "Datte, pulpe et peau, sèche",
+   "aliases": [
+    "datte"
+   ],
+   "kcal": 282.9,
+   "protein": 1.81,
+   "carbs": 64.7,
+   "fat": 0.25,
+   "pieceG": 8.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "13042",
+   "name": "Pruneau, sec",
+   "aliases": [
+    "pruneau"
+   ],
+   "kcal": 229.0,
+   "protein": 1.63,
+   "carbs": 55.4,
+   "fat": 0.4,
+   "pieceG": 10.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "13001",
+   "name": "Abricot, dénoyauté, sec",
+   "aliases": [
+    "abricot sec"
+   ],
+   "kcal": 239.0,
+   "protein": 2.88,
+   "carbs": 59.1,
+   "fat": 0.5,
+   "pieceG": 8.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "13178",
+   "name": "Canneberge ou cranberry, séchée, sucrée",
+   "aliases": [
+    "cranberry",
+    "cranberries",
+    "canneberge"
+   ],
+   "kcal": 333.0,
+   "protein": 0.0,
+   "carbs": 76.4,
+   "fat": 1.0,
+   "pieceG": null,
+   "density": 0.6,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "13047",
+   "name": "Rhubarbe, tige, crue",
+   "aliases": [
+    "rhubarbe"
+   ],
+   "kcal": 16.0,
+   "protein": 0.78,
+   "carbs": 1.47,
+   "fat": 0.23,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "13010",
+   "name": "Coing, cru",
+   "aliases": [
+    "coing"
+   ],
+   "kcal": 60.3,
+   "protein": 0.51,
+   "carbs": 13.4,
+   "fat": 0.1,
+   "pieceG": 300.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "15006",
+   "name": "Noix de coco, amande mûre, fraîche",
+   "aliases": [
+    "noix de coco fraiche"
+   ],
+   "kcal": 357.7,
+   "protein": 3.33,
+   "carbs": 6.22,
+   "fat": 33.5,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "15007",
+   "name": "Noix de coco, amande, sèche",
+   "aliases": [
+    "noix de coco rapee",
+    "coco rapee",
+    "noix de coco",
+    "coco"
+   ],
+   "kcal": 685.4,
+   "protein": 6.62,
+   "carbs": 8.55,
+   "fat": 66.3,
+   "pieceG": null,
+   "density": 0.35,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "13004",
+   "name": "Avocat, pulpe, cru",
+   "aliases": [
+    "avocat"
+   ],
+   "kcal": 205.0,
+   "protein": 1.56,
+   "carbs": 0.83,
+   "fat": 20.6,
+   "pieceG": 200.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "13038",
+   "name": "Compote de pomme",
+   "aliases": [
+    "compote",
+    "compote de pomme"
+   ],
+   "kcal": 102.0,
+   "protein": 0.23,
+   "carbs": 24.4,
+   "fat": 0.21,
+   "pieceG": null,
+   "density": 1.05,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "13033",
+   "name": "Olive verte, en saumure, égouttée",
+   "aliases": [
+    "olive verte",
+    "olive"
+   ],
+   "kcal": 155.0,
+   "protein": 1.31,
+   "carbs": 0.0,
+   "fat": 15.7,
+   "pieceG": 4.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "13131",
+   "name": "Olive noire, à l'huile (à la grecque)",
+   "aliases": [
+    "olive noire"
+   ],
+   "kcal": 332.0,
+   "protein": 2.19,
+   "carbs": 0.0,
+   "fat": 33.3,
+   "pieceG": 4.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "4008",
+   "name": "Pomme de terre, sans peau, crue",
+   "aliases": [
+    "pomme de terre",
+    "patate",
+    "pomme de terre a chair ferme",
+    "grenaille"
+   ],
+   "kcal": 80.5,
+   "protein": 2.16,
+   "carbs": 16.2,
+   "fat": 0.18,
+   "pieceG": 150.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "4101",
+   "name": "Patate douce, crue",
+   "aliases": [
+    "patate douce"
+   ],
+   "kcal": 86.3,
+   "protein": 1.51,
+   "carbs": 18.3,
+   "fat": 0.15,
+   "pieceG": 250.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20009",
+   "name": "Carotte, crue",
+   "aliases": [
+    "carotte"
+   ],
+   "kcal": 40.2,
+   "protein": 0.63,
+   "carbs": 7.59,
+   "fat": 0.0,
+   "pieceG": 100.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20034",
+   "name": "Oignon, cru",
+   "aliases": [
+    "oignon",
+    "oignon jaune",
+    "oignon blanc"
+   ],
+   "kcal": 38.4,
+   "protein": 1.1,
+   "carbs": 6.25,
+   "fat": 0.62,
+   "pieceG": 100.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20238",
+   "name": "Oignon rouge, cru",
+   "aliases": [
+    "oignon rouge"
+   ],
+   "kcal": 36.3,
+   "protein": 1.31,
+   "carbs": 5.63,
+   "fat": 0.4,
+   "pieceG": 100.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20097",
+   "name": "Échalote, crue",
+   "aliases": [
+    "echalote"
+   ],
+   "kcal": 63.6,
+   "protein": 1.81,
+   "carbs": 12.2,
+   "fat": 0.0,
+   "pieceG": 25.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "11000",
+   "name": "Ail, cru",
+   "aliases": [
+    "ail",
+    "gousse d'ail",
+    "gousse d ail"
+   ],
+   "kcal": 111.0,
+   "protein": 5.31,
+   "carbs": 18.6,
+   "fat": 0.0,
+   "pieceG": 5.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20039",
+   "name": "Poireau, cru",
+   "aliases": [
+    "poireau"
+   ],
+   "kcal": 32.3,
+   "protein": 1.49,
+   "carbs": 4.9,
+   "fat": 0.25,
+   "pieceG": 150.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20047",
+   "name": "Tomate, crue",
+   "aliases": [
+    "tomate"
+   ],
+   "kcal": 19.3,
+   "protein": 0.86,
+   "carbs": 2.49,
+   "fat": 0.26,
+   "pieceG": 120.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20172",
+   "name": "Tomate cerise, crue",
+   "aliases": [
+    "tomate cerise"
+   ],
+   "kcal": 33.7,
+   "protein": 1.31,
+   "carbs": 5.62,
+   "fat": 0.0,
+   "pieceG": 15.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20068",
+   "name": "Tomate, concentré, appertisé",
+   "aliases": [
+    "concentre de tomate",
+    "double concentre de tomate",
+    "puree de tomate concentree"
+   ],
+   "kcal": 99.2,
+   "protein": 4.4,
+   "carbs": 17.1,
+   "fat": 0.53,
+   "pieceG": null,
+   "density": 1.1,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20169",
+   "name": "Tomate, pulpe, appertisée",
+   "aliases": [
+    "pulpe de tomate",
+    "tomates concassees",
+    "tomate concassee",
+    "tomate pelee",
+    "tomates pelees",
+    "chair de tomate"
+   ],
+   "kcal": 26.1,
+   "protein": 1.2,
+   "carbs": 3.63,
+   "fat": 0.0,
+   "pieceG": null,
+   "density": 1.0,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20260",
+   "name": "Tomate, coulis, appertisé (purée de tomates mi-réduite à 11%)",
+   "aliases": [
+    "coulis de tomate",
+    "passata",
+    "puree de tomate"
+   ],
+   "kcal": 49.3,
+   "protein": 2.05,
+   "carbs": 8.53,
+   "fat": 0.2,
+   "pieceG": null,
+   "density": 1.0,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "11107",
+   "name": "Sauce tomate aux oignons, préemballée",
+   "aliases": [
+    "sauce tomate"
+   ],
+   "kcal": 78.8,
+   "protein": 1.52,
+   "carbs": 7.69,
+   "fat": 4.18,
+   "pieceG": null,
+   "density": 1.0,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20256",
+   "name": "Tomate, séchée, à l'huile",
+   "aliases": [
+    "tomate sechee",
+    "tomates sechees"
+   ],
+   "kcal": 187.0,
+   "protein": 4.27,
+   "carbs": 13.4,
+   "fat": 11.7,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20020",
+   "name": "Courgette, pulpe et peau, crue",
+   "aliases": [
+    "courgette"
+   ],
+   "kcal": 16.5,
+   "protein": 1.23,
+   "carbs": 1.8,
+   "fat": 0.26,
+   "pieceG": 200.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20053",
+   "name": "Aubergine, crue",
+   "aliases": [
+    "aubergine"
+   ],
+   "kcal": 20.7,
+   "protein": 1.12,
+   "carbs": 2.39,
+   "fat": 0.14,
+   "pieceG": 300.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20087",
+   "name": "Poivron rouge, cru",
+   "aliases": [
+    "poivron",
+    "poivron rouge"
+   ],
+   "kcal": 36.6,
+   "protein": 1.06,
+   "carbs": 5.98,
+   "fat": 0.0,
+   "pieceG": 150.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20085",
+   "name": "Poivron vert, cru",
+   "aliases": [
+    "poivron vert"
+   ],
+   "kcal": 26.0,
+   "protein": 0.81,
+   "carbs": 3.43,
+   "fat": 0.0,
+   "pieceG": 150.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20168",
+   "name": "Poivron jaune, cru",
+   "aliases": [
+    "poivron jaune"
+   ],
+   "kcal": 30.7,
+   "protein": 0.94,
+   "carbs": 4.73,
+   "fat": 0.3,
+   "pieceG": 150.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20210",
+   "name": "Concombre, pulpe, cru",
+   "aliases": [
+    "concombre"
+   ],
+   "kcal": 14.7,
+   "protein": 0.56,
+   "carbs": 2.23,
+   "fat": 0.0,
+   "pieceG": 300.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20031",
+   "name": "Laitue, crue",
+   "aliases": [
+    "salade",
+    "laitue",
+    "salade verte",
+    "batavia",
+    "feuille de salade"
+   ],
+   "kcal": 14.7,
+   "protein": 1.3,
+   "carbs": 1.33,
+   "fat": 0.2,
+   "pieceG": 300.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20099",
+   "name": "Mâche, crue",
+   "aliases": [
+    "mache"
+   ],
+   "kcal": 16.8,
+   "protein": 2.0,
+   "carbs": 0.5,
+   "fat": 0.0,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20217",
+   "name": "Roquette, crue",
+   "aliases": [
+    "roquette"
+   ],
+   "kcal": 27.9,
+   "protein": 2.58,
+   "carbs": 2.1,
+   "fat": 0.66,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20026",
+   "name": "Endive, crue",
+   "aliases": [
+    "endive",
+    "chicon"
+   ],
+   "kcal": 20.2,
+   "protein": 1.19,
+   "carbs": 2.83,
+   "fat": 0.0,
+   "pieceG": 120.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20270",
+   "name": "Épinard, jeunes pousses pour salades, cru",
+   "aliases": [
+    "epinard",
+    "pousse d'epinard",
+    "pousses d'epinard"
+   ],
+   "kcal": 18.3,
+   "protein": 2.06,
+   "carbs": 0.0,
+   "fat": 0.4,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20116",
+   "name": "Chou blanc, cru",
+   "aliases": [
+    "chou",
+    "chou blanc"
+   ],
+   "kcal": 36.5,
+   "protein": 1.38,
+   "carbs": 4.63,
+   "fat": 0.6,
+   "pieceG": 1000.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20014",
+   "name": "Chou rouge, cru",
+   "aliases": [
+    "chou rouge"
+   ],
+   "kcal": 30.0,
+   "protein": 1.13,
+   "carbs": 4.33,
+   "fat": 0.0,
+   "pieceG": 1000.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20016",
+   "name": "Chou-fleur, cru",
+   "aliases": [
+    "chou-fleur",
+    "chou fleur"
+   ],
+   "kcal": 26.2,
+   "protein": 1.81,
+   "carbs": 2.13,
+   "fat": 0.7,
+   "pieceG": 800.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20057",
+   "name": "Brocoli, cru",
+   "aliases": [
+    "brocoli"
+   ],
+   "kcal": 32.7,
+   "protein": 3.95,
+   "carbs": 1.7,
+   "fat": 0.48,
+   "pieceG": 400.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20058",
+   "name": "Chou de Bruxelles, cru",
+   "aliases": [
+    "chou de bruxelles"
+   ],
+   "kcal": 50.1,
+   "protein": 3.98,
+   "carbs": 5.67,
+   "fat": 0.4,
+   "pieceG": 10.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20218",
+   "name": "Chou frisé, cru",
+   "aliases": [
+    "chou frise",
+    "chou vert",
+    "chou kale",
+    "kale"
+   ],
+   "kcal": 53.6,
+   "protein": 4.33,
+   "carbs": 4.2,
+   "fat": 1.07,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20055",
+   "name": "Céleri-rave, cru",
+   "aliases": [
+    "celeri rave",
+    "celeri-rave"
+   ],
+   "kcal": 29.3,
+   "protein": 1.38,
+   "carbs": 3.98,
+   "fat": 0.0,
+   "pieceG": 600.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20023",
+   "name": "Céleri branche, cru",
+   "aliases": [
+    "celeri",
+    "celeri branche",
+    "branche de celeri"
+   ],
+   "kcal": 17.6,
+   "protein": 0.63,
+   "carbs": 2.41,
+   "fat": 0.0,
+   "pieceG": 40.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20028",
+   "name": "Fenouil, cru",
+   "aliases": [
+    "fenouil"
+   ],
+   "kcal": 21.8,
+   "protein": 1.0,
+   "carbs": 2.63,
+   "fat": 0.0,
+   "pieceG": 250.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20064",
+   "name": "Navet, pelé, cru",
+   "aliases": [
+    "navet"
+   ],
+   "kcal": 26.5,
+   "protein": 0.76,
+   "carbs": 4.7,
+   "fat": 0.1,
+   "pieceG": 100.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20045",
+   "name": "Radis rouge, cru",
+   "aliases": [
+    "radis"
+   ],
+   "kcal": 14.5,
+   "protein": 0.94,
+   "carbs": 1.53,
+   "fat": 0.0,
+   "pieceG": 8.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20003",
+   "name": "Betterave rouge, cuite",
+   "aliases": [
+    "betterave"
+   ],
+   "kcal": 42.8,
+   "protein": 1.44,
+   "carbs": 7.13,
+   "fat": 0.4,
+   "pieceG": 150.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20070",
+   "name": "Haricot vert, surgelé, cru",
+   "aliases": [
+    "haricot vert"
+   ],
+   "kcal": 34.0,
+   "protein": 1.97,
+   "carbs": 4.35,
+   "fat": 0.17,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20072",
+   "name": "Petits pois, crus",
+   "aliases": [
+    "petit pois",
+    "petits pois"
+   ],
+   "kcal": 67.3,
+   "protein": 5.84,
+   "carbs": 7.0,
+   "fat": 0.55,
+   "pieceG": null,
+   "density": 0.65,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20066",
+   "name": "Maïs doux, appertisé, égoutté",
+   "aliases": [
+    "mais",
+    "mais doux",
+    "grain de mais"
+   ],
+   "kcal": 106.0,
+   "protein": 2.82,
+   "carbs": 18.4,
+   "fat": 1.68,
+   "pieceG": null,
+   "density": 0.7,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20056",
+   "name": "Champignon de Paris ou champignon de couche, cru",
+   "aliases": [
+    "champignon",
+    "champignon de paris",
+    "champignons de paris"
+   ],
+   "kcal": 28.0,
+   "protein": 2.62,
+   "carbs": 3.15,
+   "fat": 0.36,
+   "pieceG": 20.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20212",
+   "name": "Champignon, lentin comestible ou shiitaké, cuit",
+   "aliases": [
+    "shiitake"
+   ],
+   "kcal": 60.9,
+   "protein": 1.56,
+   "carbs": 12.3,
+   "fat": 0.22,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20160",
+   "name": "Champignon, cèpe, cru",
+   "aliases": [
+    "cepe",
+    "champignon des bois"
+   ],
+   "kcal": 31.6,
+   "protein": 3.13,
+   "carbs": 3.03,
+   "fat": 0.43,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20103",
+   "name": "Champignon, chanterelle ou girolle, crue",
+   "aliases": [
+    "girolle",
+    "chanterelle"
+   ],
+   "kcal": 33.1,
+   "protein": 2.28,
+   "carbs": 2.3,
+   "fat": 0.78,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20279",
+   "name": "Asperge, verte, crue",
+   "aliases": [
+    "asperge",
+    "asperge verte"
+   ],
+   "kcal": 24.7,
+   "protein": 2.46,
+   "carbs": 2.03,
+   "fat": 0.27,
+   "pieceG": 20.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20052",
+   "name": "Artichaut, cru",
+   "aliases": [
+    "artichaut",
+    "fond d'artichaut"
+   ],
+   "kcal": 44.9,
+   "protein": 3.2,
+   "carbs": 4.92,
+   "fat": 0.18,
+   "pieceG": 300.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20044",
+   "name": "Potiron, cru",
+   "aliases": [
+    "potiron",
+    "citrouille",
+    "courge",
+    "potimarron",
+    "butternut",
+    "courge butternut"
+   ],
+   "kcal": 19.9,
+   "protein": 1.0,
+   "carbs": 3.5,
+   "fat": 0.1,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20181",
+   "name": "Panais, cru",
+   "aliases": [
+    "panais"
+   ],
+   "kcal": 58.3,
+   "protein": 1.54,
+   "carbs": 10.1,
+   "fat": 0.4,
+   "pieceG": 150.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20196",
+   "name": "Topinambour, cru",
+   "aliases": [
+    "topinambour"
+   ],
+   "kcal": 60.7,
+   "protein": 1.94,
+   "carbs": 11.5,
+   "fat": 0.31,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20183",
+   "name": "Haricot mungo germé ou pousse de \"soja\", cru",
+   "aliases": [
+    "germe de soja",
+    "pousse de soja"
+   ],
+   "kcal": 27.3,
+   "protein": 2.57,
+   "carbs": 3.4,
+   "fat": 0.0,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "11074",
+   "name": "Gingembre, racine crue",
+   "aliases": [
+    "gingembre frais",
+    "gingembre"
+   ],
+   "kcal": 32.9,
+   "protein": 1.1,
+   "carbs": 3.4,
+   "fat": 1.1,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20151",
+   "name": "Piment, cru",
+   "aliases": [
+    "piment",
+    "piment rouge",
+    "piment vert"
+   ],
+   "kcal": 44.5,
+   "protein": 1.87,
+   "carbs": 7.7,
+   "fat": 0.32,
+   "pieceG": 10.0,
+   "density": null,
+   "kind": "SEASONING"
+  },
+  {
+   "code": "11097",
+   "name": "Cornichon, aigre-doux",
+   "aliases": [
+    "cornichon"
+   ],
+   "kcal": 36.0,
+   "protein": 1.25,
+   "carbs": 5.0,
+   "fat": 0.35,
+   "pieceG": 10.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "11040",
+   "name": "Câpres, au vinaigre",
+   "aliases": [
+    "capre",
+    "capres"
+   ],
+   "kcal": 37.7,
+   "protein": 2.18,
+   "carbs": 3.5,
+   "fat": 0.86,
+   "pieceG": null,
+   "density": null,
+   "kind": "SEASONING"
+  },
+  {
+   "code": "25220",
+   "name": "Choucroute, sans garniture, égouttée, cuite",
+   "aliases": [
+    "choucroute"
+   ],
+   "kcal": 75.3,
+   "protein": 1.38,
+   "carbs": 0.0,
+   "fat": 6.6,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20496",
+   "name": "Légumes pour couscous, surgelés, crus",
+   "aliases": [
+    "legumes pour couscous"
+   ],
+   "kcal": 46.5,
+   "protein": 2.05,
+   "carbs": 6.75,
+   "fat": 0.7,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20051",
+   "name": "Macédoine de légumes, appertisée, égouttée",
+   "aliases": [
+    "jardiniere de legume",
+    "macedoine",
+    "macedoine de legumes"
+   ],
+   "kcal": 40.4,
+   "protein": 2.32,
+   "carbs": 5.59,
+   "fat": 0.28,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "25018",
+   "name": "Ratatouille cuisinée, préemballée",
+   "aliases": [
+    "ratatouille"
+   ],
+   "kcal": 57.2,
+   "protein": 1.22,
+   "carbs": 4.97,
+   "fat": 3.15,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20585",
+   "name": "Lentille verte, sèche",
+   "aliases": [
+    "lentille",
+    "lentilles",
+    "lentille verte"
+   ],
+   "kcal": 327.4,
+   "protein": 25.1,
+   "carbs": 44.5,
+   "fat": 1.8,
+   "pieceG": null,
+   "density": 0.8,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20535",
+   "name": "Lentille corail, sèche",
+   "aliases": [
+    "lentille corail"
+   ],
+   "kcal": 328.4,
+   "protein": 27.7,
+   "carbs": 44.9,
+   "fat": 0.8,
+   "pieceG": null,
+   "density": 0.8,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20532",
+   "name": "Pois chiche, appertisé, égoutté",
+   "aliases": [
+    "pois chiche",
+    "pois chiches"
+   ],
+   "kcal": 122.0,
+   "protein": 6.74,
+   "carbs": 15.0,
+   "fat": 2.68,
+   "pieceG": null,
+   "density": 0.65,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20524",
+   "name": "Haricot rouge, appertisé, égoutté",
+   "aliases": [
+    "haricot rouge"
+   ],
+   "kcal": 108.0,
+   "protein": 8.31,
+   "carbs": 13.0,
+   "fat": 0.97,
+   "pieceG": null,
+   "density": 0.65,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20511",
+   "name": "Haricot blanc, appertisé, égoutté",
+   "aliases": [
+    "haricot blanc",
+    "lingot",
+    "haricot coco"
+   ],
+   "kcal": 87.5,
+   "protein": 6.57,
+   "carbs": 10.9,
+   "fat": 0.4,
+   "pieceG": null,
+   "density": 0.65,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20508",
+   "name": "Haricot flageolet, appertisé, égouttés",
+   "aliases": [
+    "flageolet"
+   ],
+   "kcal": 92.9,
+   "protein": 6.1,
+   "carbs": 12.2,
+   "fat": 0.79,
+   "pieceG": null,
+   "density": 0.65,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20515",
+   "name": "Pois cassé, sec",
+   "aliases": [
+    "pois casse",
+    "pois casses"
+   ],
+   "kcal": 343.8,
+   "protein": 22.8,
+   "carbs": 52.0,
+   "fat": 1.44,
+   "pieceG": null,
+   "density": 0.8,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20541",
+   "name": "Fève, pelée, surgelée, crue",
+   "aliases": [
+    "feve"
+   ],
+   "kcal": 134.9,
+   "protein": 14.9,
+   "carbs": 14.9,
+   "fat": 0.3,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "20904",
+   "name": "Tofu nature, préemballé",
+   "aliases": [
+    "tofu"
+   ],
+   "kcal": 148.0,
+   "protein": 13.4,
+   "carbs": 2.87,
+   "fat": 8.5,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "18900",
+   "name": "Boisson au soja, nature, non enrichie, préemballée",
+   "aliases": [
+    "lait de soja",
+    "boisson au soja"
+   ],
+   "kcal": 37.1,
+   "protein": 3.31,
+   "carbs": 0.7,
+   "fat": 2.07,
+   "pieceG": null,
+   "density": 1.03,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "18107",
+   "name": "Boisson à l'amande, nature, non sucrée, non enrichie, préemballée",
+   "aliases": [
+    "lait d'amande",
+    "boisson a l'amande"
+   ],
+   "kcal": 36.3,
+   "protein": 1.06,
+   "carbs": 0.68,
+   "fat": 3.2,
+   "pieceG": null,
+   "density": 1.03,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "18905",
+   "name": "Boisson à base d'avoine, nature, préemballée",
+   "aliases": [
+    "lait d'avoine",
+    "boisson a l'avoine"
+   ],
+   "kcal": 42.6,
+   "protein": 0.0,
+   "carbs": 7.8,
+   "fat": 1.1,
+   "pieceG": null,
+   "density": 1.03,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "15000",
+   "name": "Amande (avec peau)",
+   "aliases": [
+    "amande",
+    "amandes entieres"
+   ],
+   "kcal": 599.9,
+   "protein": 18.8,
+   "carbs": 9.51,
+   "fat": 51.3,
+   "pieceG": 1.2,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "15041",
+   "name": "Amande, mondée, émondée ou blanchie",
+   "aliases": [
+    "poudre d'amande",
+    "poudre d amande",
+    "amande en poudre",
+    "amandes en poudre",
+    "amande moulue",
+    "amande mondee",
+    "amande effilee",
+    "amandes effilees",
+    "amande blanchie"
+   ],
+   "kcal": 612.9,
+   "protein": 21.4,
+   "carbs": 8.76,
+   "fat": 52.5,
+   "pieceG": null,
+   "density": 0.45,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "15004",
+   "name": "Noisette",
+   "aliases": [
+    "noisette",
+    "poudre de noisette",
+    "noisettes"
+   ],
+   "kcal": 621.5,
+   "protein": 14.4,
+   "carbs": 7.16,
+   "fat": 56.9,
+   "pieceG": 1.5,
+   "density": 0.45,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "15005",
+   "name": "Noix, séchée, cerneaux",
+   "aliases": [
+    "noix",
+    "cerneau de noix",
+    "cerneaux de noix"
+   ],
+   "kcal": 699.8,
+   "protein": 13.3,
+   "carbs": 6.88,
+   "fat": 67.3,
+   "pieceG": 5.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "15054",
+   "name": "Noix de cajou, grillée, non salée",
+   "aliases": [
+    "noix de cajou",
+    "cajou"
+   ],
+   "kcal": 618.0,
+   "protein": 17.4,
+   "carbs": 21.3,
+   "fat": 48.1,
+   "pieceG": 1.5,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "15044",
+   "name": "Pistache, grillée",
+   "aliases": [
+    "pistache"
+   ],
+   "kcal": 594.8,
+   "protein": 18.4,
+   "carbs": 18.6,
+   "fat": 47.4,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "15001",
+   "name": "Cacahuète ou Arachide",
+   "aliases": [
+    "cacahuete",
+    "arachide"
+   ],
+   "kcal": 609.5,
+   "protein": 22.8,
+   "carbs": 14.8,
+   "fat": 49.1,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "15202",
+   "name": "Beurre de cacahuète ou Pâte d'arachide",
+   "aliases": [
+    "beurre de cacahuete",
+    "beurre d'arachide"
+   ],
+   "kcal": 635.7,
+   "protein": 22.2,
+   "carbs": 16.1,
+   "fat": 52.5,
+   "pieceG": null,
+   "density": 1.1,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "15026",
+   "name": "Noix de pécan",
+   "aliases": [
+    "noix de pecan",
+    "pecan"
+   ],
+   "kcal": 730.1,
+   "protein": 9.57,
+   "carbs": 5.43,
+   "fat": 72.6,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "15008",
+   "name": "Noix du Brésil",
+   "aliases": [
+    "noix du bresil"
+   ],
+   "kcal": 691.6,
+   "protein": 14.8,
+   "carbs": 6.17,
+   "fat": 66.1,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "15027",
+   "name": "Noix de macadamia",
+   "aliases": [
+    "noix de macadamia",
+    "macadamia"
+   ],
+   "kcal": 751.9,
+   "protein": 7.91,
+   "carbs": 5.22,
+   "fat": 75.8,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "15025",
+   "name": "Pignon de pin",
+   "aliases": [
+    "pignon",
+    "pignons de pin",
+    "pignon de pin"
+   ],
+   "kcal": 685.0,
+   "protein": 13.7,
+   "carbs": 6.31,
+   "fat": 65.0,
+   "pieceG": null,
+   "density": 0.6,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "15035",
+   "name": "Sésame, graine décortiquée",
+   "aliases": [
+    "sesame",
+    "graine de sesame",
+    "graines de sesame"
+   ],
+   "kcal": 631.1,
+   "protein": 21.1,
+   "carbs": 4.5,
+   "fat": 56.1,
+   "pieceG": null,
+   "density": 0.6,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "15034",
+   "name": "Lin, graine",
+   "aliases": [
+    "graine de lin",
+    "lin"
+   ],
+   "kcal": 491.2,
+   "protein": 20.2,
+   "carbs": 6.6,
+   "fat": 36.6,
+   "pieceG": null,
+   "density": 0.65,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "15047",
+   "name": "Chia, graine, séchée",
+   "aliases": [
+    "graine de chia",
+    "chia"
+   ],
+   "kcal": 442.0,
+   "protein": 16.5,
+   "carbs": 7.72,
+   "fat": 30.7,
+   "pieceG": null,
+   "density": 0.65,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "15011",
+   "name": "Tournesol, graine",
+   "aliases": [
+    "graine de tournesol"
+   ],
+   "kcal": 637.9,
+   "protein": 21.3,
+   "carbs": 10.1,
+   "fat": 55.5,
+   "pieceG": null,
+   "density": 0.55,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "15020",
+   "name": "Châtaigne, bouillie/cuite à l'eau",
+   "aliases": [
+    "chataigne",
+    "marron"
+   ],
+   "kcal": 121.4,
+   "protein": 2.0,
+   "carbs": 23.0,
+   "fat": 1.38,
+   "pieceG": 10.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "15203",
+   "name": "Tahin ou Purée de sésame",
+   "aliases": [
+    "tahini",
+    "tahin",
+    "puree de sesame"
+   ],
+   "kcal": 620.6,
+   "protein": 17.7,
+   "carbs": 13.8,
+   "fat": 53.4,
+   "pieceG": null,
+   "density": 1.1,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "6254",
+   "name": "Boeuf, steak haché 15% MG, cru",
+   "aliases": [
+    "viande hachee",
+    "boeuf hache",
+    "steak hache",
+    "hache de boeuf",
+    "viande de boeuf hachee"
+   ],
+   "kcal": 209.0,
+   "protein": 20.2,
+   "carbs": 0.47,
+   "fat": 14.1,
+   "pieceG": 100.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "6250",
+   "name": "Boeuf, steak haché 5% MG, cru",
+   "aliases": [
+    "steak hache 5%"
+   ],
+   "kcal": 130.0,
+   "protein": 21.9,
+   "carbs": 0.3,
+   "fat": 4.59,
+   "pieceG": 100.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "6103",
+   "name": "Boeuf, entrecôte, crue",
+   "aliases": [
+    "entrecote",
+    "boeuf",
+    "steak",
+    "bifteck",
+    "pave de boeuf",
+    "rumsteck"
+   ],
+   "kcal": 231.0,
+   "protein": 19.4,
+   "carbs": 0.0,
+   "fat": 17.1,
+   "pieceG": 200.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "6231",
+   "name": "Boeuf, à bourguignon ou pot-au-feu, cru",
+   "aliases": [
+    "boeuf bourguignon",
+    "paleron",
+    "macreuse",
+    "joue de boeuf",
+    "boeuf a braiser",
+    "plat de cotes",
+    "gite",
+    "pot-au-feu",
+    "pot au feu",
+    "jarret de boeuf"
+   ],
+   "kcal": 164.0,
+   "protein": 24.0,
+   "carbs": 0.0,
+   "fat": 7.5,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "6116",
+   "name": "Boeuf, filet, cru",
+   "aliases": [
+    "filet de boeuf",
+    "tournedos"
+   ],
+   "kcal": 132.0,
+   "protein": 21.6,
+   "carbs": 0.22,
+   "fat": 4.95,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "6521",
+   "name": "Veau, escalope, crue",
+   "aliases": [
+    "veau",
+    "escalope de veau"
+   ],
+   "kcal": 108.0,
+   "protein": 20.7,
+   "carbs": 0.58,
+   "fat": 2.6,
+   "pieceG": 120.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "6550",
+   "name": "Veau, rôti, cru",
+   "aliases": [
+    "blanquette",
+    "tendron",
+    "epaule de veau",
+    "roti de veau"
+   ],
+   "kcal": 145.0,
+   "protein": 27.3,
+   "carbs": 0.0,
+   "fat": 3.96,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "28204",
+   "name": "Porc, filet mignon, cru",
+   "aliases": [
+    "filet mignon",
+    "porc",
+    "filet de porc"
+   ],
+   "kcal": 123.0,
+   "protein": 21.2,
+   "carbs": 0.4,
+   "fat": 4.09,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "28100",
+   "name": "Porc, côte, crue",
+   "aliases": [
+    "cote de porc",
+    "echine",
+    "cotelette de porc"
+   ],
+   "kcal": 164.0,
+   "protein": 19.8,
+   "carbs": 0.38,
+   "fat": 9.3,
+   "pieceG": 180.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "28300",
+   "name": "Porc, rôti, cru",
+   "aliases": [
+    "roti de porc"
+   ],
+   "kcal": 153.0,
+   "protein": 22.3,
+   "carbs": 0.5,
+   "fat": 6.86,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "28002",
+   "name": "Porc, poitrine, crue",
+   "aliases": [
+    "poitrine de porc"
+   ],
+   "kcal": 253.0,
+   "protein": 17.0,
+   "carbs": 0.0,
+   "fat": 20.5,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "28720",
+   "name": "Lardon fumé, cru",
+   "aliases": [
+    "lardon",
+    "lardons",
+    "lardons fumes",
+    "poitrine fumee"
+   ],
+   "kcal": 275.0,
+   "protein": 16.7,
+   "carbs": 0.96,
+   "fat": 22.6,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "28900",
+   "name": "Jambon cuit, supérieur",
+   "aliases": [
+    "jambon",
+    "jambon blanc",
+    "jambon cuit",
+    "tranche de jambon"
+   ],
+   "kcal": 125.0,
+   "protein": 20.8,
+   "carbs": 0.81,
+   "fat": 4.28,
+   "pieceG": 45.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "28800",
+   "name": "Jambon cru",
+   "aliases": [
+    "jambon cru",
+    "jambon de bayonne",
+    "jambon de parme",
+    "jambon sec",
+    "prosciutto"
+   ],
+   "kcal": 225.0,
+   "protein": 25.9,
+   "carbs": 0.76,
+   "fat": 13.2,
+   "pieceG": 15.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "28727",
+   "name": "Filet de bacon",
+   "aliases": [
+    "bacon"
+   ],
+   "kcal": 118.0,
+   "protein": 23.1,
+   "carbs": 0.7,
+   "fat": 2.6,
+   "pieceG": 15.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "30110",
+   "name": "Saucisse de Toulouse, crue",
+   "aliases": [
+    "saucisse",
+    "saucisse de toulouse"
+   ],
+   "kcal": 327.0,
+   "protein": 13.2,
+   "carbs": 1.0,
+   "fat": 30.0,
+   "pieceG": 110.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "30742",
+   "name": "Saucisse de Strasbourg ou Knack",
+   "aliases": [
+    "saucisse de strasbourg",
+    "knacki",
+    "saucisse de francfort",
+    "knack"
+   ],
+   "kcal": 291.0,
+   "protein": 12.4,
+   "carbs": 1.39,
+   "fat": 25.9,
+   "pieceG": 35.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "30315",
+   "name": "Chorizo",
+   "aliases": [
+    "chorizo"
+   ],
+   "kcal": 433.0,
+   "protein": 23.5,
+   "carbs": 3.05,
+   "fat": 36.1,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "30150",
+   "name": "Merguez, crue",
+   "aliases": [
+    "merguez"
+   ],
+   "kcal": 316.0,
+   "protein": 13.5,
+   "carbs": 2.5,
+   "fat": 28.0,
+   "pieceG": 60.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "30300",
+   "name": "Saucisson sec",
+   "aliases": [
+    "saucisson",
+    "saucisson sec"
+   ],
+   "kcal": 418.0,
+   "protein": 24.2,
+   "carbs": 2.41,
+   "fat": 34.5,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "16530",
+   "name": "Lard gras, cru",
+   "aliases": [
+    "lard"
+   ],
+   "kcal": 810.0,
+   "protein": 2.92,
+   "carbs": 0.0,
+   "fat": 88.7,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "30050",
+   "name": "Chair à saucisse, crue",
+   "aliases": [
+    "chair a saucisse"
+   ],
+   "kcal": 323.0,
+   "protein": 14.7,
+   "carbs": 0.6,
+   "fat": 29.1,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "21502",
+   "name": "Agneau, gigot, cru",
+   "aliases": [
+    "agneau",
+    "gigot",
+    "gigot d'agneau",
+    "souris d'agneau",
+    "epaule d'agneau"
+   ],
+   "kcal": 128.0,
+   "protein": 20.0,
+   "carbs": 0.48,
+   "fat": 5.13,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "21500",
+   "name": "Agneau, côtelette, crue",
+   "aliases": [
+    "cotelette d'agneau",
+    "cote d'agneau"
+   ],
+   "kcal": 368.0,
+   "protein": 14.4,
+   "carbs": 0.0,
+   "fat": 34.5,
+   "pieceG": 70.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "36017",
+   "name": "Poulet, filet, sans peau, cru",
+   "aliases": [
+    "poulet",
+    "blanc de poulet",
+    "filet de poulet",
+    "escalope de poulet",
+    "aiguillette de poulet",
+    "blancs de poulet"
+   ],
+   "kcal": 110.0,
+   "protein": 23.4,
+   "carbs": 0.0,
+   "fat": 1.5,
+   "pieceG": 130.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "36002",
+   "name": "Poulet, cuisse, viande et peau, cru",
+   "aliases": [
+    "cuisse de poulet",
+    "haut de cuisse",
+    "pilon",
+    "pilon de poulet"
+   ],
+   "kcal": 192.0,
+   "protein": 17.3,
+   "carbs": 0.0,
+   "fat": 13.5,
+   "pieceG": 200.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "36016",
+   "name": "Poulet, viande et peau, cru",
+   "aliases": [
+    "poulet entier",
+    "poulet fermier"
+   ],
+   "kcal": 173.0,
+   "protein": 20.2,
+   "carbs": 0.3,
+   "fat": 10.1,
+   "pieceG": 1400.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "36304",
+   "name": "Dinde, escalope, crue",
+   "aliases": [
+    "dinde",
+    "escalope de dinde",
+    "filet de dinde"
+   ],
+   "kcal": 109.0,
+   "protein": 24.1,
+   "carbs": 0.51,
+   "fat": 1.22,
+   "pieceG": 130.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "36206",
+   "name": "Canard, magret, cru",
+   "aliases": [
+    "magret",
+    "magret de canard"
+   ],
+   "kcal": 340.0,
+   "protein": 17.9,
+   "carbs": 0.85,
+   "fat": 29.4,
+   "pieceG": 350.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "36203",
+   "name": "Canard, cuisse avec peau, sans os, crue",
+   "aliases": [
+    "canard",
+    "cuisse de canard",
+    "confit de canard"
+   ],
+   "kcal": 103.0,
+   "protein": 18.7,
+   "carbs": 0.0,
+   "fat": 3.1,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "34001",
+   "name": "Lapin, viande crue",
+   "aliases": [
+    "lapin"
+   ],
+   "kcal": 189.0,
+   "protein": 20.4,
+   "carbs": 0.66,
+   "fat": 11.6,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "8328",
+   "name": "Foie gras de canard, cru",
+   "aliases": [
+    "foie gras"
+   ],
+   "kcal": 600.0,
+   "protein": 5.94,
+   "carbs": 1.41,
+   "fat": 63.4,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "40108",
+   "name": "Foie, volaille, cru",
+   "aliases": [
+    "foie de volaille",
+    "foie de poulet"
+   ],
+   "kcal": 133.0,
+   "protein": 21.3,
+   "carbs": 1.13,
+   "fat": 4.88,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "40700",
+   "name": "Gésier, poulet, cru",
+   "aliases": [
+    "gesier"
+   ],
+   "kcal": 105.0,
+   "protein": 17.3,
+   "carbs": 0.6,
+   "fat": 3.75,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "26036",
+   "name": "Saumon, cru, élevage",
+   "aliases": [
+    "saumon",
+    "pave de saumon",
+    "filet de saumon"
+   ],
+   "kcal": 194.0,
+   "protein": 20.5,
+   "carbs": 0.0,
+   "fat": 12.4,
+   "pieceG": 150.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "26037",
+   "name": "Saumon fumé",
+   "aliases": [
+    "saumon fume"
+   ],
+   "kcal": 178.0,
+   "protein": 22.0,
+   "carbs": 0.91,
+   "fat": 9.49,
+   "pieceG": 20.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "26064",
+   "name": "Thon albacore ou thon jaune, cru",
+   "aliases": [
+    "thon frais",
+    "steak de thon"
+   ],
+   "kcal": 108.0,
+   "protein": 25.0,
+   "carbs": 0.0,
+   "fat": 0.94,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "26039",
+   "name": "Thon, au naturel, appertisé, égoutté",
+   "aliases": [
+    "thon",
+    "thon au naturel",
+    "thon en boite",
+    "thon en conserve"
+   ],
+   "kcal": 111.0,
+   "protein": 26.8,
+   "carbs": 0.0,
+   "fat": 0.4,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "26180",
+   "name": "Thon à l'huile de tournesol, entier, appertisé, égoutté",
+   "aliases": [
+    "thon a l'huile"
+   ],
+   "kcal": 206.0,
+   "protein": 23.3,
+   "carbs": 0.76,
+   "fat": 12.2,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "26043",
+   "name": "Cabillaud, cru",
+   "aliases": [
+    "cabillaud",
+    "dos de cabillaud",
+    "poisson blanc",
+    "filet de poisson"
+   ],
+   "kcal": 77.6,
+   "protein": 18.1,
+   "carbs": 0.0,
+   "fat": 0.57,
+   "pieceG": 150.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "26129",
+   "name": "Lieu jaune ou colin, cru",
+   "aliases": [
+    "colin",
+    "merlu",
+    "lieu",
+    "lieu noir",
+    "merlan"
+   ],
+   "kcal": 75.5,
+   "protein": 17.7,
+   "carbs": 0.0,
+   "fat": 0.51,
+   "pieceG": 150.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "26058",
+   "name": "Sole, crue",
+   "aliases": [
+    "sole"
+   ],
+   "kcal": 77.3,
+   "protein": 18.0,
+   "carbs": 0.0,
+   "fat": 0.6,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "26109",
+   "name": "Dorade rose, ou daurade rose, crue",
+   "aliases": [
+    "dorade",
+    "daurade"
+   ],
+   "kcal": 102.0,
+   "protein": 21.0,
+   "carbs": 0.0,
+   "fat": 2.0,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "26001",
+   "name": "Bar rayé ou bar d'Amérique, cru",
+   "aliases": [
+    "bar",
+    "loup"
+   ],
+   "kcal": 113.0,
+   "protein": 20.3,
+   "carbs": 0.0,
+   "fat": 3.58,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "26092",
+   "name": "Truite de mer, crue",
+   "aliases": [
+    "truite"
+   ],
+   "kcal": 111.0,
+   "protein": 19.6,
+   "carbs": 0.0,
+   "fat": 3.63,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "26051",
+   "name": "Maquereau, cru",
+   "aliases": [
+    "maquereau"
+   ],
+   "kcal": 194.0,
+   "protein": 18.1,
+   "carbs": 0.0,
+   "fat": 13.5,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "26065",
+   "name": "Sardine, crue",
+   "aliases": [
+    "sardine"
+   ],
+   "kcal": 163.0,
+   "protein": 19.5,
+   "carbs": 0.0,
+   "fat": 9.48,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "26034",
+   "name": "Sardine, à l'huile, appertisée, égouttée",
+   "aliases": [
+    "sardine a l'huile",
+    "sardines en boite"
+   ],
+   "kcal": 207.0,
+   "protein": 24.4,
+   "carbs": 0.49,
+   "fat": 12.0,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "26000",
+   "name": "Anchois, filets à l'huile, semi-conserve, égoutté",
+   "aliases": [
+    "anchois"
+   ],
+   "kcal": 182.0,
+   "protein": 26.4,
+   "carbs": 0.0,
+   "fat": 8.45,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "26090",
+   "name": "Haddock (fumé) ou églefin fumé",
+   "aliases": [
+    "haddock"
+   ],
+   "kcal": 97.0,
+   "protein": 22.6,
+   "carbs": 0.0,
+   "fat": 0.73,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "10007",
+   "name": "Crevette, cuite",
+   "aliases": [
+    "crevette",
+    "crevettes",
+    "gambas",
+    "crevette rose"
+   ],
+   "kcal": 93.8,
+   "protein": 19.0,
+   "carbs": 1.87,
+   "fat": 1.16,
+   "pieceG": 10.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "10014",
+   "name": "Moule commune, crue",
+   "aliases": [
+    "moule"
+   ],
+   "kcal": 71.8,
+   "protein": 11.2,
+   "carbs": 2.69,
+   "fat": 1.82,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "10045",
+   "name": "Coquille Saint-Jacques, noix, crue",
+   "aliases": [
+    "saint-jacques",
+    "noix de saint-jacques",
+    "saint jacques",
+    "coquille saint-jacques"
+   ],
+   "kcal": 83.6,
+   "protein": 17.9,
+   "carbs": 1.15,
+   "fat": 0.84,
+   "pieceG": 25.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "10001",
+   "name": "Calmar ou calamar ou encornet, cru",
+   "aliases": [
+    "calmar",
+    "calamar",
+    "encornet",
+    "seiche"
+   ],
+   "kcal": 77.0,
+   "protein": 14.4,
+   "carbs": 2.17,
+   "fat": 1.19,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "26046",
+   "name": "Surimi, bâtonnets, tranche ou râpé saveur crabe",
+   "aliases": [
+    "surimi",
+    "baton de surimi"
+   ],
+   "kcal": 125.0,
+   "protein": 8.31,
+   "carbs": 11.8,
+   "fat": 4.92,
+   "pieceG": 15.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "10005",
+   "name": "Crabe, miettes et ou pattes décortiquées, appertisé, égoutté",
+   "aliases": [
+    "crabe",
+    "chair de crabe"
+   ],
+   "kcal": 111.0,
+   "protein": 14.8,
+   "carbs": 8.72,
+   "fat": 1.8,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "10018",
+   "name": "Poulpe, cru",
+   "aliases": [
+    "poulpe"
+   ],
+   "kcal": 60.1,
+   "protein": 12.9,
+   "carbs": 0.97,
+   "fat": 0.5,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "11013",
+   "name": "Moutarde",
+   "aliases": [
+    "moutarde",
+    "moutarde de dijon",
+    "moutarde a l'ancienne"
+   ],
+   "kcal": 152.0,
+   "protein": 6.92,
+   "carbs": 4.33,
+   "fat": 11.2,
+   "pieceG": null,
+   "density": 1.05,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "11054",
+   "name": "Mayonnaise (70% MG min.), préemballée",
+   "aliases": [
+    "mayonnaise",
+    "mayo"
+   ],
+   "kcal": 693.4,
+   "protein": 1.36,
+   "carbs": 2.62,
+   "fat": 75.2,
+   "pieceG": null,
+   "density": 0.95,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "11008",
+   "name": "Ketchup, préemballé",
+   "aliases": [
+    "ketchup"
+   ],
+   "kcal": 99.0,
+   "protein": 1.27,
+   "carbs": 21.4,
+   "fat": 0.19,
+   "pieceG": null,
+   "density": 1.1,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "11104",
+   "name": "Sauce soja, préemballée",
+   "aliases": [
+    "sauce soja",
+    "sauce soja salee",
+    "shoyu",
+    "tamari"
+   ],
+   "kcal": 45.5,
+   "protein": 7.08,
+   "carbs": 3.64,
+   "fat": 0.1,
+   "pieceG": null,
+   "density": 1.1,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "11194",
+   "name": "Sauce Nuoc Mâm ou Sauce au poisson, préemballée",
+   "aliases": [
+    "nuoc mam",
+    "sauce poisson",
+    "sauce nuoc-mam"
+   ],
+   "kcal": 81.2,
+   "protein": 9.3,
+   "carbs": 10.9,
+   "fat": 0.0,
+   "pieceG": null,
+   "density": 1.2,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "11018",
+   "name": "Vinaigre",
+   "aliases": [
+    "vinaigre",
+    "vinaigre de vin",
+    "vinaigre de cidre",
+    "vinaigre blanc",
+    "vinaigre de xeres"
+   ],
+   "kcal": 22.6,
+   "protein": 0.04,
+   "carbs": 0.62,
+   "fat": 0.1,
+   "pieceG": null,
+   "density": 1.0,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "11091",
+   "name": "Vinaigre balsamique",
+   "aliases": [
+    "vinaigre balsamique",
+    "balsamique"
+   ],
+   "kcal": 125.0,
+   "protein": 0.69,
+   "carbs": 25.8,
+   "fat": 0.0,
+   "pieceG": null,
+   "density": 1.05,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "11110",
+   "name": "Sauce vinaigrette (50 à 75% d'huile), préemballée",
+   "aliases": [
+    "vinaigrette"
+   ],
+   "kcal": 492.7,
+   "protein": 0.54,
+   "carbs": 4.56,
+   "fat": 52.4,
+   "pieceG": null,
+   "density": 0.95,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "11179",
+   "name": "Sauce pesto, préemballée",
+   "aliases": [
+    "pesto"
+   ],
+   "kcal": 370.0,
+   "protein": 3.94,
+   "carbs": 6.6,
+   "fat": 35.4,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "11143",
+   "name": "Sauce béchamel, maison",
+   "aliases": [
+    "bechamel",
+    "sauce bechamel"
+   ],
+   "kcal": 147.0,
+   "protein": 3.84,
+   "carbs": 8.97,
+   "fat": 10.6,
+   "pieceG": null,
+   "density": 1.0,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "11100",
+   "name": "Sauce barbecue, préemballée",
+   "aliases": [
+    "sauce barbecue",
+    "sauce bbq"
+   ],
+   "kcal": 136.0,
+   "protein": 0.56,
+   "carbs": 30.3,
+   "fat": 0.6,
+   "pieceG": null,
+   "density": 1.1,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "X1",
+   "name": "Tabasco",
+   "aliases": [
+    "tabasco",
+    "sauce piquante"
+   ],
+   "kcal": 0.0,
+   "protein": 0.0,
+   "carbs": 0.0,
+   "fat": 0.0,
+   "pieceG": null,
+   "density": 1.0,
+   "kind": "SEASONING"
+  },
+  {
+   "code": "11112",
+   "name": "Harissa (sauce condimentaire), préemballée",
+   "aliases": [
+    "harissa"
+   ],
+   "kcal": 76.4,
+   "protein": 2.72,
+   "carbs": 7.3,
+   "fat": 2.9,
+   "pieceG": null,
+   "density": 1.0,
+   "kind": "SEASONING"
+  },
+  {
+   "code": "X2",
+   "name": "Sauce worcestershire",
+   "aliases": [
+    "sauce worcestershire",
+    "worcestershire"
+   ],
+   "kcal": 0.0,
+   "protein": 0.0,
+   "carbs": 0.0,
+   "fat": 0.0,
+   "pieceG": null,
+   "density": 1.1,
+   "kind": "SEASONING"
+  },
+  {
+   "code": "11174",
+   "name": "Bouillon de volaille, déshydraté",
+   "aliases": [
+    "bouillon cube",
+    "cube de bouillon",
+    "bouillon de volaille",
+    "bouillon de boeuf",
+    "bouillon de legumes",
+    "bouillon",
+    "fond de volaille",
+    "fond de veau",
+    "kub"
+   ],
+   "kcal": 233.0,
+   "protein": 11.3,
+   "carbs": 20.8,
+   "fat": 11.5,
+   "pieceG": 10.0,
+   "density": null,
+   "kind": "SEASONING"
+  },
+  {
+   "code": "11017",
+   "name": "Sel blanc alimentaire, non iodé, non fluoré (marin, ignigène ou gemme)",
+   "aliases": [
+    "sel",
+    "sel fin",
+    "gros sel",
+    "fleur de sel",
+    "sel de guerande"
+   ],
+   "kcal": 0.0,
+   "protein": 0.0,
+   "carbs": 0.0,
+   "fat": 0.0,
+   "pieceG": null,
+   "density": 1.2,
+   "kind": "SEASONING"
+  },
+  {
+   "code": "11015",
+   "name": "Poivre noir, poudre",
+   "aliases": [
+    "poivre",
+    "poivre noir",
+    "poivre du moulin",
+    "poivre blanc"
+   ],
+   "kcal": 330.0,
+   "protein": 13.3,
+   "carbs": 39.5,
+   "fat": 7.5,
+   "pieceG": null,
+   "density": 0.5,
+   "kind": "SEASONING"
+  },
+  {
+   "code": "11025",
+   "name": "Cannelle, poudre",
+   "aliases": [
+    "cannelle"
+   ],
+   "kcal": 243.0,
+   "protein": 3.87,
+   "carbs": 27.5,
+   "fat": 1.22,
+   "pieceG": null,
+   "density": 0.5,
+   "kind": "SEASONING"
+  },
+  {
+   "code": "11057",
+   "name": "Vanille, gousse",
+   "aliases": [
+    "vanille",
+    "gousse de vanille",
+    "extrait de vanille",
+    "arome vanille"
+   ],
+   "kcal": 0.0,
+   "protein": 0.0,
+   "carbs": 0.0,
+   "fat": 0.0,
+   "pieceG": null,
+   "density": null,
+   "kind": "SEASONING"
+  },
+  {
+   "code": "11048",
+   "name": "Noix de muscade",
+   "aliases": [
+    "muscade",
+    "noix de muscade"
+   ],
+   "kcal": 507.0,
+   "protein": 5.3,
+   "carbs": 28.5,
+   "fat": 36.3,
+   "pieceG": null,
+   "density": 0.5,
+   "kind": "SEASONING"
+  },
+  {
+   "code": "11042",
+   "name": "Cumin, graine",
+   "aliases": [
+    "cumin"
+   ],
+   "kcal": 427.0,
+   "protein": 17.8,
+   "carbs": 33.7,
+   "fat": 22.3,
+   "pieceG": null,
+   "density": 0.5,
+   "kind": "SEASONING"
+  },
+  {
+   "code": "11005",
+   "name": "Curry, poudre",
+   "aliases": [
+    "curry",
+    "curcuma",
+    "garam masala"
+   ],
+   "kcal": 301.0,
+   "protein": 14.5,
+   "carbs": 2.63,
+   "fat": 14.0,
+   "pieceG": null,
+   "density": 0.5,
+   "kind": "SEASONING"
+  },
+  {
+   "code": "11049",
+   "name": "Paprika",
+   "aliases": [
+    "paprika",
+    "piment d'espelette",
+    "piment de cayenne",
+    "chili"
+   ],
+   "kcal": 319.0,
+   "protein": 14.1,
+   "carbs": 19.1,
+   "fat": 12.9,
+   "pieceG": null,
+   "density": 0.5,
+   "kind": "SEASONING"
+  },
+  {
+   "code": "11006",
+   "name": "Gingembre, poudre",
+   "aliases": [
+    "gingembre en poudre",
+    "gingembre moulu"
+   ],
+   "kcal": 335.0,
+   "protein": 8.98,
+   "carbs": 58.3,
+   "fat": 4.24,
+   "pieceG": null,
+   "density": 0.5,
+   "kind": "SEASONING"
+  },
+  {
+   "code": "11052",
+   "name": "Clou de girofle",
+   "aliases": [
+    "clou de girofle",
+    "girofle"
+   ],
+   "kcal": 335.0,
+   "protein": 5.97,
+   "carbs": 31.6,
+   "fat": 13.0,
+   "pieceG": null,
+   "density": 0.5,
+   "kind": "SEASONING"
+  },
+  {
+   "code": "11060",
+   "name": "Herbes de Provence, séchées",
+   "aliases": [
+    "herbes de provence",
+    "herbe de provence",
+    "origan",
+    "thym",
+    "romarin",
+    "laurier",
+    "feuille de laurier",
+    "bouquet garni",
+    "sarriette",
+    "marjolaine"
+   ],
+   "kcal": 283.0,
+   "protein": 11.5,
+   "carbs": 23.0,
+   "fat": 7.2,
+   "pieceG": null,
+   "density": 0.3,
+   "kind": "SEASONING"
+  },
+  {
+   "code": "11014",
+   "name": "Persil, frais",
+   "aliases": [
+    "persil",
+    "persil plat",
+    "persil frais"
+   ],
+   "kcal": 43.0,
+   "protein": 3.71,
+   "carbs": 3.48,
+   "fat": 0.63,
+   "pieceG": null,
+   "density": 0.3,
+   "kind": "SEASONING"
+  },
+  {
+   "code": "11033",
+   "name": "Basilic, frais",
+   "aliases": [
+    "basilic"
+   ],
+   "kcal": 34.8,
+   "protein": 3.35,
+   "carbs": 2.55,
+   "fat": 0.47,
+   "pieceG": null,
+   "density": 0.3,
+   "kind": "SEASONING"
+  },
+  {
+   "code": "11003",
+   "name": "Ciboule ou Ciboulette, fraîche",
+   "aliases": [
+    "ciboulette"
+   ],
+   "kcal": 29.7,
+   "protein": 2.57,
+   "carbs": 2.1,
+   "fat": 0.52,
+   "pieceG": null,
+   "density": 0.3,
+   "kind": "SEASONING"
+  },
+  {
+   "code": "11094",
+   "name": "Coriandre, fraiche",
+   "aliases": [
+    "coriandre"
+   ],
+   "kcal": 22.3,
+   "protein": 2.13,
+   "carbs": 0.87,
+   "fat": 0.52,
+   "pieceG": null,
+   "density": 0.3,
+   "kind": "SEASONING"
+  },
+  {
+   "code": "11027",
+   "name": "Menthe, fraîche",
+   "aliases": [
+    "menthe"
+   ],
+   "kcal": 57.6,
+   "protein": 3.52,
+   "carbs": 5.3,
+   "fat": 0.84,
+   "pieceG": null,
+   "density": 0.3,
+   "kind": "SEASONING"
+  },
+  {
+   "code": "11093",
+   "name": "Aneth, frais",
+   "aliases": [
+    "aneth"
+   ],
+   "kcal": 48.2,
+   "protein": 3.93,
+   "carbs": 3.9,
+   "fat": 1.1,
+   "pieceG": null,
+   "density": 0.3,
+   "kind": "SEASONING"
+  },
+  {
+   "code": "11092",
+   "name": "Estragon, frais",
+   "aliases": [
+    "estragon",
+    "cerfeuil"
+   ],
+   "kcal": 44.0,
+   "protein": 3.8,
+   "carbs": 4.1,
+   "fat": 0.0,
+   "pieceG": null,
+   "density": 0.3,
+   "kind": "SEASONING"
+  },
+  {
+   "code": "11039",
+   "name": "Safran",
+   "aliases": [
+    "safran"
+   ],
+   "kcal": 352.0,
+   "protein": 11.4,
+   "carbs": 61.5,
+   "fat": 5.85,
+   "pieceG": null,
+   "density": null,
+   "kind": "SEASONING"
+  },
+  {
+   "code": "X3",
+   "name": "Badiane",
+   "aliases": [
+    "badiane",
+    "anis etoile",
+    "anis"
+   ],
+   "kcal": 0.0,
+   "protein": 0.0,
+   "carbs": 0.0,
+   "fat": 0.0,
+   "pieceG": null,
+   "density": null,
+   "kind": "SEASONING"
+  },
+  {
+   "code": "11056",
+   "name": "Quatre épices",
+   "aliases": [
+    "quatre-epices",
+    "quatre epices",
+    "epices",
+    "melange d'epices",
+    "epice a pain d'epice",
+    "ras el hanout"
+   ],
+   "kcal": 348.0,
+   "protein": 6.09,
+   "carbs": 50.5,
+   "fat": 8.69,
+   "pieceG": null,
+   "density": 0.5,
+   "kind": "SEASONING"
+  },
+  {
+   "code": "X4",
+   "name": "Eau de fleur d'oranger",
+   "aliases": [
+    "eau de fleur d'oranger",
+    "fleur d'oranger"
+   ],
+   "kcal": 0.0,
+   "protein": 0.0,
+   "carbs": 0.0,
+   "fat": 0.0,
+   "pieceG": null,
+   "density": 1.0,
+   "kind": "SEASONING"
+  },
+  {
+   "code": "18066",
+   "name": "Eau du robinet",
+   "aliases": [
+    "eau",
+    "eau tiede",
+    "eau froide",
+    "eau chaude",
+    "eau bouillante",
+    "eau de cuisson"
+   ],
+   "kcal": 0.0,
+   "protein": 0.0,
+   "carbs": 0.0,
+   "fat": 0.0,
+   "pieceG": null,
+   "density": 1.0,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "5215",
+   "name": "Vin blanc (sec)",
+   "aliases": [
+    "vin blanc"
+   ],
+   "kcal": 70.4,
+   "protein": 0.0,
+   "carbs": 4.04,
+   "fat": 0.0,
+   "pieceG": null,
+   "density": 0.99,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "5214",
+   "name": "Vin rouge",
+   "aliases": [
+    "vin rouge",
+    "vin"
+   ],
+   "kcal": 82.1,
+   "protein": 0.07,
+   "carbs": 2.63,
+   "fat": 0.0,
+   "pieceG": null,
+   "density": 0.99,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "5009",
+   "name": "Bière blanche",
+   "aliases": [
+    "biere"
+   ],
+   "kcal": 34.6,
+   "protein": 0.0,
+   "carbs": 0.43,
+   "fat": 0.0,
+   "pieceG": null,
+   "density": 1.0,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "5007",
+   "name": "Cidre doux",
+   "aliases": [
+    "cidre"
+   ],
+   "kcal": 37.5,
+   "protein": 0.0,
+   "carbs": 5.09,
+   "fat": 0.0,
+   "pieceG": null,
+   "density": 1.0,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "1004",
+   "name": "Rhum",
+   "aliases": [
+    "rhum"
+   ],
+   "kcal": 256.0,
+   "protein": 0.0,
+   "carbs": 0.0,
+   "fat": 0.0,
+   "pieceG": null,
+   "density": 0.95,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "1023",
+   "name": "Eau de vie de vin, type armagnac, cognac",
+   "aliases": [
+    "cognac",
+    "armagnac",
+    "calvados",
+    "whisky",
+    "eau-de-vie"
+   ],
+   "kcal": 228.0,
+   "protein": 0.0,
+   "carbs": 1.0,
+   "fat": 0.0,
+   "pieceG": null,
+   "density": 0.95,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "1007",
+   "name": "Apéritif à base de vin ou vermouth",
+   "aliases": [
+    "porto",
+    "madere",
+    "vin cuit"
+   ],
+   "kcal": 137.1,
+   "protein": 0.05,
+   "carbs": 11.3,
+   "fat": 0.0,
+   "pieceG": null,
+   "density": 1.0,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "1003",
+   "name": "Liqueur",
+   "aliases": [
+    "liqueur",
+    "grand marnier",
+    "cointreau",
+    "amaretto",
+    "kirsch"
+   ],
+   "kcal": 328.0,
+   "protein": 0.1,
+   "carbs": 39.6,
+   "fat": 0.3,
+   "pieceG": null,
+   "density": 1.05,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "18073",
+   "name": "Café, instantané, non sucré, prêt à boire",
+   "aliases": [
+    "cafe",
+    "cafe fort",
+    "espresso",
+    "expresso",
+    "cafe noir"
+   ],
+   "kcal": 1.6,
+   "protein": 0.1,
+   "carbs": 0.3,
+   "fat": 0.0,
+   "pieceG": null,
+   "density": 1.0,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "X5",
+   "name": "The",
+   "aliases": [
+    "the",
+    "the vert",
+    "the noir",
+    "infusion"
+   ],
+   "kcal": 0.0,
+   "protein": 0.0,
+   "carbs": 0.0,
+   "fat": 0.0,
+   "pieceG": null,
+   "density": 1.0,
+   "kind": "SEASONING"
+  },
+  {
+   "code": "18018",
+   "name": "Cola, sucré",
+   "aliases": [
+    "cola",
+    "coca",
+    "soda"
+   ],
+   "kcal": 41.8,
+   "protein": 0.09,
+   "carbs": 10.2,
+   "fat": 0.06,
+   "pieceG": null,
+   "density": 1.04,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "18017",
+   "name": "Sirop à diluer, sucré",
+   "aliases": [
+    "sirop",
+    "sirop de fruits",
+    "grenadine",
+    "sirop de menthe"
+   ],
+   "kcal": 255.0,
+   "protein": 0.0,
+   "carbs": 62.6,
+   "fat": 0.0,
+   "pieceG": null,
+   "density": 1.3,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "4047",
+   "name": "Pomme de terre, purée (aliment moyen)",
+   "aliases": [
+    "puree",
+    "puree de pomme de terre"
+   ],
+   "kcal": 91.8,
+   "protein": 2.11,
+   "carbs": 12.7,
+   "fat": 3.25,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "4032",
+   "name": "Frites de pommes de terre, surgelées, cuites en friteuse",
+   "aliases": [
+    "frites",
+    "frite"
+   ],
+   "kcal": 285.0,
+   "protein": 3.28,
+   "carbs": 39.4,
+   "fat": 11.9,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "8937",
+   "name": "Quenelle nature, crue",
+   "aliases": [
+    "quenelle"
+   ],
+   "kcal": 217.0,
+   "protein": 7.68,
+   "carbs": 14.8,
+   "fat": 13.7,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "25571",
+   "name": "Falafel ou Boulette de pois-chiche et/ou fève, frite",
+   "aliases": [
+    "falafel"
+   ],
+   "kcal": 252.0,
+   "protein": 8.25,
+   "carbs": 18.7,
+   "fat": 14.4,
+   "pieceG": 25.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "25621",
+   "name": "Houmous, préemballé",
+   "aliases": [
+    "houmous",
+    "hummus"
+   ],
+   "kcal": 288.3,
+   "protein": 8.2,
+   "carbs": 7.1,
+   "fat": 23.9,
+   "pieceG": null,
+   "density": 1.0,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "25620",
+   "name": "Guacamole, préemballé",
+   "aliases": [
+    "guacamole"
+   ],
+   "kcal": 191.9,
+   "protein": 2.18,
+   "carbs": 5.85,
+   "fat": 16.5,
+   "pieceG": null,
+   "density": 1.0,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "11043",
+   "name": "Tapenade",
+   "aliases": [
+    "tapenade"
+   ],
+   "kcal": 230.0,
+   "protein": 1.3,
+   "carbs": 2.6,
+   "fat": 23.0,
+   "pieceG": null,
+   "density": 1.0,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "39515",
+   "name": "Glace ou crème glacée, en bac",
+   "aliases": [
+    "glace",
+    "glace a la vanille",
+    "creme glacee"
+   ],
+   "kcal": 190.2,
+   "protein": 2.55,
+   "carbs": 26.1,
+   "fat": 8.4,
+   "pieceG": null,
+   "density": 0.55,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "39528",
+   "name": "Sorbet, cône",
+   "aliases": [
+    "sorbet"
+   ],
+   "kcal": 228.0,
+   "protein": 2.08,
+   "carbs": 39.3,
+   "fat": 6.74,
+   "pieceG": null,
+   "density": 0.6,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "39246",
+   "name": "Crème dessert au café, rayon frais",
+   "aliases": [
+    "creme dessert"
+   ],
+   "kcal": 116.0,
+   "protein": 2.93,
+   "carbs": 17.8,
+   "fat": 3.69,
+   "pieceG": null,
+   "density": 1.05,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "39700",
+   "name": "Crème anglaise, préemballée",
+   "aliases": [
+    "creme anglaise"
+   ],
+   "kcal": 105.0,
+   "protein": 3.44,
+   "carbs": 16.7,
+   "fat": 2.5,
+   "pieceG": null,
+   "density": 1.05,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "39710",
+   "name": "Crème pâtissière",
+   "aliases": [
+    "creme patissiere"
+   ],
+   "kcal": 120.0,
+   "protein": 3.79,
+   "carbs": 18.0,
+   "fat": 3.6,
+   "pieceG": null,
+   "density": 1.05,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "23200",
+   "name": "Pain d'épices",
+   "aliases": [
+    "pain d'epice",
+    "pain d'epices"
+   ],
+   "kcal": 313.7,
+   "protein": 2.94,
+   "carbs": 71.5,
+   "fat": 1.1,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "24520",
+   "name": "Meringue",
+   "aliases": [
+    "meringue"
+   ],
+   "kcal": 393.6,
+   "protein": 4.11,
+   "carbs": 94.3,
+   "fat": 0.0,
+   "pieceG": 5.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "31050",
+   "name": "Guimauve ou marshmallow",
+   "aliases": [
+    "guimauve",
+    "marshmallow",
+    "chamallow"
+   ],
+   "kcal": 342.7,
+   "protein": 3.67,
+   "carbs": 78.7,
+   "fat": 1.42,
+   "pieceG": 5.0,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "24685",
+   "name": "Cône ou cornet classique, pour glace",
+   "aliases": [
+    "cornet"
+   ],
+   "kcal": 400.6,
+   "protein": 7.5,
+   "carbs": 80.4,
+   "fat": 5.0,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "31027",
+   "name": "Fruit confit",
+   "aliases": [
+    "fruit confit",
+    "fruits confits",
+    "ecorce d'orange confite",
+    "orange confite"
+   ],
+   "kcal": 298.0,
+   "protein": 0.0,
+   "carbs": 72.3,
+   "fat": 0.0,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL"
+  },
+  {
+   "code": "31021",
+   "name": "Zeste d'orange confit",
+   "aliases": [
+    "zeste",
+    "zeste de citron",
+    "zeste d'orange",
+    "zestes"
+   ],
+   "kcal": 335.6,
+   "protein": 0.2,
+   "carbs": 82.7,
+   "fat": 0.2,
+   "pieceG": null,
+   "density": null,
+   "kind": "SEASONING"
+  }
+ ]
+}

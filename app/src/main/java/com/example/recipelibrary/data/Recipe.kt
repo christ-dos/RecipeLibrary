@@ -43,5 +43,24 @@ data class Recipe(
     val createdAt: Long = System.currentTimeMillis(),
 
     @ColumnInfo(name = "updated_at")
-    val updatedAt: Long = System.currentTimeMillis()
-)
+    val updatedAt: Long = System.currentTimeMillis(),
+
+    /** Nombre de parts, 1 à 100 ; null = inconnu. */
+    @ColumnInfo(name = "servings")
+    val servings: Int? = null,
+
+    /** Origine de [servings] : [SERVINGS_USER] ou [SERVINGS_SOURCE] ; null si [servings] est null. */
+    @ColumnInfo(name = "servings_source")
+    val servingsSource: String? = null,
+
+    /** Poids par ligne d'ingrédients (clé = texte exact de la ligne). */
+    @ColumnInfo(name = "ingredient_weights")
+    val ingredientWeights: Map<String, IngredientWeight> = emptyMap()
+) {
+    companion object {
+        const val SERVINGS_USER = "USER"
+        const val SERVINGS_SOURCE = "SOURCE"
+        const val MIN_SERVINGS = 1
+        const val MAX_SERVINGS = 100
+    }
+}

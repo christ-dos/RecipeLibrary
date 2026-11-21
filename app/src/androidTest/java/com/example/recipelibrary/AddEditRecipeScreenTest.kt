@@ -7,6 +7,7 @@ import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.recipelibrary.data.Recipe
 import com.example.recipelibrary.ui.AddEditRecipeScreen
+import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -139,5 +140,115 @@ class AddEditRecipeScreenTest {
         rule.onNodeWithTag("form_source_url").performTextReplacement("pas-une-url")
         rule.onNodeWithText("L'URL doit commencer par http:// ou https://").assertExists()
         rule.onNodeWithText("Enregistrer").assertIsNotEnabled()
+    }
+    // ── 11. Recette importée incomplète : bandeau « à compléter » et enregistrement possible ──
+
+    @Test
+    fun importedRecipe_missingFields_showBannerAndCanSave() {
+        val imported = com.example.recipelibrary.data.ImportedRecipe.fillMissing(
+            Recipe(id = "7", title = "Crumble", category = "Desserts", ingredients = emptyList(), steps = emptyList())
+        )
+        var saved: Recipe? = null
+        rule.setContent { MaterialTheme { AddEditRecipeScreen(existing = imported, onSave = { saved = it }, onBack = {}) } }
+        rule.onNodeWithText("Champs à compléter : ingrédients, étapes", substring = true).assertIsDisplayed()
+        rule.onNodeWithText("Enregistrer").assertIsEnabled().performClick()
+        assert(saved?.ingredients == listOf("À compléter")) { "Ingrédients enregistrés : ${saved?.ingredients}" }
+    }
+
+    // ── 12. Le bandeau disparaît une fois les champs remplis ──────────────────
+
+    @Test
+    fun importedRecipe_bannerDisappearsWhenCompleted() {
+        val imported = com.example.recipelibrary.data.ImportedRecipe.fillMissing(
+            Recipe(id = "8", title = "Crumble", category = "Desserts", ingredients = listOf("pommes"), steps = emptyList())
+        )
+        rule.setContent { MaterialTheme { AddEditRecipeScreen(existing = imported, onSave = {}, onBack = {}) } }
+        rule.onNodeWithText("Champs à compléter : étapes", substring = true).assertIsDisplayed()
+        rule.onNodeWithTag("form_steps").performScrollTo().performTextReplacement("Cuire 30 min")
+        rule.onNodeWithText("Champs à compléter", substring = true).assertDoesNotExist()
+    }
+
+    // ── 13. Recette complète : pas de bandeau ─────────────────────────────────
+
+    @Test
+    fun completeRecipe_noBanner() {
+        rule.setContent { MaterialTheme { AddEditRecipeScreen(existing = null, onSave = {}, onBack = {}) } }
+        rule.onNodeWithText("Champs à compléter", substring = true).assertDoesNotExist()
+    }
+
+    // ── Nombre de parts (story 5) et conservation des poids ───────────────────
+
+    private val weighted = Recipe(
+        id = "w1", title = "Tarte", category = "Desserts",
+        ingredients = listOf("1 noix de beurre", "2 pommes", "200 g de farine"),
+        steps = listOf("Cuire"),
+        servings = 6, servingsSource = Recipe.SERVINGS_SOURCE,
+        ingredientWeights = mapOf(
+            "1 noix de beurre" to com.example.recipelibrary.data.IngredientWeight(10.0, com.example.recipelibrary.data.IngredientWeight.USER),
+            "2 pommes" to com.example.recipelibrary.data.IngredientWeight(300.0, com.example.recipelibrary.data.IngredientWeight.PC)
+        )
+    )
+
+    private fun editAndSave(existing: Recipe?, edit: () -> Unit): Recipe? {
+        var saved: Recipe? = null
+        rule.setContent { MaterialTheme { AddEditRecipeScreen(existing = existing, onSave = { saved = it }, onBack = {}) } }
+        edit()
+        rule.onNodeWithText("Enregistrer").performClick()
+        rule.waitForIdle()
+        return saved
+    }
+
+    @Test
+    fun servings_6_savedAsUser() {
+        val saved = editAndSave(weighted.copy(servings = null, servingsSource = null)) {
+            rule.onNodeWithTag("form_servings").performTextReplacement("6")
+        }
+        assertEquals(6, saved!!.servings)
+        assertEquals(Recipe.SERVINGS_USER, saved.servingsSource)
+    }
+
+    @Test
+    fun servings_invalidValuesRefused() {
+        rule.setContent { MaterialTheme { AddEditRecipeScreen(existing = weighted, onSave = {}, onBack = {}) } }
+        for (bad in listOf("0", "-1", "abc", "101")) {
+            rule.onNodeWithTag("form_servings").performTextReplacement(bad)
+            rule.onNodeWithText("Entrez un nombre de parts de 1 à 100.").assertExists()
+            rule.onNodeWithText("Enregistrer").assertIsNotEnabled()
+        }
+        rule.onNodeWithTag("form_servings").performTextReplacement("4")
+        rule.onNodeWithText("Enregistrer").assertIsEnabled()
+    }
+
+    @Test
+    fun servings_emptyGivesNull() {
+        val saved = editAndSave(weighted) { rule.onNodeWithTag("form_servings").performTextReplacement("") }
+        assertEquals(null, saved!!.servings)
+        assertEquals(null, saved.servingsSource)
+    }
+
+    @Test
+    fun servings_prefilledFromExistingRecipe() {
+        rule.setContent { MaterialTheme { AddEditRecipeScreen(existing = weighted, onSave = {}, onBack = {}) } }
+        rule.onNodeWithTag("form_servings").assertTextContains("6")
+    }
+
+    @Test
+    fun editTitle_keepsWeightsAndServingsSourceIdentical() {
+        val saved = editAndSave(weighted) { rule.onNodeWithTag("form_title").performTextReplacement("Tarte fine") }
+        assertEquals("Tarte fine", saved!!.title)
+        assertEquals(weighted.ingredientWeights, saved.ingredientWeights)
+        assertEquals(6, saved.servings)
+        assertEquals(Recipe.SERVINGS_SOURCE, saved.servingsSource)
+    }
+
+    @Test
+    fun editOneLine_onlyThatEntryDisappears() {
+        val saved = editAndSave(weighted) {
+            rule.onNodeWithTag("form_ingredients").performTextReplacement("1 noix de beurre\n3 pommes\n200 g de farine")
+        }
+        assertEquals(
+            mapOf("1 noix de beurre" to weighted.ingredientWeights.getValue("1 noix de beurre")),
+            saved!!.ingredientWeights
+        )
     }
 }

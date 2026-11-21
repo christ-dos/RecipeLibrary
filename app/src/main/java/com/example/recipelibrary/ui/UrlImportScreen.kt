@@ -1,7 +1,7 @@
 package com.example.recipelibrary.ui
 
 import android.content.Context
-import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -11,7 +11,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Card
@@ -19,6 +21,7 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.IconButton
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
+import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -32,84 +35,53 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.recipelibrary.R
+import com.example.recipelibrary.data.HermesImporter
+import com.example.recipelibrary.data.HermesNetwork
+import com.example.recipelibrary.data.HermesPrefs
+import com.example.recipelibrary.data.PendingImport
 import com.example.recipelibrary.data.Recipe
+import com.example.recipelibrary.data.extractorDisplayAddress
+import com.example.recipelibrary.data.isConnectionError
+import com.example.recipelibrary.data.normalizeExtractorBaseUrl
+import com.example.recipelibrary.data.resolveStoredServerUrl
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.json.JSONObject
-import java.net.HttpURLConnection
-import java.net.URL
 
-private const val PREFS_NAME = "url_import"
-private const val PREF_SERVER_URL = "server_url"
-private const val PREF_FALLBACK_URLS = "fallback_urls"
-private const val MAX_FALLBACKS = 5
-
-private fun normalizeExtractorBaseUrl(raw: String): String? {
-    val trimmed = raw.trim()
-    if (trimmed.isBlank()) return null
-
-    val withScheme = when {
-        trimmed.startsWith("http://", ignoreCase = true) -> "http://${trimmed.removePrefix("http://")}"
-        trimmed.startsWith("https://", ignoreCase = true) -> "https://${trimmed.removePrefix("https://")}"
-        else -> "http://$trimmed"
-    }.trimEnd('/')
-
-    return if (withScheme.lowercase().endsWith("/extract")) {
-        withScheme.dropLast("/extract".length)
-    } else {
-        withScheme
-    }
-}
-
-private fun extractorEndpoint(baseUrl: String): String = "${baseUrl.trimEnd('/')}/extract"
-
-private fun extractorDisplayAddress(baseUrl: String): String =
-    baseUrl.removePrefix("http://").removePrefix("https://").trimEnd('/')
-
-private fun resolveStoredServerUrl(prefs: android.content.SharedPreferences): String {
-    val stored = prefs.getString(PREF_SERVER_URL, null)?.trim()?.let(::normalizeExtractorBaseUrl)
-    // "192.168.0.21" was an incorrect hardcoded default — clear it so the user enters the real IP
-    if (stored == "http://192.168.0.21:18642") {
-        prefs.edit().remove(PREF_SERVER_URL).apply()
-        return ""
-    }
-    return stored ?: ""
-}
-
-private fun loadFallbackUrls(prefs: android.content.SharedPreferences): List<String> {
-    val json = prefs.getString(PREF_FALLBACK_URLS, null) ?: return emptyList()
-    return try {
-        val arr = org.json.JSONArray(json)
-        (0 until arr.length()).mapNotNull { normalizeExtractorBaseUrl(arr.getString(it)) }
-    } catch (e: Exception) { emptyList() }
-}
-
-private fun saveFallbackUrls(prefs: android.content.SharedPreferences, urls: List<String>) {
-    val arr = org.json.JSONArray(urls.take(MAX_FALLBACKS))
-    prefs.edit().putString(PREF_FALLBACK_URLS, arr.toString()).apply()
-}
+/** Message affiché quand un lien part en file d'attente. */
+const val QUEUED_MESSAGE =
+    "Lien mis en file d'attente\n\nLe PC est injoignable. La recette sera importée automatiquement " +
+        "dès que le téléphone sera sur le Wi-Fi de la maison. Tu la retrouveras dans la file d'attente, à valider."
 
 @Composable
 fun UrlImportScreen(
     onImport: (Recipe) -> Unit,
     onBack: () -> Unit,
     parseJson: (String) -> Recipe?,
-    extract: suspend (String, String) -> Result<String> = ::extractRecipe,
-    discover: suspend () -> String? = ::discoverHermesServer
+    extract: suspend (String, String) -> Result<String> = HermesNetwork::extractRecipe,
+    discover: suspend () -> String? = HermesNetwork::discover,
+    isUp: suspend (String) -> Boolean = HermesNetwork::isUp,
+    wake: suspend (String, String) -> Unit = HermesNetwork::wake,
+    learnMac: suspend (String) -> String? = HermesNetwork::fetchMac,
+    onLocalNetwork: suspend () -> Boolean = HermesNetwork::onWifi,
+    /** Si fourni, un lien dont l'import échoue faute de joindre le PC est mis en file d'attente. */
+    onQueue: ((String) -> Unit)? = null,
+    /** Contenu de la file, pour afficher le lien vers l'écran de la file d'attente. */
+    pending: List<PendingImport> = emptyList(),
+    onOpenQueue: () -> Unit = {}
 ) {
     val context = LocalContext.current
     val prefs = remember(context) {
-        context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        context.getSharedPreferences(HermesPrefs.NAME, Context.MODE_PRIVATE)
     }
+    val importer = remember(prefs) { HermesImporter(prefs, extract, discover, isUp, wake, learnMac, onLocalNetwork) }
     val clipboard = LocalClipboardManager.current
     val scope = rememberCoroutineScope()
 
@@ -119,7 +91,10 @@ fun UrlImportScreen(
     }
     var loading by remember { mutableStateOf(false) }
     var detecting by remember { mutableStateOf(false) }
+    var waking by remember { mutableStateOf(false) }
+    var serverMac by remember { mutableStateOf(prefs.getString(HermesPrefs.SERVER_MAC, null)) }
     var error by remember { mutableStateOf<String?>(null) }
+    var info by remember { mutableStateOf<String?>(null) }
     var detectError by remember { mutableStateOf<String?>(null) }
 
     val normalizedServerUrl = remember(serverUrlInput) { normalizeExtractorBaseUrl(serverUrlInput) }
@@ -128,6 +103,7 @@ fun UrlImportScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .verticalScroll(rememberScrollState())
             .padding(horizontal = 24.dp, vertical = 24.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -156,7 +132,7 @@ fun UrlImportScreen(
         ) {
             OutlinedTextField(
                 value = url,
-                onValueChange = { url = it; error = null },
+                onValueChange = { url = it; error = null; info = null },
                 label = { Text("URL") },
                 placeholder = { Text("https://www.instagram.com/reel/...") },
                 modifier = Modifier.weight(1f),
@@ -170,6 +146,7 @@ fun UrlImportScreen(
                     if (clip.startsWith("http")) {
                         url = clip
                         error = null
+                        info = null
                     }
                 },
                 enabled = !loading
@@ -186,7 +163,7 @@ fun UrlImportScreen(
                 value = serverUrlInput,
                 onValueChange = {
                     serverUrlInput = it
-                    prefs.edit().putString(PREF_SERVER_URL, it).apply()
+                    prefs.edit().putString(HermesPrefs.SERVER_URL, it).apply()
                     error = null
                     detectError = null
                 },
@@ -207,7 +184,13 @@ fun UrlImportScreen(
                         detecting = false
                         if (found != null) {
                             serverUrlInput = found
-                            prefs.edit().putString(PREF_SERVER_URL, found).apply()
+                            prefs.edit().putString(HermesPrefs.SERVER_URL, found).apply()
+                            // Memorise l'adresse MAC du PC pour pouvoir le reveiller plus tard
+                            val mac = withContext(Dispatchers.IO) { runCatching { learnMac(found) }.getOrNull() }
+                            if (mac != null) {
+                                prefs.edit().putString(HermesPrefs.SERVER_MAC, mac).apply()
+                                serverMac = mac
+                            }
                         } else {
                             detectError = "Aucun serveur Hermes trouve. Verifie que le PC est allume et sur le meme WiFi."
                         }
@@ -231,18 +214,7 @@ fun UrlImportScreen(
         }
 
         if (detectError != null) {
-            Card(
-                backgroundColor = Color(0xFFFFEEEE),
-                elevation = 0.dp,
-                shape = RoundedCornerShape(10.dp)
-            ) {
-                Text(
-                    detectError!!,
-                    modifier = Modifier.padding(10.dp),
-                    color = Color(0xFFCC0000),
-                    fontSize = 13.sp
-                )
-            }
+            MessageCard(detectError!!, isError = true)
         }
 
         Text(
@@ -253,18 +225,19 @@ fun UrlImportScreen(
         )
 
         if (error != null) {
-            Card(
-                backgroundColor = Color(0xFFFFEEEE),
-                elevation = 0.dp,
-                shape = RoundedCornerShape(10.dp)
-            ) {
-                Text(
-                    error!!,
-                    modifier = Modifier.padding(10.dp),
-                    color = Color(0xFFCC0000),
-                    fontSize = 13.sp
-                )
+            MessageCard(error!!, isError = true)
+            // Extraction impossible : copier le lien pour la faire à la main (navigateur, import texte)
+            if (url.isNotBlank()) {
+                TextButton(onClick = {
+                    clipboard.setText(AnnotatedString(url.trim()))
+                    Toast.makeText(context, "Lien copié", Toast.LENGTH_SHORT).show()
+                }) {
+                    Text("📋 Copier le lien", color = Color(0xFF7A2CF6), fontWeight = FontWeight.SemiBold)
+                }
             }
+        }
+        if (info != null) {
+            MessageCard(info!!, isError = false)
         }
 
         Button(
@@ -274,44 +247,25 @@ fun UrlImportScreen(
                     error = "Adresse Hermes invalide."
                     return@Button
                 }
-
-                // Build list: configured URL first, then previously-successful fallbacks
-                val urlsToTry = listOf(activeServerUrl) +
-                    loadFallbackUrls(prefs).filter { it != activeServerUrl }
+                val videoUrl = url.trim()
 
                 error = null
+                info = null
                 loading = true
                 scope.launch(Dispatchers.IO) {
-                    var lastResult: Result<String> = Result.failure(Exception("Aucune adresse disponible"))
-                    var successUrl: String? = null
-
-                    for (candidateUrl in urlsToTry) {
-                        val result = extract(url.trim(), candidateUrl)
-                        lastResult = result
-                        if (result.isSuccess) {
-                            successUrl = candidateUrl
-                            break
-                        }
-                        // Only try next IP on connection errors; stop on extraction errors
-                        val ex = result.exceptionOrNull()
-                        val isConnErr = ex is java.net.ConnectException ||
-                            ex?.message?.let {
-                                it.contains("ECONNREFUSED") || it.contains("ETIMEDOUT") ||
-                                it.contains("ENETUNREACH") || it.contains("Connection refused")
-                            } == true
-                        if (!isConnErr) break
+                    val outcome = importer.run(videoUrl, activeServerUrl) { isWaking ->
+                        withContext(Dispatchers.Main) { waking = isWaking }
                     }
 
                     withContext(Dispatchers.Main) {
                         loading = false
-                        // If a fallback URL worked, promote it and keep old one as fallback
-                        if (successUrl != null && successUrl != activeServerUrl) {
-                            val oldFallbacks = loadFallbackUrls(prefs).filter { it != successUrl }
-                            saveFallbackUrls(prefs, listOf(activeServerUrl) + oldFallbacks)
-                            serverUrlInput = successUrl
-                            prefs.edit().putString(PREF_SERVER_URL, successUrl).apply()
+                        // L'importeur a pu changer l'adresse du serveur ou apprendre l'adresse MAC du PC
+                        if (outcome.successUrl != null && outcome.successUrl != activeServerUrl) {
+                            serverUrlInput = outcome.successUrl
                         }
-                        lastResult.onSuccess { json ->
+                        serverMac = prefs.getString(HermesPrefs.SERVER_MAC, null)
+
+                        outcome.result.onSuccess { json ->
                             val recipe = parseJson(json)
                             if (recipe != null) {
                                 onImport(recipe)
@@ -319,7 +273,13 @@ fun UrlImportScreen(
                                 error = "Impossible de parser la recette recue."
                             }
                         }.onFailure { e ->
-                            val triedAddresses = urlsToTry.joinToString(", ") { extractorDisplayAddress(it) }
+                            if (onQueue != null && isConnectionError(e)) {
+                                onQueue(videoUrl)
+                                url = ""
+                                info = QUEUED_MESSAGE
+                                return@onFailure
+                            }
+                            val triedAddresses = outcome.triedUrls.joinToString(", ") { extractorDisplayAddress(it) }
                             val msg = e.message ?: ""
                             error = when {
                                 e is java.net.ConnectException &&
@@ -360,7 +320,7 @@ fun UrlImportScreen(
                         color = Color.White
                     )
                     Text(
-                        "Extraction en cours... (1-2 min)",
+                        if (waking) "Reveil du PC..." else "Extraction en cours... (1-2 min)",
                         color = Color.White,
                         fontWeight = FontWeight.SemiBold
                     )
@@ -372,91 +332,38 @@ fun UrlImportScreen(
 
         Text(
             if (serverAddress == "adresse invalide") "Entre l'adresse IP du PC ci-dessus."
+            else if (serverMac != null) "Serveur : $serverAddress — meme WiFi. Le PC en veille sera reveille automatiquement."
             else "Serveur : $serverAddress — PC allume, meme WiFi, Hermes lance.",
             fontSize = 11.sp,
             color = Color(0xFF625B70),
             textAlign = TextAlign.Center
         )
+
+        if (pending.isNotEmpty()) {
+            TextButton(onClick = onOpenQueue) {
+                Text(
+                    "Voir la file d'attente (${queueSummary(pending)})",
+                    color = Color(0xFF7A2CF6),
+                    fontWeight = FontWeight.SemiBold,
+                    textAlign = TextAlign.Center
+                )
+            }
+        }
     }
 }
 
-private suspend fun extractRecipe(videoUrl: String, extractorBaseUrl: String): Result<String> =
-    withContext(Dispatchers.IO) {
-        runCatching {
-            val normalizedBaseUrl = normalizeExtractorBaseUrl(extractorBaseUrl)
-                ?: error("Adresse Hermes invalide.")
-            val endpoint = extractorEndpoint(normalizedBaseUrl)
-
-            Log.d("UrlImport", "Connexion a $endpoint")
-            val conn = URL(endpoint).openConnection() as HttpURLConnection
-            conn.requestMethod = "POST"
-            conn.setRequestProperty("Content-Type", "application/json")
-            conn.connectTimeout = 15_000
-            conn.readTimeout = 180_000
-            conn.doOutput = true
-
-            val escaped = videoUrl.replace("\\", "\\\\").replace("\"", "\\\"")
-            conn.outputStream.bufferedWriter().use { it.write("""{"url":"$escaped"}""") }
-
-            Log.d("UrlImport", "Requete envoyee, attente reponse...")
-            val code = conn.responseCode
-            Log.d("UrlImport", "HTTP $code recu")
-
-            val body = runCatching {
-                (if (code == 200) conn.inputStream else conn.errorStream)
-                    ?.bufferedReader()
-                    ?.readText()
-                    ?: ""
-            }.getOrDefault("")
-
-            Log.d("UrlImport", "Body (${body.length} chars): ${body.take(200)}")
-            if (code != 200) {
-                val msg = runCatching { JSONObject(body).getString("error") }
-                    .getOrDefault("Serveur inaccessible (HTTP $code).")
-                Log.e("UrlImport", "Erreur serveur: $msg")
-                error(msg)
-            }
-
-            val parsed = runCatching { JSONObject(body) }.getOrNull()
-            val serverError = parsed?.optString("error")?.takeIf { it.isNotBlank() }
-            if (serverError != null) {
-                Log.e("UrlImport", "Erreur extraction: $serverError")
-                error(serverError)
-            }
-
-            Log.d("UrlImport", "Succes")
-            body
-        }.onFailure { e ->
-            Log.e("UrlImport", "Exception: ${e.javaClass.simpleName}: ${e.message}")
-        }
-    }
-
-private fun getLocalSubnet(): String? = try {
-    java.net.NetworkInterface.getNetworkInterfaces()?.asSequence()
-        ?.filter { iface -> !iface.isLoopback && iface.isUp }
-        ?.filter { iface -> iface.name.startsWith("wlan") || iface.name.startsWith("eth") || iface.name.startsWith("en") || iface.name.startsWith("rmnet") }
-        ?.flatMap { it.inetAddresses.asSequence() }
-        ?.filterIsInstance<java.net.Inet4Address>()
-        ?.firstOrNull()
-        ?.hostAddress
-        ?.substringBeforeLast(".")
-} catch (_: Exception) { null }
-
-private suspend fun discoverHermesServer(): String? = withContext(Dispatchers.IO) {
-    val subnet = getLocalSubnet() ?: return@withContext null
-    Log.d("UrlImport", "Scan reseau sur $subnet.1-254:18642")
-    coroutineScope {
-        (1..254).map { i ->
-            async {
-                val ip = "$subnet.$i"
-                try {
-                    val conn = URL("http://$ip:18642/health").openConnection() as HttpURLConnection
-                    conn.connectTimeout = 300
-                    conn.readTimeout = 300
-                    conn.requestMethod = "GET"
-                    if (conn.responseCode == 200) "http://$ip:18642" else null
-                } catch (_: Exception) { null }
-            }
-        }.awaitAll().firstOrNull { it != null }
+@Composable
+private fun MessageCard(text: String, isError: Boolean) {
+    Card(
+        backgroundColor = if (isError) Color(0xFFFFEEEE) else Color(0xFFF3ECFF),
+        elevation = 0.dp,
+        shape = RoundedCornerShape(10.dp)
+    ) {
+        Text(
+            text,
+            modifier = Modifier.padding(10.dp),
+            color = if (isError) Color(0xFFCC0000) else Color(0xFF4A16C6),
+            fontSize = 13.sp
+        )
     }
 }

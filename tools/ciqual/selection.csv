@@ -1,0 +1,386 @@
+code;aliases;pieceG;density;kind
+19042;lait|lait demi-ecreme|lait demi ecreme;;1.03;NORMAL
+19024;lait entier;;1.03;NORMAL
+19051;lait ecreme;;1.03;NORMAL
+19027;lait concentre sucre|lait concentre;;1.3;NORMAL
+19054;lait en poudre;;0.5;NORMAL
+18041;lait de coco|creme de coco;;1.0;NORMAL
+19410;creme fraiche|creme fraiche epaisse|creme epaisse|creme;;1.0;NORMAL
+19415;creme liquide|creme fleurette|creme entiere|creme fraiche liquide|creme fluide;;1.0;NORMAL
+19430;creme legere|creme fraiche legere|creme allegee;;1.0;NORMAL
+19420;chantilly|creme chantilly;;0.4;NORMAL
+16400;beurre|beurre doux|beurre mou|beurre fondu|beurre pommade;;0.95;NORMAL
+16402;beurre demi-sel|beurre demi sel|beurre sale;;0.95;NORMAL
+16412;beurre allege;;0.95;NORMAL
+16615;margarine;;0.95;NORMAL
+19593;yaourt|yaourt nature|yogourt;125;1.03;NORMAL
+19860;yaourt grec|yaourt a la grecque;150;1.03;NORMAL
+19646;fromage blanc;;1.03;NORMAL
+19644;fromage blanc 0%|fromage blanc 0 %|skyr;;1.03;NORMAL
+19664;petit suisse|petit-suisse;60;;NORMAL
+19641;faisselle;;;NORMAL
+19584;mascarpone;;;NORMAL
+19585;ricotta;;;NORMAL
+19590;mozzarella;125;;NORMAL
+12115;emmental|emmental rape|gruyere rape|fromage rape;;0.4;NORMAL
+12114;gruyere;;0.4;NORMAL
+12110;comte;;0.4;NORMAL
+12120;parmesan|parmigiano;;0.4;NORMAL
+12726;cheddar;;;NORMAL
+12066;feta;;;NORMAL
+12804;chevre frais|fromage de chevre frais;;;NORMAL
+12812;fromage de chevre|chevre|buche de chevre;;;NORMAL
+12006;camembert;250;;NORMAL
+12021;brie;;;NORMAL
+12500;roquefort;;;NORMAL
+12521;bleu|bleu d'auvergne;;;NORMAL
+12045;reblochon;450;;NORMAL
+12749;raclette|fromage a raclette;;;NORMAL
+12735;mimolette;;;NORMAL
+12300;fromage fondu|vache qui rit|fromage a tartiner;;;NORMAL
+12758;tomme;;;NORMAL
+12743;morbier;;;NORMAL
+12039;munster;;;NORMAL
+22000;oeuf|oeuf entier;55;;NORMAL
+22001;blanc d'oeuf|blanc d oeuf|blanc;30;;NORMAL
+22002;jaune d'oeuf|jaune d oeuf|jaune;18;;NORMAL
+22050;oeuf de caille;10;;NORMAL
+17270;huile d'olive|huile d olive;;0.92;NORMAL
+17440;huile|huile de tournesol|huile neutre|huile vegetale;;0.92;NORMAL
+17130;huile de colza;;0.92;NORMAL
+17040;huile d'arachide|huile d arachide;;0.92;NORMAL
+17400;huile de sesame;;0.92;NORMAL
+17220;huile de noix;;0.92;NORMAL
+16060;huile de coco;;0.92;NORMAL
+17350;huile de pepin de raisin|huile de pepins de raisin;;0.92;NORMAL
+16128;huile de friture|huile pour friture|bain de friture|bain d'huile;;0.92;FRYING
+16520;saindoux;;0.9;NORMAL
+16550;graisse de canard|graisse d'oie;;0.9;NORMAL
+9440;farine|farine de ble|farine t45|farine de ble t45|farine de froment|farine blanche;;0.55;NORMAL
+9436;farine t55|farine de ble t55;;0.55;NORMAL
+9435;farine t65;;0.55;NORMAL
+9445;farine t80|farine bise;;0.55;NORMAL
+9415;farine complete|farine t150;;0.55;NORMAL
+9437;farine a gateau|farine avec levure incorporee|farine fluide;;0.55;NORMAL
+9532;farine de seigle;;0.55;NORMAL
+9540;farine de sarrasin|farine de ble noir;;0.55;NORMAL
+9520;farine de riz;;0.6;NORMAL
+9545;farine de mais;;0.6;NORMAL
+9580;farine de pois chiche;;0.5;NORMAL
+9570;farine de chataigne;;0.5;NORMAL
+9510;maizena|fecule de mais|amidon de mais;;0.6;NORMAL
+4090;fecule|fecule de pomme de terre;;0.6;NORMAL
+9313;flocon d'avoine|flocons d'avoine|flocon d avoine|avoine;;0.4;NORMAL
+9610;semoule|semoule de ble|couscous|graine de couscous;;0.7;NORMAL
+9690;boulgour|boulghour;;0.7;NORMAL
+9340;quinoa;;0.75;NORMAL
+9614;polenta|semoule de mais;;0.7;NORMAL
+9100;riz|riz blanc|riz long|riz rond|riz arborio|riz pour risotto|riz a risotto;;0.85;NORMAL
+9102;riz complet;;0.85;NORMAL
+9119;riz basmati|riz thai;;0.85;NORMAL
+9810;pate|pates|spaghetti|spaghettis|penne|tagliatelle|tagliatelles|macaroni|coquillette|fusilli|farfalle|linguine|nouille|pates seches|lasagne|feuille de lasagne|plaque de lasagne;;;NORMAL
+9870;pates completes|pate complete;;;NORMAL
+9821;pates aux oeufs|pate aux oeufs;;;NORMAL
+9815;pates fraiches|pate fraiche|tagliatelles fraiches|gnocchi;;;NORMAL
+9900;vermicelle de riz|nouille de riz;;;NORMAL
+7500;chapelure|panure;;0.45;NORMAL
+7200;pain de mie;25;;NORMAL
+7001;pain|baguette|pain blanc;250;;NORMAL
+7110;pain complet;;;NORMAL
+7100;pain de campagne;;;NORMAL
+7259;pain burger|pain a burger|pain a hamburger|bun;60;;NORMAL
+7180;pain pita|pita;70;;NORMAL
+7815;tortilla|wrap|galette de ble;40;;NORMAL
+7300;biscotte;8;;NORMAL
+7740;brioche;;;NORMAL
+7602;croissant;55;;NORMAL
+23421;pate feuilletee;230;;NORMAL
+23410;pate brisee;230;;NORMAL
+23440;pate sablee;230;;NORMAL
+37001;pate a pizza;250;;NORMAL
+23430;feuille de brick|brick;15;;NORMAL
+24430;boudoir|biscuit a la cuillere;5;;NORMAL
+24015;petit beurre|biscuit sec|biscuit;8;;NORMAL
+24009;speculoos;7;;NORMAL
+32014;corn flakes|cornflakes;;0.15;NORMAL
+32004;muesli|granola;;0.4;NORMAL
+31016;sucre|sucre en poudre|sucre semoule|sucre blanc|sucre cristal|sucre glace|sucre perle|sucre en grain;;0.85;NORMAL
+31017;sucre roux|cassonade|vergeoise|sucre brun|sucre complet|rapadura;;0.8;NORMAL
+31044;sucre vanille|sucre vanillee;;0.85;NORMAL
+31008;miel;;1.4;NORMAL
+31034;sirop d'erable|sirop d erable;;1.32;NORMAL
+31089;sirop d'agave|sirop d agave;;1.35;NORMAL
+31024;confiture;;1.3;NORMAL
+31032;pate a tartiner|nutella|pate a tartiner chocolat;;1.2;NORMAL
+31046;caramel|sauce caramel;;1.3;NORMAL
+31074;chocolat noir|chocolat patissier|chocolat a cuire|chocolat dessert|chocolat|pepite de chocolat|pepites de chocolat;;;NORMAL
+31004;chocolat au lait;;;NORMAL
+31010;chocolat blanc;;;NORMAL
+18100;cacao|cacao en poudre|cacao amer|poudre de cacao|cacao non sucre;;0.45;NORMAL
+18101;chocolat en poudre|poudre chocolatee;;0.5;NORMAL
+15201;pate d'amande|pate d amande|massepain;;;NORMAL
+15013;creme de marron|creme de marrons;;1.3;NORMAL
+11007;gelatine|feuille de gelatine;2;;NORMAL
+11084;agar-agar|agar agar|agar;;0.6;NORMAL
+11046;levure chimique|poudre a lever|sachet de levure;;0.9;NORMAL
+11010;levure de boulanger|levure boulangere|levure fraiche|levure seche|levure;;0.7;NORMAL
+11507;bicarbonate|bicarbonate de soude|bicarbonate alimentaire;;1.2;SEASONING
+13620;pomme|pomme golden|pomme granny|pomme reinette;150;;NORMAL
+13037;poire;160;;NORMAL
+13005;banane;120;;NORMAL
+13034;orange;150;;NORMAL
+13009;citron|citron jaune;120;;NORMAL
+13067;citron vert|lime;70;;NORMAL
+2007;jus de citron|jus d'un citron;;1.03;NORMAL
+2070;jus d'orange|jus d orange;;1.04;NORMAL
+2074;jus de pomme;;1.04;NORMAL
+13024;clementine|mandarine;70;;NORMAL
+13040;pamplemousse;250;;NORMAL
+13014;fraise|fraises;15;;NORMAL
+13015;framboise;4;;NORMAL
+13028;myrtille|bleuet;;0.6;NORMAL
+13029;mure;5;;NORMAL
+13007;cassis;;0.6;NORMAL
+13019;groseille;;0.6;NORMAL
+13008;cerise;7;;NORMAL
+13000;abricot;45;;NORMAL
+13193;peche;150;;NORMAL
+13148;nectarine|brugnon;150;;NORMAL
+13041;prune|quetsche|mirabelle;35;;NORMAL
+13044;raisin|raisin blanc|grain de raisin;5;;NORMAL
+13046;raisin sec|raisins secs|sultanine;;0.6;NORMAL
+13002;ananas;900;;NORMAL
+13025;mangue;350;;NORMAL
+13021;kiwi;75;;NORMAL
+13026;melon;800;;NORMAL
+13036;pasteque;;;NORMAL
+13016;fruit de la passion|maracuja;35;;NORMAL
+13018;grenade;250;;NORMAL
+13012;figue;50;;NORMAL
+13013;figue seche;20;;NORMAL
+13011;datte;8;;NORMAL
+13042;pruneau;10;;NORMAL
+13001;abricot sec;8;;NORMAL
+13178;cranberry|cranberries|canneberge;;0.6;NORMAL
+13047;rhubarbe;;;NORMAL
+13010;coing;300;;NORMAL
+15006;noix de coco fraiche;;;NORMAL
+15007;noix de coco rapee|coco rapee|noix de coco|coco;;0.35;NORMAL
+13004;avocat;200;;NORMAL
+13038;compote|compote de pomme;;1.05;NORMAL
+13033;olive verte|olive;4;;NORMAL
+13131;olive noire;4;;NORMAL
+4008;pomme de terre|patate|pomme de terre a chair ferme|grenaille;150;;NORMAL
+4101;patate douce;250;;NORMAL
+20009;carotte;100;;NORMAL
+20034;oignon|oignon jaune|oignon blanc;100;;NORMAL
+20238;oignon rouge;100;;NORMAL
+20097;echalote;25;;NORMAL
+11000;ail|gousse d'ail|gousse d ail;5;;NORMAL
+20039;poireau;150;;NORMAL
+20047;tomate;120;;NORMAL
+20172;tomate cerise;15;;NORMAL
+20068;concentre de tomate|double concentre de tomate|puree de tomate concentree;;1.1;NORMAL
+20169;pulpe de tomate|tomates concassees|tomate concassee|tomate pelee|tomates pelees|chair de tomate;;1.0;NORMAL
+20260;coulis de tomate|passata|puree de tomate;;1.0;NORMAL
+11107;sauce tomate;;1.0;NORMAL
+20256;tomate sechee|tomates sechees;;;NORMAL
+20020;courgette;200;;NORMAL
+20053;aubergine;300;;NORMAL
+20087;poivron|poivron rouge;150;;NORMAL
+20085;poivron vert;150;;NORMAL
+20168;poivron jaune;150;;NORMAL
+20210;concombre;300;;NORMAL
+20031;salade|laitue|salade verte|batavia|feuille de salade;300;;NORMAL
+20099;mache;;;NORMAL
+20217;roquette;;;NORMAL
+20026;endive|chicon;120;;NORMAL
+20270;epinard|pousse d'epinard|pousses d'epinard;;;NORMAL
+20116;chou|chou blanc;1000;;NORMAL
+20014;chou rouge;1000;;NORMAL
+20016;chou-fleur|chou fleur;800;;NORMAL
+20057;brocoli;400;;NORMAL
+20058;chou de bruxelles;10;;NORMAL
+20218;chou frise|chou vert|chou kale|kale;;;NORMAL
+20055;celeri rave|celeri-rave;600;;NORMAL
+20023;celeri|celeri branche|branche de celeri;40;;NORMAL
+20028;fenouil;250;;NORMAL
+20064;navet;100;;NORMAL
+20045;radis;8;;NORMAL
+20003;betterave;150;;NORMAL
+20070;haricot vert;;;NORMAL
+20072;petit pois|petits pois;;0.65;NORMAL
+20066;mais|mais doux|grain de mais;;0.7;NORMAL
+20056;champignon|champignon de paris|champignons de paris;20;;NORMAL
+20212;shiitake;;;NORMAL
+20160;cepe|champignon des bois;;;NORMAL
+20103;girolle|chanterelle;;;NORMAL
+20279;asperge|asperge verte;20;;NORMAL
+20052;artichaut|fond d'artichaut;300;;NORMAL
+20044;potiron|citrouille|courge|potimarron|butternut|courge butternut;;;NORMAL
+20181;panais;150;;NORMAL
+20196;topinambour;;;NORMAL
+20183;germe de soja|pousse de soja;;;NORMAL
+11074;gingembre frais|gingembre;;;NORMAL
+20151;piment|piment rouge|piment vert;10;;SEASONING
+11097;cornichon;10;;NORMAL
+11040;capre|capres;;;SEASONING
+25220;choucroute;;;NORMAL
+20496;legumes pour couscous;;;NORMAL
+20051;jardiniere de legume|macedoine|macedoine de legumes;;;NORMAL
+25018;ratatouille;;;NORMAL
+20585;lentille|lentilles|lentille verte;;0.8;NORMAL
+20535;lentille corail;;0.8;NORMAL
+20532;pois chiche|pois chiches;;0.65;NORMAL
+20524;haricot rouge;;0.65;NORMAL
+20511;haricot blanc|lingot|haricot coco;;0.65;NORMAL
+20508;flageolet;;0.65;NORMAL
+20515;pois casse|pois casses;;0.8;NORMAL
+20541;feve;;;NORMAL
+20904;tofu;;;NORMAL
+18900;lait de soja|boisson au soja;;1.03;NORMAL
+18107;lait d'amande|boisson a l'amande;;1.03;NORMAL
+18905;lait d'avoine|boisson a l'avoine;;1.03;NORMAL
+15000;amande|amandes entieres;1.2;;NORMAL
+15041;poudre d'amande|poudre d amande|amande en poudre|amandes en poudre|amande moulue|amande mondee|amande effilee|amandes effilees|amande blanchie;;0.45;NORMAL
+15004;noisette|poudre de noisette|noisettes;1.5;0.45;NORMAL
+15005;noix|cerneau de noix|cerneaux de noix;5;;NORMAL
+15054;noix de cajou|cajou;1.5;;NORMAL
+15044;pistache;;;NORMAL
+15001;cacahuete|arachide;;;NORMAL
+15202;beurre de cacahuete|beurre d'arachide;;1.1;NORMAL
+15026;noix de pecan|pecan;;;NORMAL
+15008;noix du bresil;;;NORMAL
+15027;noix de macadamia|macadamia;;;NORMAL
+15025;pignon|pignons de pin|pignon de pin;;0.6;NORMAL
+15035;sesame|graine de sesame|graines de sesame;;0.6;NORMAL
+15034;graine de lin|lin;;0.65;NORMAL
+15047;graine de chia|chia;;0.65;NORMAL
+15011;graine de tournesol;;0.55;NORMAL
+15020;chataigne|marron;10;;NORMAL
+15203;tahini|tahin|puree de sesame;;1.1;NORMAL
+6254;viande hachee|boeuf hache|steak hache|hache de boeuf|viande de boeuf hachee;100;;NORMAL
+6250;steak hache 5%;100;;NORMAL
+6103;entrecote|boeuf|steak|bifteck|pave de boeuf|rumsteck;200;;NORMAL
+6231;boeuf bourguignon|paleron|macreuse|joue de boeuf|boeuf a braiser|plat de cotes|gite|pot-au-feu|pot au feu|jarret de boeuf;;;NORMAL
+6116;filet de boeuf|tournedos;;;NORMAL
+6521;veau|escalope de veau;120;;NORMAL
+6550;blanquette|tendron|epaule de veau|roti de veau;;;NORMAL
+28204;filet mignon|porc|filet de porc;;;NORMAL
+28100;cote de porc|echine|cotelette de porc;180;;NORMAL
+28300;roti de porc;;;NORMAL
+28002;poitrine de porc;;;NORMAL
+28720;lardon|lardons|lardons fumes|poitrine fumee;;;NORMAL
+28900;jambon|jambon blanc|jambon cuit|tranche de jambon;45;;NORMAL
+28800;jambon cru|jambon de bayonne|jambon de parme|jambon sec|prosciutto;15;;NORMAL
+28727;bacon;15;;NORMAL
+30110;saucisse|saucisse de toulouse;110;;NORMAL
+30742;saucisse de strasbourg|knacki|saucisse de francfort|knack;35;;NORMAL
+30315;chorizo;;;NORMAL
+30150;merguez;60;;NORMAL
+30300;saucisson|saucisson sec;;;NORMAL
+16530;lard;;;NORMAL
+30050;chair a saucisse;;;NORMAL
+21502;agneau|gigot|gigot d'agneau|souris d'agneau|epaule d'agneau;;;NORMAL
+21500;cotelette d'agneau|cote d'agneau;70;;NORMAL
+36017;poulet|blanc de poulet|filet de poulet|escalope de poulet|aiguillette de poulet|blancs de poulet;130;;NORMAL
+36002;cuisse de poulet|haut de cuisse|pilon|pilon de poulet;200;;NORMAL
+36016;poulet entier|poulet fermier;1400;;NORMAL
+36304;dinde|escalope de dinde|filet de dinde;130;;NORMAL
+36206;magret|magret de canard;350;;NORMAL
+36203;canard|cuisse de canard|confit de canard;;;NORMAL
+34001;lapin;;;NORMAL
+8328;foie gras;;;NORMAL
+40108;foie de volaille|foie de poulet;;;NORMAL
+40700;gesier;;;NORMAL
+26036;saumon|pave de saumon|filet de saumon;150;;NORMAL
+26037;saumon fume;20;;NORMAL
+26064;thon frais|steak de thon;;;NORMAL
+26039;thon|thon au naturel|thon en boite|thon en conserve;;;NORMAL
+26180;thon a l'huile;;;NORMAL
+26043;cabillaud|dos de cabillaud|poisson blanc|filet de poisson;150;;NORMAL
+26129;colin|merlu|lieu|lieu noir|merlan;150;;NORMAL
+26058;sole;;;NORMAL
+26109;dorade|daurade;;;NORMAL
+26001;bar|loup;;;NORMAL
+26092;truite;;;NORMAL
+26051;maquereau;;;NORMAL
+26065;sardine;;;NORMAL
+26034;sardine a l'huile|sardines en boite;;;NORMAL
+26000;anchois;;;NORMAL
+26090;haddock;;;NORMAL
+10007;crevette|crevettes|gambas|crevette rose;10;;NORMAL
+10014;moule;;;NORMAL
+10045;saint-jacques|noix de saint-jacques|saint jacques|coquille saint-jacques;25;;NORMAL
+10001;calmar|calamar|encornet|seiche;;;NORMAL
+26046;surimi|baton de surimi;15;;NORMAL
+10005;crabe|chair de crabe;;;NORMAL
+10018;poulpe;;;NORMAL
+11013;moutarde|moutarde de dijon|moutarde a l'ancienne;;1.05;NORMAL
+11054;mayonnaise|mayo;;0.95;NORMAL
+11008;ketchup;;1.1;NORMAL
+11104;sauce soja|sauce soja salee|shoyu|tamari;;1.1;NORMAL
+11194;nuoc mam|sauce poisson|sauce nuoc-mam;;1.2;NORMAL
+11018;vinaigre|vinaigre de vin|vinaigre de cidre|vinaigre blanc|vinaigre de xeres;;1.0;NORMAL
+11091;vinaigre balsamique|balsamique;;1.05;NORMAL
+11110;vinaigrette;;0.95;NORMAL
+11179;pesto;;;NORMAL
+11143;bechamel|sauce bechamel;;1.0;NORMAL
+11100;sauce barbecue|sauce bbq;;1.1;NORMAL
+-;tabasco|sauce piquante;;1.0;SEASONING
+11112;harissa;;1.0;SEASONING
+-;sauce worcestershire|worcestershire;;1.1;SEASONING
+11174;bouillon cube|cube de bouillon|bouillon de volaille|bouillon de boeuf|bouillon de legumes|bouillon|fond de volaille|fond de veau|kub;10;;SEASONING
+11017;sel|sel fin|gros sel|fleur de sel|sel de guerande;;1.2;SEASONING
+11015;poivre|poivre noir|poivre du moulin|poivre blanc;;0.5;SEASONING
+11025;cannelle;;0.5;SEASONING
+11057;vanille|gousse de vanille|extrait de vanille|arome vanille;;;SEASONING
+11048;muscade|noix de muscade;;0.5;SEASONING
+11042;cumin;;0.5;SEASONING
+11005;curry|curcuma|garam masala;;0.5;SEASONING
+11049;paprika|piment d'espelette|piment de cayenne|chili;;0.5;SEASONING
+11006;gingembre en poudre|gingembre moulu;;0.5;SEASONING
+11052;clou de girofle|girofle;;0.5;SEASONING
+11060;herbes de provence|herbe de provence|origan|thym|romarin|laurier|feuille de laurier|bouquet garni|sarriette|marjolaine;;0.3;SEASONING
+11014;persil|persil plat|persil frais;;0.3;SEASONING
+11033;basilic;;0.3;SEASONING
+11003;ciboulette;;0.3;SEASONING
+11094;coriandre;;0.3;SEASONING
+11027;menthe;;0.3;SEASONING
+11093;aneth;;0.3;SEASONING
+11092;estragon|cerfeuil;;0.3;SEASONING
+11039;safran;;;SEASONING
+-;badiane|anis etoile|anis;;;SEASONING
+11056;quatre-epices|quatre epices|epices|melange d'epices|epice a pain d'epice|ras el hanout;;0.5;SEASONING
+-;eau de fleur d'oranger|fleur d'oranger;;1.0;SEASONING
+18066;eau|eau tiede|eau froide|eau chaude|eau bouillante|eau de cuisson;;1.0;NORMAL
+5215;vin blanc;;0.99;NORMAL
+5214;vin rouge|vin;;0.99;NORMAL
+5009;biere;;1.0;NORMAL
+5007;cidre;;1.0;NORMAL
+1004;rhum;;0.95;NORMAL
+1023;cognac|armagnac|calvados|whisky|eau-de-vie;;0.95;NORMAL
+1007;porto|madere|vin cuit;;1.0;NORMAL
+1003;liqueur|grand marnier|cointreau|amaretto|kirsch;;1.05;NORMAL
+18073;cafe|cafe fort|espresso|expresso|cafe noir;;1.0;NORMAL
+-;the|the vert|the noir|infusion;;1.0;SEASONING
+18018;cola|coca|soda;;1.04;NORMAL
+18017;sirop|sirop de fruits|grenadine|sirop de menthe;;1.3;NORMAL
+4047;puree|puree de pomme de terre;;;NORMAL
+4032;frites|frite;;;NORMAL
+8937;quenelle;;;NORMAL
+25571;falafel;25;;NORMAL
+25621;houmous|hummus;;1.0;NORMAL
+25620;guacamole;;1.0;NORMAL
+11043;tapenade;;1.0;NORMAL
+39515;glace|glace a la vanille|creme glacee;;0.55;NORMAL
+39528;sorbet;;0.6;NORMAL
+39246;creme dessert;;1.05;NORMAL
+39700;creme anglaise;;1.05;NORMAL
+39710;creme patissiere;;1.05;NORMAL
+23200;pain d'epice|pain d'epices;;;NORMAL
+24520;meringue;5;;NORMAL
+31050;guimauve|marshmallow|chamallow;5;;NORMAL
+24685;cornet;;;NORMAL
+31027;fruit confit|fruits confits|ecorce d'orange confite|orange confite;;;NORMAL
+31021;zeste|zeste de citron|zeste d'orange|zestes;;;SEASONING

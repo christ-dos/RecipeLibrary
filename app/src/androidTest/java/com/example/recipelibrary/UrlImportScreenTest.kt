@@ -7,7 +7,11 @@ import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.recipelibrary.data.Recipe
 import com.example.recipelibrary.ui.UrlImportScreen
+import android.content.Context
+import androidx.test.platform.app.InstrumentationRegistry
+import org.junit.After
 import org.junit.Assert.assertEquals
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -21,6 +25,18 @@ class UrlImportScreenTest {
     val rule = createAndroidComposeRule<ComponentActivity>()
 
     private val validUrl = "https://youtu.be/test123"
+
+    private val prefs
+        get() = InstrumentationRegistry.getInstrumentation().targetContext
+            .getSharedPreferences("url_import", Context.MODE_PRIVATE)
+
+    // Sans adresse MAC memorisee, l'ecran ne tente aucun reveil : les tests qui n'en parlent pas
+    // gardent exactement le comportement d'avant (aucun appel reseau reel).
+    @Before
+    @After
+    fun clearLearnedMac() {
+        prefs.edit().remove("server_mac").commit()
+    }
 
     private fun urlField() = rule.onNode(hasText("URL") and hasSetTextAction())
 
@@ -247,6 +263,261 @@ class UrlImportScreenTest {
     }
 
     @Test
+    fun urlImport_serverIpChanged_rediscoversAndImports() {
+        var imported: Recipe? = null
+        val newServer = "http://192.168.1.99:18642"
+        val json = """{"title":"Tarte","ingredients":["200g farine"],"steps":["Cuire"]}"""
+        val triedServers = mutableListOf<String>()
+        rule.setContent {
+            MaterialTheme {
+                UrlImportScreen(
+                    onImport = { imported = it },
+                    onBack = {},
+                    parseJson = ::parseRecipeJson,
+                    extract = { _, server ->
+                        triedServers += server
+                        if (server == newServer) Result.success(json)
+                        else Result.failure(ConnectException("ECONNREFUSED (Connection refused)"))
+                    },
+                    discover = { newServer },
+                    onLocalNetwork = { true } // la recherche du PC n'a lieu que sur Wi-Fi
+                )
+            }
+        }
+        setUrl()
+        setServer("192.168.1.36:18642") // ancienne IP
+        rule.onNodeWithText("Importer").performClick()
+        rule.waitUntil(timeoutMillis = 5000) { imported != null }
+        assertEquals("Tarte", imported?.title)
+        assertEquals(newServer, triedServers.last())
+    }
+
+    // --- Tests reveil du PC en veille (Wake-on-LAN) ---
+
+    @Test
+    fun urlImport_pcAsleep_sendsWakeSignalThenImports() {
+        prefs.edit().putString("server_mac", "04:33:C2:B9:44:3E").commit()
+        var imported: Recipe? = null
+        var awake = false
+        val wakeCalls = mutableListOf<Pair<String, String>>()
+        val json = """{"title":"Tarte","ingredients":["200g farine"],"steps":["Cuire"]}"""
+        rule.setContent {
+            MaterialTheme {
+                UrlImportScreen(
+                    onImport = { imported = it },
+                    onBack = {},
+                    parseJson = ::parseRecipeJson,
+                    extract = { _, _ ->
+                        if (awake) Result.success(json)
+                        else Result.failure(ConnectException("ETIMEDOUT (Connection timed out)"))
+                    },
+                    isUp = { awake },
+                    wake = { mac, server -> wakeCalls += mac to server; awake = true },
+                    learnMac = { null },
+                    onLocalNetwork = { true }
+                )
+            }
+        }
+        setUrl()
+        setServer("192.168.1.44:18642")
+        rule.onNodeWithText("Importer").performClick()
+        rule.waitUntil(timeoutMillis = 5000) { imported != null }
+        assertEquals("Tarte", imported?.title)
+        assertEquals(listOf("04:33:C2:B9:44:3E" to "http://192.168.1.44:18642"), wakeCalls)
+    }
+
+    @Test
+    fun urlImport_pcAlreadyAwake_doesNotSendWakeSignal() {
+        prefs.edit().putString("server_mac", "04:33:C2:B9:44:3E").commit()
+        var imported: Recipe? = null
+        var wakeCalls = 0
+        rule.setContent {
+            MaterialTheme {
+                UrlImportScreen(
+                    onImport = { imported = it },
+                    onBack = {},
+                    parseJson = ::parseRecipeJson,
+                    extract = { _, _ -> Result.success("""{"title":"Tarte","ingredients":["a"],"steps":["b"]}""") },
+                    isUp = { true },
+                    wake = { _, _ -> wakeCalls++ },
+                    learnMac = { null },
+                    onLocalNetwork = { true }
+                )
+            }
+        }
+        setUrl()
+        setServer()
+        rule.onNodeWithText("Importer").performClick()
+        rule.waitUntil(timeoutMillis = 5000) { imported != null }
+        assertEquals(0, wakeCalls)
+    }
+
+    @Test
+    fun urlImport_unknownMac_neverTriesToWake() {
+        var done = false
+        var probes = 0
+        rule.setContent {
+            MaterialTheme {
+                UrlImportScreen(
+                    onImport = {},
+                    onBack = {},
+                    parseJson = { null },
+                    extract = { _, _ -> done = true; Result.failure(ConnectException("ETIMEDOUT (Connection timed out)")) },
+                    discover = { null },
+                    isUp = { probes++; false },
+                    wake = { _, _ -> probes++ }
+                )
+            }
+        }
+        setUrl()
+        setServer()
+        rule.onNodeWithText("Importer").performClick()
+        rule.waitUntil(timeoutMillis = 5000) { done }
+        rule.waitUntil(timeoutMillis = 5000) {
+            rule.onAllNodesWithText("PC injoignable", substring = true).fetchSemanticsNodes().isNotEmpty()
+        }
+        assertEquals(0, probes)
+    }
+
+    @Test
+    fun urlImport_successfulImport_remembersServerMac() {
+        var imported: Recipe? = null
+        rule.setContent {
+            MaterialTheme {
+                UrlImportScreen(
+                    onImport = { imported = it },
+                    onBack = {},
+                    parseJson = ::parseRecipeJson,
+                    extract = { _, _ -> Result.success("""{"title":"Tarte","ingredients":["a"],"steps":["b"]}""") },
+                    learnMac = { "04:33:C2:B9:44:3E" }
+                )
+            }
+        }
+        setUrl()
+        setServer()
+        rule.onNodeWithText("Importer").performClick()
+        rule.waitUntil(timeoutMillis = 5000) { imported != null }
+        rule.waitUntil(timeoutMillis = 5000) { prefs.getString("server_mac", null) != null }
+        assertEquals("04:33:C2:B9:44:3E", prefs.getString("server_mac", null))
+    }
+
+    // --- Tests file d'attente ---
+
+    @Test
+    fun urlImport_pcUnreachable_withQueue_queuesLinkAndShowsMessage() {
+        var queued: String? = null
+        rule.setContent {
+            MaterialTheme {
+                UrlImportScreen(
+                    onImport = {},
+                    onBack = {},
+                    parseJson = { null },
+                    extract = { _, _ -> Result.failure(ConnectException("ETIMEDOUT (Connection timed out)")) },
+                    discover = { null },
+                    onQueue = { queued = it }
+                )
+            }
+        }
+        setUrl("https://www.instagram.com/reel/abc/")
+        setServer()
+        rule.onNodeWithText("Importer").performClick()
+        rule.waitUntil(timeoutMillis = 5000) { queued != null }
+        assertEquals("https://www.instagram.com/reel/abc/", queued)
+        rule.waitUntil(timeoutMillis = 5000) {
+            rule.onAllNodesWithText("Lien mis en file d'attente", substring = true).fetchSemanticsNodes().isNotEmpty()
+        }
+        rule.onAllNodesWithText("PC injoignable (", substring = true).assertCountEquals(0)
+    }
+
+    @Test
+    fun urlImport_mobileDataConnectTimeout_withQueue_queuesInsteadOfSlowExtractionMessage() {
+        var queued: String? = null
+        var wakes = 0
+        prefs.edit().putString("server_mac", "04:33:C2:B9:44:3E").commit()
+        rule.setContent {
+            MaterialTheme {
+                UrlImportScreen(
+                    onImport = {},
+                    onBack = {},
+                    parseJson = { null },
+                    extract = { _, _ ->
+                        Result.failure(SocketTimeoutException("failed to connect to /192.168.1.44 (port 18642) after 15000ms"))
+                    },
+                    discover = { null },
+                    isUp = { false },
+                    wake = { _, _ -> wakes++ },
+                    learnMac = { null },
+                    onLocalNetwork = { false },
+                    onQueue = { queued = it }
+                )
+            }
+        }
+        setUrl()
+        setServer()
+        rule.onNodeWithText("Importer").performClick()
+        rule.waitUntil(timeoutMillis = 5000) { queued != null }
+        rule.waitUntil(timeoutMillis = 5000) {
+            rule.onAllNodesWithText("Lien mis en file d'attente", substring = true).fetchSemanticsNodes().isNotEmpty()
+        }
+        rule.onAllNodesWithText("Hermes ne repond pas", substring = true).assertCountEquals(0)
+        assertEquals(0, wakes)
+    }
+
+    @Test
+    fun urlImport_extractionError_withQueue_isNotQueued() {
+        var queued: String? = null
+        rule.setContent {
+            MaterialTheme {
+                UrlImportScreen(
+                    onImport = {},
+                    onBack = {},
+                    parseJson = { null },
+                    extract = { _, _ -> Result.failure(Exception("Pas de recette dans cette video")) },
+                    onQueue = { queued = it }
+                )
+            }
+        }
+        setUrl()
+        setServer()
+        rule.onNodeWithText("Importer").performClick()
+        rule.waitUntil(timeoutMillis = 5000) {
+            rule.onAllNodesWithText("Pas de recette", substring = true).fetchSemanticsNodes().isNotEmpty()
+        }
+        assertEquals(null, queued)
+    }
+
+    @Test
+    fun urlImport_nonEmptyQueue_showsLinkThatOpensQueueScreen() {
+        var openedQueue = false
+        val pending = listOf(
+            com.example.recipelibrary.data.PendingImport(id = 1, url = "https://insta/reel/1", status = "READY", recipeJson = "{}"),
+            com.example.recipelibrary.data.PendingImport(id = 2, url = "https://insta/reel/2")
+        )
+        rule.setContent {
+            MaterialTheme {
+                UrlImportScreen(
+                    onImport = {},
+                    onBack = {},
+                    parseJson = { null },
+                    pending = pending,
+                    onOpenQueue = { openedQueue = true }
+                )
+            }
+        }
+        rule.onNodeWithText("Voir la file d'attente (1 à valider, 1 en attente)")
+            .performScrollTo().assertIsDisplayed().performClick()
+        assertEquals(true, openedQueue)
+    }
+
+    @Test
+    fun urlImport_emptyQueue_showsNoQueueLink() {
+        rule.setContent {
+            MaterialTheme { UrlImportScreen(onImport = {}, onBack = {}, parseJson = { null }) }
+        }
+        rule.onAllNodesWithText("Voir la file d'attente", substring = true).assertCountEquals(0)
+    }
+
+    @Test
     fun urlImport_instagramBlocked_showsTextImportSuggestion() {
         rule.setContent {
             MaterialTheme {
@@ -437,5 +708,38 @@ class UrlImportScreenTest {
         rule.onNodeWithText("Importer").performClick()
         rule.onNodeWithText("Detecter").assertIsNotEnabled()
         latch.countDown()
+    }
+    // ── Extraction impossible : copier le lien pour la faire à la main ──────────
+
+    private class FakeClipboard : androidx.compose.ui.platform.ClipboardManager {
+        var copied: androidx.compose.ui.text.AnnotatedString? = null
+        override fun getText() = copied
+        override fun setText(annotatedString: androidx.compose.ui.text.AnnotatedString) { copied = annotatedString }
+    }
+
+    @Test
+    fun urlImport_extractionFails_copyLinkButtonCopiesUrl() {
+        val clipboard = FakeClipboard()
+        rule.setContent {
+            MaterialTheme {
+                androidx.compose.runtime.CompositionLocalProvider(
+                    androidx.compose.ui.platform.LocalClipboardManager provides clipboard
+                ) {
+                    UrlImportScreen(
+                        onImport = {}, onBack = {}, parseJson = { null },
+                        extract = { _, _ -> Result.failure(Exception("Pas de recette dans cette video.")) }
+                    )
+                }
+            }
+        }
+        rule.onAllNodesWithText("Copier le lien", substring = true).assertCountEquals(0)
+        setUrl()
+        setServer()
+        rule.onNodeWithText("Importer").performClick()
+        rule.waitUntil(timeoutMillis = 5000) {
+            rule.onAllNodesWithText("Copier le lien", substring = true).fetchSemanticsNodes().isNotEmpty()
+        }
+        rule.onNodeWithText("Copier le lien", substring = true).performScrollTo().performClick()
+        assertEquals(validUrl, clipboard.copied?.text)
     }
 }

@@ -64,6 +64,12 @@ dependencies {
     // ML Kit OCR (text recognition from photos)
     implementation("com.google.mlkit:text-recognition:16.0.0")
 
+    // PDF text extraction (import de fichier)
+    implementation("com.tom-roush:pdfbox-android:2.0.27.0")
+
+    // File d'attente d'import en arrière-plan (quand le PC Hermes est injoignable)
+    implementation("androidx.work:work-runtime-ktx:2.9.0")
+
     // Coil for image loading (URLs + local files)
     implementation("io.coil-kt:coil-compose:2.5.0")
 
@@ -71,8 +77,11 @@ dependencies {
     implementation("androidx.compose.material:material-icons-extended:1.5.1")
 
     testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    // Vrai org.json pour les tests unitaires (celui d'android.jar n'est qu'un bouchon)
+    testImplementation("org.json:json:20231013")
+    // Espresso 3.7+ requis sur les Android récents (InputManager.getInstance supprimé du système)
+    androidTestImplementation("androidx.test.ext:junit:1.3.0")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.7.0")
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.5.1")
     androidTestImplementation("androidx.room:room-testing:2.6.1")
     debugImplementation("androidx.compose.ui:ui-test-manifest:1.5.1")
