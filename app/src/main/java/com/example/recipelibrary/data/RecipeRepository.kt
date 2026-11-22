@@ -1,6 +1,14 @@
-package com.example.recipelibrary.data
-
-class RecipeRepository(private val dao: RecipeDao) {
+package com.example.recipelibrary.data
+
+
+
+import androidx.room.withTransaction
+
+/**
+ * @param db base complète : la suppression d'une recette retire aussi ses entrées du menu dans
+ *   la même transaction (spec 002, FR-005). Null dans les tests qui n'utilisent que [dao].
+ */
+class RecipeRepository(private val dao: RecipeDao, private val db: AppDatabase? = null) {
     fun observeAll() = dao.getAll()
 
     suspend fun get(id: String) = dao.getById(id)
@@ -12,5 +20,14 @@ class RecipeRepository(private val dao: RecipeDao) {
         dao.upsert(normalized)
     }
 
-    suspend fun delete(id: String) = dao.deleteById(id)
+    suspend fun delete(id: String) {
+        val database = db ?: return dao.deleteById(id)
+        database.withTransaction {
+            database.menuDao().deleteForRecipe(id)
+            dao.deleteById(id)
+        }
+    }
+
+    /** Nombre d'entrées du menu qui visent cette recette (avertissement avant suppression). */
+    suspend fun menuCount(id: String): Int = db?.menuDao()?.countForRecipe(id) ?: 0
 }

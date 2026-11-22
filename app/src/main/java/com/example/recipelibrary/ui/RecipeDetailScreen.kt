@@ -20,6 +20,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ContentCopy
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Share
@@ -77,7 +78,15 @@ fun RecipeDetailScreen(
     /** Nombre de parts saisi depuis la fiche (story 5). */
     onServingsChange: ((Int) -> Unit)? = null,
     /** Poids corrigé d'une ligne d'ingrédients (story 2). */
-    onWeightChange: ((String, com.example.recipelibrary.data.IngredientWeight) -> Unit)? = null
+    onWeightChange: ((String, com.example.recipelibrary.data.IngredientWeight) -> Unit)? = null,
+    /** « Ajouter au menu » (spec 002) ; absent = entrée masquée. */
+    onAddToMenu: (() -> Unit)? = null,
+    /** Nombre d'entrées du menu qui visent cette recette (avertissement avant suppression). */
+    menuCount: Int = 0,
+    /** Aliment de remplacement choisi pour un ingrédient non reconnu (spec 001, story 6) ; absent = bouton masqué. */
+    onChooseFood: ((key: String, foodCode: String) -> Unit)? = null,
+    /** Ouvre l'écran « Aliments de remplacement » ; absent = lien masqué. */
+    onOpenSubstitutions: (() -> Unit)? = null
 ) {
     val context = LocalContext.current
     // Calcul mémorisé : refait seulement si la recette ou la table change (SC-004).
@@ -89,7 +98,10 @@ fun RecipeDetailScreen(
         NutritionDetailSheet(
             estimate = nutrition,
             onDismiss = { showNutritionDetail = false },
-            onWeightChange = onWeightChange
+            onWeightChange = onWeightChange,
+            foodTable = foodTable,
+            onChooseFood = onChooseFood,
+            onOpenSubstitutions = onOpenSubstitutions?.let { open -> { showNutritionDetail = false; open() } }
         )
     }
     val scope = rememberCoroutineScope()
@@ -392,7 +404,11 @@ fun RecipeDetailScreen(
             title = { Text("Supprimer la recette ?") },
             text = {
                 Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                    Text("Cette action est définitive.")
+                    Text(
+                        "Cette action est définitive." +
+                            if (menuCount > 0) " Elle est au menu ($menuCount fois) et en sera retirée." else "",
+                        modifier = Modifier.semantics { testTag = "delete_text" }
+                    )
                     Spacer(Modifier.height(4.dp))
                     Button(
                         onClick = { showDeleteDialog = false; onDelete() },
@@ -524,6 +540,29 @@ fun RecipeDetailScreen(
                                 color = ColorTitleViolet,
                                 fontWeight = FontWeight.Medium
                             )
+                        }
+                    }
+                    if (onAddToMenu != null) {
+                        Spacer(Modifier.height(12.dp))
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Button(
+                                onClick = onAddToMenu,
+                                shape = RoundedCornerShape(16.dp),
+                                colors = ButtonDefaults.buttonColors(backgroundColor = ColorTitleViolet),
+                                modifier = Modifier.semantics { testTag = "add_to_menu" }
+                            ) {
+                                Icon(Icons.Default.Add, null, tint = Color.White, modifier = Modifier.size(18.dp))
+                                Spacer(Modifier.width(6.dp))
+                                Text("Ajouter au menu", color = Color.White)
+                            }
+                            if (menuCount > 0) {
+                                Spacer(Modifier.width(12.dp))
+                                Text(
+                                    if (menuCount > 1) "Au menu ($menuCount fois)" else "Au menu",
+                                    color = ColorTitleViolet, fontSize = 13.sp,
+                                    modifier = Modifier.semantics { testTag = "in_menu" }
+                                )
+                            }
                         }
                     }
                 }

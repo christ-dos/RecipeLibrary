@@ -55,4 +55,15 @@ class FoodsJsonTest {
     }
 
     @Test fun loadsIntoFoodTable() = assertEquals(foods.size, TestFoods.table.size)
+
+    @Test fun aisleInClosedList_andExpectedForCommonFoods() {
+        val aisles = setOf("Fruits et légumes", "Crèmerie", "Boucherie et poisson", "Épicerie salée",
+            "Épicerie sucrée", "Surgelés", "Boissons", "Autres")
+        foods.filter { it.has("aisle") && !it.isNull("aisle") }
+            .forEach { assertTrue("rayon ${it.getString("name")} : ${it.getString("aisle")}", it.getString("aisle") in aisles) }
+        assertEquals("Épicerie sucrée", TestFoods.table.match("farine")?.aisle)
+        assertEquals("Crèmerie", TestFoods.table.match("lait")?.aisle)
+        assertEquals("Fruits et légumes", TestFoods.table.match("pomme")?.aisle)
+        assertEquals("Boucherie et poisson", TestFoods.table.match("poulet")?.aisle)
+    }
 }

@@ -18,13 +18,14 @@
 
 ## `selection.csv`
 
-Format : `code;aliases;pieceG;density;kind`
+Format : `code;aliases;pieceG;density;kind;aisle`
 
 - `code` : code Ciqual (`alim_code`), ou `-` pour un assaisonnement sans équivalent Ciqual (tabasco, thé…), qui reçoit un code `X1`, `X2`… et 0 kcal.
 - `aliases` : noms reconnus dans les recettes, séparés par `|`, en minuscules et sans accents. Chaque alias doit être unique, y compris après normalisation (le script échoue sinon).
 - `pieceG` : poids moyen d'une pièce en grammes (œuf 55, oignon 100…), vide sinon.
 - `density` : g/ml pour les mesures en volume (huile 0,92, farine 0,55…), vide = 1,0.
 - `kind` : `NORMAL`, `SEASONING` (sel, poivre, épices, herbes : ignorés sans avertissement) ou `FRYING` (huile de friture : comptée mais signalée approximative).
+- `aisle` (facultatif) : force le rayon de la liste de courses. Vide = rayon déduit du sous-groupe puis du groupe Ciqual (tables `AISLE_BY_SUBGROUP` et `AISLE_BY_GROUP` du script), sinon « Autres ». Forcé aujourd'hui : farines et fécules (Épicerie sucrée), pâtes à tarte et brick (Crèmerie), et les assaisonnements sans code Ciqual.
 
 ## Regénérer
 

@@ -56,6 +56,21 @@ Fichier `app/src/main/assets/nutrition/foods.json`, voir [contracts/foods-json.m
 | `perServing` | `total / servings`, kcal arrondis à la dizaine, nutriments au gramme ; `null` sans parts |
 | `warnings` | `PARTIAL` (> 50 % des lignes non comptées), `CHECK_VALUE` (> 3 000 kcal/part ou > 30 parts estimées), `FRYING` |
 
+## FoodSubstitution (table `food_substitutions`, nouvelle — version 8, story 6)
+
+Créée par `MIGRATION_7_8` (`CREATE TABLE` seulement ; aucune autre table touchée).
+
+| Colonne | Type | Règles |
+|---|---|---|
+| `text_key` | TEXT NOT NULL, clé primaire | Texte de l'ingrédient normalisé (`Normalize.text` : minuscules, sans accents, pluriels retirés, mots séparés par une espace), ex. `skyr nature` ; un nouveau choix pour le même texte remplace l'ancien |
+| `food_code` | TEXT NOT NULL | Code Ciqual d'un aliment de `foods.json` ; un code absent de la table rend l'équivalence inopérante (ignorée, signalée à l'écran) |
+| `created_at` | INTEGER NOT NULL | Date du choix (ms) |
+
+Règles :
+- S'applique à une ligne seulement si la table ne reconnaît aucun aliment, et si le texte de la ligne (hors quantité et unité) contient `text_key` en mots entiers ; plusieurs candidates → la plus longue en mots.
+- Ne modifie aucune recette ; annuler = supprimer la ligne de la table.
+- `ParsedIngredient` gagne `substitutionKey: String?` (texte de l'équivalence appliquée, `null` sinon).
+
 ## Transitions (rattrapage)
 
 ```

@@ -9,6 +9,8 @@ import com.example.recipelibrary.data.MIGRATION_2_3
 import com.example.recipelibrary.data.MIGRATION_3_4
 import com.example.recipelibrary.data.MIGRATION_4_5
 import com.example.recipelibrary.data.MIGRATION_5_6
+import com.example.recipelibrary.data.MIGRATION_6_7
+import com.example.recipelibrary.data.MIGRATION_7_8
 import com.example.recipelibrary.data.IngredientWeight
 import com.example.recipelibrary.data.PendingImport
 import com.example.recipelibrary.data.Recipe
@@ -161,7 +163,7 @@ class DatabaseMigrationTest {
         }
 
         val migrated = Room.databaseBuilder(ctx, AppDatabase::class.java, name)
-            .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6)
+            .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7, MIGRATION_7_8)
             .allowMainThreadQueries()
             .build()
         try {
@@ -211,7 +213,7 @@ class DatabaseMigrationTest {
         }
 
         val migrated = Room.databaseBuilder(ctx, AppDatabase::class.java, name)
-            .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6)
+            .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7, MIGRATION_7_8)
             .allowMainThreadQueries()
             .build()
         try {
@@ -269,5 +271,136 @@ class DatabaseMigrationTest {
         val loaded = db.recipeDao().getById("r-upd")
         assertEquals("Après",   loaded!!.title)
         assertEquals("modifié", loaded.notes)
+    }
+
+    // ── 10. Migration 6 → 7 : recettes identiques, tables du menu créées et vides ──
+
+    @Test
+    fun migration_6_to_7_keepsRecipesIdentical_menuTablesEmpty() = runBlocking {
+        val ctx = InstrumentationRegistry.getInstrumentation().targetContext
+        val name = "migration-test-v6.db"
+        ctx.deleteDatabase(name)
+
+        // Base au format v6, telle que Room la créait avant les menus
+        ctx.openOrCreateDatabase(name, android.content.Context.MODE_PRIVATE, null).use { raw ->
+            raw.execSQL("CREATE TABLE IF NOT EXISTS `recipes` (`id` TEXT NOT NULL, `title` TEXT NOT NULL, `source_url` TEXT, `description` TEXT, `ingredients` TEXT NOT NULL, `steps` TEXT NOT NULL, `category` TEXT, `tags` TEXT NOT NULL, `notes` TEXT, `image_url` TEXT, `created_at` INTEGER NOT NULL, `updated_at` INTEGER NOT NULL, PRIMARY KEY(`id`))")
+            raw.execSQL("ALTER TABLE recipes ADD COLUMN servings INTEGER")
+            raw.execSQL("ALTER TABLE recipes ADD COLUMN servings_source TEXT")
+            raw.execSQL("ALTER TABLE recipes ADD COLUMN ingredient_weights TEXT NOT NULL DEFAULT '{}'")
+            raw.execSQL("CREATE TABLE IF NOT EXISTS `pending_imports` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `url` TEXT NOT NULL, `status` TEXT NOT NULL, `recipe_json` TEXT, `error` TEXT, `created_at` INTEGER NOT NULL)")
+            raw.execSQL(
+                "INSERT INTO recipes VALUES ('v6-full', 'Tarte aux pommes', 'https://youtu.be/abc', 'Classique', " +
+                    "'[\"3 pommes\",\"200 g de farine\"]', '[\"Éplucher\",\"Cuire 30 min\"]', 'Desserts', " +
+                    "'[\"fruits\"]', 'Servir tiède', 'https://example.com/img.jpg', 1000, 2000, 6, 'USER', " +
+                    "'{\"3 pommes\":{\"g\":450.0,\"src\":\"USER\"}}')"
+            )
+            raw.execSQL(
+                "INSERT INTO recipes (id, title, ingredients, steps, tags, created_at, updated_at) " +
+                    "VALUES ('v6-min', 'Minimal', '[]', '[]', '[]', 3000, 4000)"
+            )
+            raw.execSQL("INSERT INTO pending_imports (url, status, created_at) VALUES ('https://insta/reel/3', 'WAITING', 5000)")
+            raw.version = 6
+        }
+
+        val migrated = Room.databaseBuilder(ctx, AppDatabase::class.java, name)
+            .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7, MIGRATION_7_8)
+            .allowMainThreadQueries()
+            .build()
+        try {
+            assertEquals(
+                Recipe(
+                    id = "v6-full", title = "Tarte aux pommes", sourceUrl = "https://youtu.be/abc",
+                    description = "Classique", ingredients = listOf("3 pommes", "200 g de farine"),
+                    steps = listOf("Éplucher", "Cuire 30 min"), category = "Desserts",
+                    tags = listOf("fruits"), notes = "Servir tiède",
+                    imageUrl = "https://example.com/img.jpg", createdAt = 1000L, updatedAt = 2000L,
+                    servings = 6, servingsSource = Recipe.SERVINGS_USER,
+                    ingredientWeights = mapOf("3 pommes" to IngredientWeight(450.0, IngredientWeight.USER))
+                ),
+                migrated.recipeDao().getById("v6-full")
+            )
+            val min = migrated.recipeDao().getById("v6-min")!!
+            assertEquals("Minimal", min.title)
+            assertEquals(4000L, min.updatedAt)
+            assertEquals(2, migrated.recipeDao().getAll().first().size)
+            assertEquals("https://insta/reel/3", migrated.pendingImportDao().nextWaiting()?.url)
+            val menu = migrated.menuDao()
+            assertEquals(0, menu.entries().size)
+            assertEquals(0, menu.observeCheckedKeys().first().size)
+            assertEquals(0, menu.observeExtras().first().size)
+            // Les nouvelles tables sont utilisables
+            menu.appendEntry(com.example.recipelibrary.data.menu.MenuEntry(recipeId = "v6-full", servings = 4))
+            assertEquals(1, menu.countForRecipe("v6-full"))
+        } finally {
+            migrated.close()
+            ctx.deleteDatabase(name)
+        }
+    }
+
+    // ── 11. Migration 7 → 8 : tout est conservé, table des aliments de remplacement créée et vide ──
+
+    @Test
+    fun migration_7_to_8_keepsEverything_substitutionTableEmpty() = runBlocking {
+        val ctx = InstrumentationRegistry.getInstrumentation().targetContext
+        val name = "migration-test-v7.db"
+        ctx.deleteDatabase(name)
+
+        // Base au format v7, telle que Room la créait avant les aliments de remplacement
+        ctx.openOrCreateDatabase(name, android.content.Context.MODE_PRIVATE, null).use { raw ->
+            raw.execSQL("CREATE TABLE IF NOT EXISTS `recipes` (`id` TEXT NOT NULL, `title` TEXT NOT NULL, `source_url` TEXT, `description` TEXT, `ingredients` TEXT NOT NULL, `steps` TEXT NOT NULL, `category` TEXT, `tags` TEXT NOT NULL, `notes` TEXT, `image_url` TEXT, `created_at` INTEGER NOT NULL, `updated_at` INTEGER NOT NULL, PRIMARY KEY(`id`))")
+            raw.execSQL("ALTER TABLE recipes ADD COLUMN servings INTEGER")
+            raw.execSQL("ALTER TABLE recipes ADD COLUMN servings_source TEXT")
+            raw.execSQL("ALTER TABLE recipes ADD COLUMN ingredient_weights TEXT NOT NULL DEFAULT '{}'")
+            raw.execSQL("CREATE TABLE IF NOT EXISTS `pending_imports` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `url` TEXT NOT NULL, `status` TEXT NOT NULL, `recipe_json` TEXT, `error` TEXT, `created_at` INTEGER NOT NULL)")
+            raw.execSQL("CREATE TABLE IF NOT EXISTS `menu_entries` (`id` TEXT NOT NULL, `recipe_id` TEXT NOT NULL, `servings` INTEGER, `times` INTEGER NOT NULL DEFAULT 1, `day` INTEGER, `position` INTEGER NOT NULL, `created_at` INTEGER NOT NULL, PRIMARY KEY(`id`))")
+            raw.execSQL("CREATE INDEX IF NOT EXISTS `index_menu_entries_recipe_id` ON `menu_entries` (`recipe_id`)")
+            raw.execSQL("CREATE TABLE IF NOT EXISTS `shopping_checks` (`item_key` TEXT NOT NULL, `checked_at` INTEGER NOT NULL, PRIMARY KEY(`item_key`))")
+            raw.execSQL("CREATE TABLE IF NOT EXISTS `shopping_extras` (`id` TEXT NOT NULL, `text` TEXT NOT NULL, `checked` INTEGER NOT NULL DEFAULT 0, `position` INTEGER NOT NULL, `created_at` INTEGER NOT NULL, PRIMARY KEY(`id`))")
+            raw.execSQL(
+                "INSERT INTO recipes VALUES ('v7-full', 'Bowl skyr', NULL, 'Petit-déjeuner', " +
+                    "'[\"150 g de skyr\",\"40 g de flocons d''avoine\"]', '[\"Mélanger\"]', 'Desserts', " +
+                    "'[\"rapide\"]', NULL, NULL, 1000, 2000, 2, 'USER', " +
+                    "'{\"150 g de skyr\":{\"g\":150.0,\"src\":\"USER\"}}')"
+            )
+            raw.execSQL("INSERT INTO pending_imports (url, status, created_at) VALUES ('https://insta/reel/4', 'WAITING', 5000)")
+            raw.execSQL("INSERT INTO menu_entries (id, recipe_id, servings, times, day, position, created_at) VALUES ('m1', 'v7-full', 4, 1, 2, 0, 6000)")
+            raw.execSQL("INSERT INTO shopping_checks (item_key, checked_at) VALUES ('txt:skyr', 7000)")
+            raw.execSQL("INSERT INTO shopping_extras (id, text, checked, position, created_at) VALUES ('x1', 'Café', 0, 0, 8000)")
+            raw.version = 7
+        }
+
+        val migrated = Room.databaseBuilder(ctx, AppDatabase::class.java, name)
+            .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7, MIGRATION_7_8)
+            .allowMainThreadQueries()
+            .build()
+        try {
+            assertEquals(
+                Recipe(
+                    id = "v7-full", title = "Bowl skyr", description = "Petit-déjeuner",
+                    ingredients = listOf("150 g de skyr", "40 g de flocons d'avoine"),
+                    steps = listOf("Mélanger"), category = "Desserts", tags = listOf("rapide"),
+                    createdAt = 1000L, updatedAt = 2000L, servings = 2, servingsSource = Recipe.SERVINGS_USER,
+                    ingredientWeights = mapOf("150 g de skyr" to IngredientWeight(150.0, IngredientWeight.USER))
+                ),
+                migrated.recipeDao().getById("v7-full")
+            )
+            assertEquals("https://insta/reel/4", migrated.pendingImportDao().nextWaiting()?.url)
+            val menu = migrated.menuDao()
+            val entry = menu.entries().single()
+            assertEquals("m1", entry.id)
+            assertEquals(4, entry.servings)
+            assertEquals(2, entry.day)
+            assertEquals(listOf("txt:skyr"), menu.observeCheckedKeys().first())
+            assertEquals(listOf("Café"), menu.observeExtras().first().map { it.text })
+
+            val subs = migrated.foodSubstitutionDao()
+            assertEquals(0, subs.getAll().size)
+            // La nouvelle table est utilisable
+            subs.upsert(com.example.recipelibrary.data.FoodSubstitution("skyr", "19590"))
+            assertEquals("19590", subs.getAll().single().foodCode)
+        } finally {
+            migrated.close()
+            ctx.deleteDatabase(name)
+        }
     }
 }

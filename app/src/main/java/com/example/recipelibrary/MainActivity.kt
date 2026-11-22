@@ -10,6 +10,8 @@ import androidx.activity.compose.setContent
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.ui.draw.shadow
@@ -80,12 +82,11 @@ private val VioletPrimary  = Color(0xFF7A2CF6)
 private data class NavItem(val route: String, val label: String, val icon: Int)
 private val NAV_ITEMS = listOf(
     NavItem("list",       "Recettes",  R.drawable.ic_nav_home),
-    NavItem("url_import", "URL",       R.drawable.ic_nav_url),
-    NavItem("file",       "Fichier",   R.drawable.ic_nav_file),
-    NavItem("photo",      "Photo",     R.drawable.ic_nav_photo),
+    NavItem("ajouter",    "Ajouter",   R.drawable.ic_nav_add),
     NavItem("search",     "Recherche", R.drawable.ic_nav_search),
+    NavItem("menu",       "Menu",      R.drawable.ic_recipe_planning),
 )
-private val MAIN_ROUTES = setOf("list", "url_import", "file", "photo", "search")
+private val MAIN_ROUTES = setOf("list", "ajouter", "search", "menu")
 
 // ── Shared header ─────────────────────────────────────────────────────────────
 @Composable
@@ -133,25 +134,31 @@ private fun RecipeTopBar(title: String, showBack: Boolean = false, onBack: () ->
 
 private val ActiveGradient = listOf(Color(0xFF9D6EFF), Color(0xFF7A2CF6))
 private val ActiveSurfaceLight = Color(0xFFF3ECFF)
+/** Creux de l'onglet sélectionné (effet d'appui) : fond violet plus soutenu et bord violet. */
+private val NavPressedSurface = Color(0xFFE4D6FC)
+private val NavPressedBorder = Color(0x664A16C6)
 private val Accent = Color(0xFFEC4899)
 
 // ── Bottom nav bar ─────────────────────────────────────────────────────────────
+/** Hauteur de la barre du bas : grandes icônes + libellé dessous, sans rien couper. */
+private fun navBarHeight(screenW: Int) = when {
+    screenW < 360 -> 80.dp
+    screenW < 600 -> 92.dp
+    else          -> 108.dp
+}
 @Composable
 private fun RecipeBottomNav(currentRoute: String?, onTabSelected: (String) -> Unit) {
     val navBarBottom = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
     val screenW = LocalConfiguration.current.screenWidthDp
 
-    val navHeight = when {
-        screenW < 360 -> 64.dp
-        screenW < 600 -> 76.dp
-        else          -> 88.dp
-    }
+    val navHeight = navBarHeight(screenW)
     val pillSize = when {
-        screenW < 360 -> 40.dp
-        screenW < 600 -> 48.dp
-        else          -> 60.dp
+        screenW < 360 -> 44.dp
+        screenW < 600 -> 52.dp
+        else          -> 64.dp
     }
-    val iconSize = (pillSize.value * 0.70f).dp
+    // Icônes détaillées : elles occupent presque tout le bouton pour rester lisibles
+    val iconSize = (pillSize.value * 0.90f).dp
     val labelSp  = when {
         screenW < 360 -> 9.sp
         screenW < 600 -> 10.sp
@@ -169,6 +176,9 @@ private fun RecipeBottomNav(currentRoute: String?, onTabSelected: (String) -> Un
             NAV_ITEMS.forEach { item ->
                 val selected = currentRoute == item.route
                 val alpha by animateFloatAsState(if (selected) 1f else 0.78f, label = "alpha")
+                // Effet « bouton enfoncé » sur l'onglet sélectionné : icône un peu plus petite et
+                // plus basse, dans un creux violet bordé
+                val press by animateFloatAsState(if (selected) 1f else 0f, label = "press")
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier
@@ -180,17 +190,24 @@ private fun RecipeBottomNav(currentRoute: String?, onTabSelected: (String) -> Un
                         modifier = Modifier
                             .size(pillSize)
                             .then(
-                                if (selected) Modifier.background(
-                                    ActiveSurfaceLight,
-                                    RoundedCornerShape(pillRadius)
-                                ) else Modifier
+                                if (selected) Modifier
+                                    .background(NavPressedSurface, RoundedCornerShape(pillRadius))
+                                    .border(1.5.dp, NavPressedBorder, RoundedCornerShape(pillRadius))
+                                else Modifier
                             ),
                         contentAlignment = Alignment.Center
                     ) {
                         Image(
                             painter = painterResource(item.icon),
                             contentDescription = item.label,
-                            modifier = Modifier.size(iconSize).alpha(alpha)
+                            modifier = Modifier
+                                .size(iconSize)
+                                .graphicsLayer {
+                                    val k = 1f - 0.08f * press
+                                    scaleX = k; scaleY = k
+                                    translationY = 1.5.dp.toPx() * press
+                                }
+                                .alpha(alpha)
                         )
                     }
                     Spacer(Modifier.height(2.dp))
@@ -239,6 +256,10 @@ class MainActivity : ComponentActivity() {
     private var pendingQueueId: Long? = null
     /** Ouvrir l'écran de la file d'attente (depuis la notification). */
     private var openQueueRequested by mutableStateOf(false)
+    /** Lien de page partagé vers l'app : ouvert dans l'import par URL et importé tout de suite. */
+    private var sharedUrl by mutableStateOf<String?>(null)
+    /** Image partagée vers l'app : l'utilisatrice choisit entre lire la recette ou en faire la photo d'une recette. */
+    private var sharedImage by mutableStateOf<Uri?>(null)
 
     private val notificationPermission =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { }
@@ -274,16 +295,29 @@ class MainActivity : ComponentActivity() {
             foodTable = table
         }
         val db      = DatabaseProvider.getDatabase(applicationContext)
-        val repo    = RecipeRepository(db.recipeDao())
+        val repo    = RecipeRepository(db.recipeDao(), db)
         val factory = RecipeViewModelFactory(repo)
         val listVm  = ViewModelProvider(this, factory).get(RecipeListViewModel::class.java)
+        val menuVm  = ViewModelProvider(
+            this, MenuViewModel.Factory(com.example.recipelibrary.data.menu.MenuRepository(db.menuDao()), listVm.recipes)
+        ).get(MenuViewModel::class.java)
         val queueFlow = db.pendingImportDao().observeAll()
+        // Aliments de remplacement (spec 001, story 6) : valables pour toutes les recettes.
+        val substitutionDao = db.foodSubstitutionDao()
+        val substitutionsFlow = substitutionDao.observeAll()
 
         handleIncomingIntent(intent)
 
         setContent {
             navController = rememberNavController()
             val recipes by listVm.recipes.collectAsState()
+            val menuEntries by menuVm.entries.collectAsState()
+            val substitutions by substitutionsFlow.collectAsState(initial = emptyList())
+            // Table avec les aliments de remplacement : calories, parts estimées et liste de courses.
+            val effectiveFoodTable = remember(foodTable, substitutions) {
+                foodTable?.withSubstitutions(substitutions.associate { it.textKey to it.foodCode })
+            }
+            LaunchedEffect(effectiveFoodTable) { menuVm.setFoodTable(effectiveFoodTable) }
             val context = LocalContext.current
             val backStack by navController.currentBackStackEntryAsState()
             val currentRoute = backStack?.destination?.route
@@ -297,6 +331,35 @@ class MainActivity : ComponentActivity() {
                     navController.navigate("add")
                 }
             }
+            // Onglet « Ajouter » (spec 005) : mode URL / Fichier / Photo, gardé à la rotation
+            var addMode by androidx.compose.runtime.saveable.rememberSaveable { mutableStateOf(AddMode.URL) }
+            // Lien partagé : toujours sur le mode URL de l'onglet Ajouter
+            LaunchedEffect(sharedUrl) {
+                if (sharedUrl != null) {
+                    addMode = AddMode.URL
+                    if (currentRoute != "ajouter") navController.navigateToTab("ajouter")
+                }
+            }
+            sharedImage?.let { uri ->
+                AlertDialog(
+                    onDismissRequest = { sharedImage = null },
+                    title = { Text("Image reçue") },
+                    text = { Text("Que veux-tu faire de cette image ?") },
+                    confirmButton = {
+                        TextButton(onClick = {
+                            sharedImage = null
+                            readRecipeFromImage(uri) { navController.navigate("ocr_review") }
+                        }) { Text("Lire la recette") }
+                    },
+                    dismissButton = {
+                        TextButton(onClick = {
+                            sharedImage = null
+                            pendingImageUrl = uri.toString()
+                            Toast.makeText(context, "Ouvre une recette pour lui mettre cette photo", Toast.LENGTH_LONG).show()
+                        }) { Text("Photo d'une recette") }
+                    }
+                )
+            }
             LaunchedEffect(openQueueRequested) {
                 if (openQueueRequested) {
                     openQueueRequested = false
@@ -306,7 +369,7 @@ class MainActivity : ComponentActivity() {
 
             Box(modifier = Modifier.fillMaxSize().background(ScreenBg)) {
                 val navBarBottom = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
-                val bottomNavHeight = if (currentRoute in MAIN_ROUTES) 81.dp + navBarBottom else 0.dp
+                val bottomNavHeight = if (currentRoute in MAIN_ROUTES) navBarHeight(LocalConfiguration.current.screenWidthDp) + 5.dp + navBarBottom else 0.dp
 
                 NavHost(
                     navController = navController,
@@ -355,40 +418,78 @@ class MainActivity : ComponentActivity() {
                                     onNavigateToDetail = { id -> navController.navigate("detail/$id") },
                                     onNavigateToEdit = { id -> navController.navigate("edit/$id") },
                                     onDeleteRecipe = { id -> listVm.delete(id) },
+                                    menuCountOf = { id -> menuEntries.count { it.recipeId == id } },
                                     modifier = Modifier.weight(1f)
                                 )
                             }
                         }
                     }
 
-                    // ── URL Import ────────────────────────────────────────────
-                    composable("url_import") {
+                    // ── Ajouter (spec 005) : URL / Fichier / Photo ───────────
+                    composable("ajouter") {
                         Scaffold(
                             backgroundColor = ScreenBg,
-                            topBar = { RecipeTopBar("Depuis URL") }
+                            topBar = { RecipeTopBar("Ajouter") }
                         ) { innerPadding ->
-                            Box(Modifier.padding(innerPadding)) {
-                                UrlImportScreen(
-                                    onImport = { recipe ->
-                                        pendingImport = RecipeCategories.keepKnown(recipe)
-                                        navController.navigate("add") {
-                                            popUpTo("url_import") { inclusive = true }
+                            AddTabScreen(
+                                mode = addMode,
+                                onModeChange = { addMode = it },
+                                modifier = Modifier.padding(innerPadding),
+                                url = {
+                                    UrlImportScreen(
+                                        onImport = { recipe ->
+                                            pendingImport = RecipeCategories.keepKnown(recipe)
+                                            navController.navigate("add") {
+                                                popUpTo("ajouter") { inclusive = true }
+                                            }
+                                        },
+                                        onBack = { navController.popBackStack() },
+                                        parseJson = { text -> parseRecipeJson(text) },
+                                        onQueue = { url ->
+                                            askNotificationPermissionIfNeeded()
+                                            lifecycleScope.launch { ImportQueue.add(applicationContext, url) }
+                                        },
+                                        pending = queue,
+                                        onOpenQueue = openQueueScreen,
+                                        sharedUrl = sharedUrl,
+                                        onSharedUrlConsumed = { sharedUrl = null }
+                                    )
+                                },
+                                file = {
+                                    FileImportScreen(
+                                        onFilePicked = { text ->
+                                            pendingImport = parseTextRecipe(text)
+                                            navController.navigate("add")
                                         }
-                                    },
-                                    onBack = { navController.popBackStack() },
-                                    parseJson = { text -> parseRecipeJson(text) },
-                                    onQueue = { url ->
-                                        askNotificationPermissionIfNeeded()
-                                        lifecycleScope.launch { ImportQueue.add(applicationContext, url) }
-                                    },
-                                    pending = queue,
-                                    onOpenQueue = openQueueScreen
-                                )
-                            }
+                                    )
+                                },
+                                photo = {
+                                    PhotoImportScreen(
+                                        onGalleryPicked = { uri ->
+                                            readRecipeFromImage(uri) { navController.navigate("ocr_review") }
+                                        }
+                                    )
+                                }
+                            )
                         }
                     }
 
                     // ── File d'attente ────────────────────────────────────────
+                    // ── Aliments de remplacement (spec 001, story 6) ─────────
+                    composable("substitutions") {
+                        Scaffold(
+                            backgroundColor = ScreenBg,
+                            topBar = { RecipeTopBar("Aliments de remplacement", showBack = true) { navController.popBackStack() } }
+                        ) { innerPadding ->
+                            com.example.recipelibrary.ui.FoodSubstitutionsScreen(
+                                substitutions = substitutions,
+                                foodTable = foodTable,
+                                onCancel = { key -> lifecycleScope.launch { substitutionDao.delete(key) } },
+                                modifier = Modifier.padding(innerPadding)
+                            )
+                        }
+                    }
+
                     composable("queue") {
                         Scaffold(
                             backgroundColor = ScreenBg,
@@ -422,57 +523,6 @@ class MainActivity : ComponentActivity() {
                         }
                     }
 
-                    // ── File Import ───────────────────────────────────────────
-                    composable("file") {
-                        Scaffold(
-                            backgroundColor = ScreenBg,
-                            topBar = { RecipeTopBar("Fichier") }
-                        ) { innerPadding ->
-                            Box(Modifier.padding(innerPadding)) {
-                                FileImportScreen(
-                                    onFilePicked = { text ->
-                                        pendingImport = parseTextRecipe(text)
-                                        navController.navigate("add")
-                                    }
-                                )
-                            }
-                        }
-                    }
-
-                    // ── Photo Import ──────────────────────────────────────────
-                    composable("photo") {
-                        Scaffold(
-                            backgroundColor = ScreenBg,
-                            topBar = { RecipeTopBar("Photo") }
-                        ) { innerPadding ->
-                            Box(Modifier.padding(innerPadding)) {
-                                PhotoImportScreen(
-                                    onGalleryPicked = { uri ->
-                                        try {
-                                            val image = InputImage.fromFilePath(context, uri)
-                                            val recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
-                                            recognizer.process(image)
-                                                .addOnSuccessListener { result ->
-                                                    val text = result.text
-                                                    if (text.isBlank()) {
-                                                        Toast.makeText(context, "Aucun texte détecté dans la photo", Toast.LENGTH_LONG).show()
-                                                    } else {
-                                                        pendingOcrText = text
-                                                        navController.navigate("ocr_review")
-                                                    }
-                                                }
-                                                .addOnFailureListener {
-                                                    Toast.makeText(context, "Erreur lors de la lecture de la photo", Toast.LENGTH_SHORT).show()
-                                                }
-                                        } catch (e: Exception) {
-                                            Toast.makeText(context, "Impossible de lire cette image", Toast.LENGTH_SHORT).show()
-                                        }
-                                    }
-                                )
-                            }
-                        }
-                    }
-
                     // ── Search ────────────────────────────────────────────────
                     composable("search") {
                         Scaffold(
@@ -486,6 +536,57 @@ class MainActivity : ComponentActivity() {
                                     onBack = { navController.navigate("list") }
                                 )
                             }
+                        }
+                    }
+
+                    // ── Menu et liste de courses (spec 002) ───────────────────
+                    composable("menu") {
+                        LaunchedEffect(Unit) { menuVm.expireChecks() }
+                        val byId by menuVm.recipesById.collectAsState()
+                        val shopping by menuVm.shopping.collectAsState()
+                        val extras by menuVm.extras.collectAsState()
+                        Scaffold(
+                            backgroundColor = ScreenBg,
+                            topBar = { RecipeTopBar("Menu") }
+                        ) { innerPadding ->
+                            MenuScreen(
+                                entries = menuEntries,
+                                recipesById = byId,
+                                allRecipes = recipes,
+                                shopping = shopping,
+                                modifier = Modifier.padding(innerPadding),
+                                actions = MenuActions(
+                                    onAdd = { menuVm.add(it) },
+                                    onServings = { id, n -> menuVm.setServings(id, n) },
+                                    onTimes = { id, n -> menuVm.setTimes(id, n) },
+                                    onSetRecipeServings = { entry, r, n ->
+                                        // Saisie volontaire : seule écriture d'une recette depuis le menu
+                                        listVm.upsert(com.example.recipelibrary.data.RecipeEdits.withServings(r, n))
+                                        menuVm.setServings(entry.id, n)
+                                    },
+                                    onDay = { id, d -> menuVm.setDay(id, d) },
+                                    onRemove = { menuVm.remove(it) },
+                                    onClear = { menuVm.clear() },
+                                    onOpenRecipe = { navController.navigate("detail/${it.id}") }
+                                ),
+                                extras = extras,
+                                shoppingActions = ShoppingActions(
+                                    onCheck = { key, c -> menuVm.check(key, c) },
+                                    onAddExtra = { menuVm.addExtra(it) },
+                                    onEditExtra = { id, t -> menuVm.setExtraText(id, t) },
+                                    onExtraChecked = { id, c -> menuVm.setExtraChecked(id, c) },
+                                    onRemoveExtra = { menuVm.removeExtra(it) },
+                                    onShare = { text ->
+                                        val send = Intent(Intent.ACTION_SEND).apply {
+                                            type = "text/plain"
+                                            putExtra(Intent.EXTRA_SUBJECT, "Liste de courses")
+                                            putExtra(Intent.EXTRA_TEXT, text)
+                                        }
+                                        context.startActivity(Intent.createChooser(send, "Partager la liste de courses"))
+                                    },
+                                    onChronodrive = { term -> ChronodriveLauncher.open(context, term) }
+                                )
+                            )
                         }
                     }
 
@@ -525,14 +626,26 @@ class MainActivity : ComponentActivity() {
                                 val query = Uri.encode(recipe.title)
                                 startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/search?q=$query&tbm=isch")))
                             },
-                            foodTable = foodTable,
+                            foodTable = effectiveFoodTable,
+                            onChooseFood = { key, code ->
+                                lifecycleScope.launch {
+                                    substitutionDao.upsert(com.example.recipelibrary.data.FoodSubstitution(key, code))
+                                }
+                                Toast.makeText(context, "Aliment retenu pour toutes les recettes", Toast.LENGTH_SHORT).show()
+                            },
+                            onOpenSubstitutions = { navController.navigate("substitutions") { launchSingleTop = true } },
                             onServingsChange = { n ->
                                 listVm.upsert(com.example.recipelibrary.data.RecipeEdits.withServings(recipe, n))
                             },
                             onWeightChange = { line, w ->
                                 // Correction à la main : prioritaire, enregistrée avec la recette (SC-005)
                                 listVm.upsert(com.example.recipelibrary.data.RecipeEdits.withUserWeight(recipe, line, w))
-                            }
+                            },
+                            onAddToMenu = {
+                                menuVm.add(recipe)
+                                Toast.makeText(context, "Ajoutée au menu", Toast.LENGTH_SHORT).show()
+                            },
+                            menuCount = menuEntries.count { it.recipeId == recipe.id }
                         )
                     }
 
@@ -600,6 +713,8 @@ class MainActivity : ComponentActivity() {
                             .fillMaxWidth()
                     ) {
                         RecipeBottomNav(currentRoute) { route ->
+                            // « Ajouter » s'ouvre toujours sur l'URL, même s'il est déjà affiché (FR-002)
+                            if (route == "ajouter") addMode = AddMode.URL
                             if (route != currentRoute) navController.navigateToTab(route)
                         }
                     }
@@ -619,36 +734,64 @@ class MainActivity : ComponentActivity() {
             openQueueRequested = true
             return
         }
+        if (intent.action != Intent.ACTION_SEND) {
+            parseImportIntent(intent)?.let { openImport(it) }
+            return
+        }
         val type = intent.type ?: ""
+        val stream: Uri? = intent.getParcelableExtra(Intent.EXTRA_STREAM)
         when {
-            type.startsWith("image/") && intent.action == Intent.ACTION_SEND -> {
-                val uri: Uri? = intent.getParcelableExtra(Intent.EXTRA_STREAM)
-                if (uri != null) {
-                    pendingImageUrl = uri.toString()
-                    Toast.makeText(this, "Image reçue — ouvre une recette pour l'appliquer", Toast.LENGTH_LONG).show()
-                }
+            // Image (capture d'écran d'une recette, photo d'un plat) : on demande quoi en faire
+            type.startsWith("image/") -> stream?.let { sharedImage = it }
+            type == "text/plain" -> {
+                val text = intent.getStringExtra(Intent.EXTRA_TEXT)
+                    ?: stream?.let { uri -> runCatching { contentResolver.openInputStream(uri)?.bufferedReader()?.use { it.readText() } }.getOrNull() }
+                handleSharedText(text)
             }
-            type == "text/plain" && intent.action == Intent.ACTION_SEND -> {
-                val text = intent.getStringExtra(Intent.EXTRA_TEXT) ?: return
-                val url = text.lines().firstOrNull { it.startsWith("http") }?.trim() ?: return
-                if (url.matches(Regex(".*\\.(jpg|jpeg|png|webp|gif)(\\?.*)?", RegexOption.IGNORE_CASE)) ||
-                    url.contains("googleusercontent") || url.contains("wikimedia") ||
-                    url.contains("unsplash") || url.contains("pexels")) {
-                    pendingImageUrl = url
-                    Toast.makeText(this, "Image reçue — ouvre une recette pour l'appliquer", Toast.LENGTH_LONG).show()
-                } else {
-                    parseRecipeJson(text)?.let { recipe ->
-                        pendingImport = recipe
-                        if (::navController.isInitialized) navController.navigate("add")
+            else -> parseImportIntent(intent)?.let { openImport(it) }
+        }
+    }
+
+    /** Texte partagé : chaque contenu part vers la bonne extraction (contrat SharedText). */
+    private fun handleSharedText(text: String?) {
+        when (val shared = com.example.recipelibrary.data.share.SharedText.classify(text)) {
+            is com.example.recipelibrary.data.share.SharedText.PageLink -> sharedUrl = shared.url
+            is com.example.recipelibrary.data.share.SharedText.ImageLink -> {
+                pendingImageUrl = shared.url
+                Toast.makeText(this, "Image reçue — ouvre une recette pour l'appliquer", Toast.LENGTH_LONG).show()
+            }
+            is com.example.recipelibrary.data.share.SharedText.RecipeJson ->
+                parseRecipeJson(shared.json)?.let { openImport(it) }
+                    ?: Toast.makeText(this, "Recette JSON illisible", Toast.LENGTH_LONG).show()
+            is com.example.recipelibrary.data.share.SharedText.RecipeText -> openImport(parseTextRecipe(shared.text))
+            com.example.recipelibrary.data.share.SharedText.Unknown ->
+                Toast.makeText(this, "Rien à importer dans ce partage", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun openImport(recipe: Recipe) {
+        pendingImport = recipe
+        if (::navController.isInitialized) navController.navigate("add")
+    }
+
+    /** Lit le texte d'une image (photo, capture d'écran) puis ouvre la relecture. */
+    private fun readRecipeFromImage(uri: Uri, openReview: () -> Unit) {
+        try {
+            val image = InputImage.fromFilePath(this, uri)
+            TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS).process(image)
+                .addOnSuccessListener { result ->
+                    if (result.text.isBlank()) {
+                        Toast.makeText(this, "Aucun texte détecté dans la photo", Toast.LENGTH_LONG).show()
+                    } else {
+                        pendingOcrText = result.text
+                        openReview()
                     }
                 }
-            }
-            else -> {
-                parseImportIntent(intent)?.let { recipe ->
-                    pendingImport = recipe
-                    if (::navController.isInitialized) navController.navigate("add")
+                .addOnFailureListener {
+                    Toast.makeText(this, "Erreur lors de la lecture de la photo", Toast.LENGTH_SHORT).show()
                 }
-            }
+        } catch (e: Exception) {
+            Toast.makeText(this, "Impossible de lire cette image", Toast.LENGTH_SHORT).show()
         }
     }
 

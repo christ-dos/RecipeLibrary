@@ -55,10 +55,13 @@ fun FileImportScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(20.dp)
     ) {
+        val headerIcon = painterResource(R.drawable.ic_nav_file)
         androidx.compose.foundation.Image(
-            painter = painterResource(R.drawable.ic_nav_file),
+            painter = headerIcon,
             contentDescription = null,
-            modifier = Modifier.size(96.dp)
+            // Même hauteur sur les trois pages d'ajout, largeur selon le dessin
+            modifier = Modifier.height(96.dp)
+                .aspectRatio(headerIcon.intrinsicSize.width / headerIcon.intrinsicSize.height)
         )
         Text(
             "Importer un fichier",

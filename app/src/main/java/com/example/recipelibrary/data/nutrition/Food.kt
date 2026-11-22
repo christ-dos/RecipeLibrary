@@ -21,7 +21,9 @@ data class Food(
     val fat: Double,
     val pieceG: Double? = null,
     val density: Double? = null,
-    val kind: FoodKind = FoodKind.NORMAL
+    val kind: FoodKind = FoodKind.NORMAL,
+    /** Rayon de la liste de courses (spec 002, story 4) ; null = « Autres ». */
+    val aisle: String? = null
 ) {
     /** Masse volumique en g/ml (1,0 par défaut). */
     val densityOrDefault: Double get() = density ?: 1.0

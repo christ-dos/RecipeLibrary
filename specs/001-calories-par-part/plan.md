@@ -103,6 +103,13 @@ C:\Users\Kikine\AppData\Local\hermes\test_recipe_extractor.py
 5. **P3 — rattrapage et fil de l'eau** : processeur dans le worker, estimation immédiate en import texte/fichier, progression (story 4).
 6. **Validation** : 20 recettes de référence (SC-001), mesure sur les recettes réelles (SC-002/003), `/verifie-tests`.
 
+## Ajout : aliment de remplacement (story 6, T046)
+
+- **Stockage** : nouvelle table Room `food_substitutions` (`text_key` → `food_code`), base 7 → 8 par `MIGRATION_7_8` (`CREATE TABLE` seulement, aucune table existante touchée), enregistrée dans `DatabaseProvider`, testée dans `DatabaseMigrationTest` (base v7 remplie → tout relu à l'identique). Les versions 9 et 10 sont réservées aux specs 003 et 004. Les recettes ne sont jamais modifiées : annuler une équivalence revient à supprimer sa ligne.
+- **Calcul** : `FoodTable` reçoit les équivalences (`withSubstitutions(map)`, copie légère de la table) et les indexe comme les variantes de nom (`matchSubstitution`, même règle « plus long en mots entiers »). `IngredientParser` ne les consulte que si `match` ne reconnaît rien, et renseigne `ParsedIngredient.substitutionKey`. Comme le calcul des calories, l'estimation des parts et `ShoppingListBuilder` passent tous par l'analyseur, une seule table « effective » suffit : `MainActivity` la construit à partir de la table chargée et du flux `FoodSubstitutionDao.observeAll()`, et la passe à la fiche et à `MenuViewModel`. `ShoppingListBuilder` n'est pas modifié (la clé `food:<code>` regroupe d'elle-même).
+- **Règles pures** : `data/nutrition/FoodSubstitutions.kt` (texte proposé, validation du texte retenu par l'analyseur lui-même, recherche dans la table), testées en JVM.
+- **UI** : `NutritionDetailSheet` gagne « Choisir l'aliment » (fenêtre `FoodPickerDialog` : texte à reconnaître, recherche, résultats) et le lien « Aliments de remplacement » ; nouvel écran `ui/FoodSubstitutionsScreen.kt` (route `substitutions`) avec « Annuler » par équivalence.
+
 ## Complexity Tracking
 
 Aucune violation à justifier.

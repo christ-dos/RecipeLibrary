@@ -1,5 +1,6 @@
 package com.example.recipelibrary.ui
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -37,7 +38,10 @@ import androidx.compose.ui.window.DialogProperties
 import com.example.recipelibrary.data.IngredientWeight
 import com.example.recipelibrary.data.nutrition.GramsOrigin
 import com.example.recipelibrary.data.nutrition.IngredientIssue
+import com.example.recipelibrary.data.nutrition.FoodSubstitutions
+import com.example.recipelibrary.data.nutrition.FoodTable
 import com.example.recipelibrary.data.nutrition.NutritionEstimate
+import com.example.recipelibrary.data.nutrition.ParsedIngredient
 import kotlin.math.roundToInt
 
 private val Violet = Color(0xFF7A2CF6)
@@ -70,9 +74,16 @@ private fun grams(g: Double): String = if (g >= 10) "${g.roundToInt()}" else "%.
 fun NutritionDetailSheet(
     estimate: NutritionEstimate,
     onDismiss: () -> Unit,
-    onWeightChange: (line: String, weight: IngredientWeight) -> Unit
+    onWeightChange: (line: String, weight: IngredientWeight) -> Unit,
+    /** Table utilisée pour chercher un aliment de remplacement (story 6) ; null = bouton masqué. */
+    foodTable: FoodTable? = null,
+    /** Aliment de remplacement choisi : texte normalisé → code Ciqual, pour toutes les recettes. */
+    onChooseFood: ((key: String, foodCode: String) -> Unit)? = null,
+    /** Ouvre l'écran « Aliments de remplacement » ; null = lien masqué. */
+    onOpenSubstitutions: (() -> Unit)? = null
 ) {
     var editing by remember { mutableStateOf<Pair<String, Double?>?>(null) }
+    var choosing by remember { mutableStateOf<ParsedIngredient?>(null) }
 
     Dialog(onDismissRequest = onDismiss, properties = DialogProperties(usePlatformDefaultWidth = false)) {
         Surface(
@@ -117,6 +128,13 @@ fun NutritionDetailSheet(
                                     "${grams(c.grams)} g (${originLabel(c.origin)}) · ${c.nutrients.kcal.roundToInt()} kcal · ${c.food.name}",
                                     fontSize = 12.sp, color = Grey
                                 )
+                                c.parsed.substitutionKey?.let { key ->
+                                    Text(
+                                        "Aliment de remplacement pour « $key »",
+                                        fontSize = 12.sp, color = Violet,
+                                        modifier = Modifier.testTag("substituted_${c.parsed.line}")
+                                    )
+                                }
                             }
                             TextButton(onClick = { editing = c.parsed.line to c.grams }) { Text("Corriger", color = Violet, fontSize = 12.sp) }
                         }
@@ -140,6 +158,11 @@ fun NutritionDetailSheet(
                                     onClick = { editing = ig.parsed.line to null },
                                     modifier = Modifier.testTag("set_weight_${ig.parsed.line}")
                                 ) { Text("Indiquer le poids", color = Violet, fontSize = 12.sp) }
+                            } else if (ig.issue == IngredientIssue.UNKNOWN_FOOD && foodTable != null && onChooseFood != null) {
+                                TextButton(
+                                    onClick = { choosing = ig.parsed },
+                                    modifier = Modifier.testTag("choose_food_${ig.parsed.line}")
+                                ) { Text("Choisir l'aliment", color = Violet, fontSize = 12.sp) }
                             }
                         }
                     }
@@ -162,6 +185,12 @@ fun NutritionDetailSheet(
                         "Estimation indicative (environ ±15 %). Source : Anses, table Ciqual 2020.",
                         fontSize = 11.sp, color = Grey, modifier = Modifier.padding(top = 6.dp).testTag("detail_source")
                     )
+                    if (onOpenSubstitutions != null) {
+                        TextButton(
+                            onClick = onOpenSubstitutions,
+                            modifier = Modifier.fillMaxWidth().testTag("open_substitutions")
+                        ) { Text("Aliments de remplacement", color = Violet) }
+                    }
                     TextButton(onClick = onDismiss, modifier = Modifier.fillMaxWidth()) { Text("Fermer", color = Violet) }
                 }
             }
@@ -175,6 +204,85 @@ fun NutritionDetailSheet(
             onConfirm = { g -> editing = null; onWeightChange(line, IngredientWeight(g, IngredientWeight.USER)) },
             onDismiss = { editing = null }
         )
+    }
+
+    val picking = choosing
+    if (picking != null && foodTable != null && onChooseFood != null) {
+        FoodPickerDialog(
+            parsed = picking,
+            table = foodTable,
+            onChoose = { key, code -> choosing = null; onChooseFood(key, code) },
+            onDismiss = { choosing = null }
+        )
+    }
+}
+
+/**
+ * Choix d'un aliment de remplacement (story 6) : texte à reconnaître (prérempli, raccourcissable
+ * pour viser d'autres recettes, ex. « skyr »), recherche dans la table ; toucher un aliment le retient.
+ */
+@Composable
+fun FoodPickerDialog(
+    parsed: ParsedIngredient,
+    table: FoodTable,
+    onChoose: (key: String, foodCode: String) -> Unit,
+    onDismiss: () -> Unit
+) {
+    var key by remember { mutableStateOf(FoodSubstitutions.defaultKey(parsed)) }
+    var query by remember { mutableStateOf("") }
+    val validKey = remember(key) { FoodSubstitutions.normalizedKey(key, parsed.line, table) }
+    val results = remember(query) { FoodSubstitutions.search(table, query) }
+
+    Dialog(onDismissRequest = onDismiss, properties = DialogProperties(usePlatformDefaultWidth = false)) {
+        Surface(
+            shape = RoundedCornerShape(16.dp),
+            modifier = Modifier.fillMaxWidth().fillMaxHeight(0.85f).padding(12.dp).testTag("food_picker")
+        ) {
+            Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                Text("Choisir l'aliment", fontSize = 18.sp, fontWeight = FontWeight.Bold)
+                Text(parsed.line, fontSize = 13.sp, color = Grey)
+                OutlinedTextField(
+                    value = key,
+                    onValueChange = { key = it.take(80) },
+                    singleLine = true,
+                    label = { Text("Texte à reconnaître") },
+                    isError = validKey == null,
+                    modifier = Modifier.fillMaxWidth().testTag("substitution_key")
+                )
+                Text(
+                    if (validKey == null) "Ce texte doit figurer dans l'ingrédient."
+                    else "Le choix vaudra pour toutes les recettes contenant « $validKey ».",
+                    fontSize = 12.sp, color = if (validKey == null) Color(0xFFB00020) else Grey,
+                    modifier = Modifier.testTag("substitution_key_hint")
+                )
+                OutlinedTextField(
+                    value = query,
+                    onValueChange = { query = it.take(60) },
+                    singleLine = true,
+                    label = { Text("Rechercher un aliment") },
+                    modifier = Modifier.fillMaxWidth().testTag("food_search")
+                )
+                LazyColumn(Modifier.weight(1f).fillMaxWidth().testTag("food_results")) {
+                    items(results, key = { it.code }) { f ->
+                        Column(
+                            Modifier.fillMaxWidth()
+                                .clickable(enabled = validKey != null) { validKey?.let { onChoose(it, f.code) } }
+                                .padding(vertical = 8.dp)
+                                .testTag("food_result_${f.code}")
+                                .semantics(mergeDescendants = true) {}
+                        ) {
+                            Text(f.name, fontSize = 14.sp)
+                            Text("${f.kcal.roundToInt()} kcal / 100 g", fontSize = 12.sp, color = Grey)
+                        }
+                        Divider()
+                    }
+                    if (query.isNotBlank() && results.isEmpty()) {
+                        item { Text("Aucun aliment trouvé.", fontSize = 13.sp, color = Grey) }
+                    }
+                }
+                TextButton(onClick = onDismiss, modifier = Modifier.align(Alignment.End)) { Text("Annuler", color = Violet) }
+            }
+        }
     }
 }
 

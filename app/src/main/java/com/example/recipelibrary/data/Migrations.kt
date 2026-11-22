@@ -52,3 +52,36 @@ val MIGRATION_5_6 = object : Migration(5, 6) {
         database.execSQL("ALTER TABLE recipes ADD COLUMN ingredient_weights TEXT NOT NULL DEFAULT '{}'")
     }
 }
+
+// Menus et liste de courses : trois nouvelles tables, aucune table existante touchée.
+// Schéma identique à celui que Room génère pour MenuEntry, ShoppingCheck et ShoppingExtra.
+val MIGRATION_6_7 = object : Migration(6, 7) {
+    override fun migrate(database: SupportSQLiteDatabase) {
+        database.execSQL(
+            "CREATE TABLE IF NOT EXISTS `menu_entries` (`id` TEXT NOT NULL, `recipe_id` TEXT NOT NULL, " +
+                "`servings` INTEGER, `times` INTEGER NOT NULL DEFAULT 1, `day` INTEGER, `position` INTEGER NOT NULL, " +
+                "`created_at` INTEGER NOT NULL, PRIMARY KEY(`id`))"
+        )
+        database.execSQL("CREATE INDEX IF NOT EXISTS `index_menu_entries_recipe_id` ON `menu_entries` (`recipe_id`)")
+        database.execSQL(
+            "CREATE TABLE IF NOT EXISTS `shopping_checks` (`item_key` TEXT NOT NULL, `checked_at` INTEGER NOT NULL, " +
+                "PRIMARY KEY(`item_key`))"
+        )
+        database.execSQL(
+            "CREATE TABLE IF NOT EXISTS `shopping_extras` (`id` TEXT NOT NULL, `text` TEXT NOT NULL, " +
+                "`checked` INTEGER NOT NULL DEFAULT 0, `position` INTEGER NOT NULL, `created_at` INTEGER NOT NULL, " +
+                "PRIMARY KEY(`id`))"
+        )
+    }
+}
+
+// Aliments de remplacement (spec 001, story 6) : une nouvelle table, aucune table existante touchée.
+// Schéma identique à celui que Room génère pour FoodSubstitution.
+val MIGRATION_7_8 = object : Migration(7, 8) {
+    override fun migrate(database: SupportSQLiteDatabase) {
+        database.execSQL(
+            "CREATE TABLE IF NOT EXISTS `food_substitutions` (`text_key` TEXT NOT NULL, `food_code` TEXT NOT NULL, " +
+                "`created_at` INTEGER NOT NULL, PRIMARY KEY(`text_key`))"
+        )
+    }
+}

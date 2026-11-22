@@ -166,6 +166,8 @@ class RecipeDetailNutritionTest {
         // apparaît en double dans l'arbre de test : Compose 1.5 garde une ancienne ligne de liste.
         androidx.test.espresso.Espresso.pressBack()
         rule.waitForIdle()
+        // La fermeture de la fenêtre peut arriver un peu après le retour : on l'attend (5 s au plus).
+        rule.waitUntil(5_000) { rule.onAllNodes(hasTestTag("nutrition_detail")).fetchSemanticsNodes().isEmpty() }
         assertEquals(0, rule.onAllNodes(hasTestTag("nutrition_detail")).fetchSemanticsNodes().size)
         rule.waitForIdle()
         scrollToBanner()

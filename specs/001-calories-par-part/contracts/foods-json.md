@@ -24,5 +24,6 @@ Règles vérifiées par un test unitaire du fichier :
 - `kcal` entre 0 et 910 (900 pour un corps gras pur, plus l'arrondi de Ciqual : huile de tournesol 901), nutriments entre 0 et 100 ;
 - `pieceG` > 0 si présent ; `density` entre 0,1 et 2 si présente ;
 - `kind` ∈ `NORMAL`, `SEASONING`, `FRYING`.
+- `aisle` (facultatif, ajouté par la spec 002 story 4) ∈ « Fruits et légumes », « Crèmerie », « Boucherie et poisson », « Épicerie salée », « Épicerie sucrée », « Surgelés », « Boissons », « Autres » ; absent = « Autres ».
 
-`selection.csv` (versionné, édité à la main) : `code;aliases (séparés par |);pieceG;density;kind`.
+`selection.csv` (versionné, édité à la main) : `code;aliases (séparés par |);pieceG;density;kind;aisle` (`aisle` facultatif : force le rayon).

@@ -16,7 +16,8 @@
    "fat": 1.54,
    "pieceG": null,
    "density": 1.03,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Crèmerie"
   },
   {
    "code": "19024",
@@ -30,7 +31,8 @@
    "fat": 3.3,
    "pieceG": null,
    "density": 1.03,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Crèmerie"
   },
   {
    "code": "19051",
@@ -44,7 +46,8 @@
    "fat": 0.19,
    "pieceG": null,
    "density": 1.03,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Crèmerie"
   },
   {
    "code": "19027",
@@ -59,7 +62,8 @@
    "fat": 7.87,
    "pieceG": null,
    "density": 1.3,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Crèmerie"
   },
   {
    "code": "19054",
@@ -73,7 +77,8 @@
    "fat": 0.7,
    "pieceG": null,
    "density": 0.5,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Crèmerie"
   },
   {
    "code": "18041",
@@ -88,7 +93,8 @@
    "fat": 18.4,
    "pieceG": null,
    "density": 1.0,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boissons"
   },
   {
    "code": "19410",
@@ -105,7 +111,8 @@
    "fat": 30.7,
    "pieceG": null,
    "density": 1.0,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Crèmerie"
   },
   {
    "code": "19415",
@@ -123,7 +130,8 @@
    "fat": 30.7,
    "pieceG": null,
    "density": 1.0,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Crèmerie"
   },
   {
    "code": "19430",
@@ -139,7 +147,8 @@
    "fat": 18.7,
    "pieceG": null,
    "density": 1.0,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Crèmerie"
   },
   {
    "code": "19420",
@@ -154,7 +163,8 @@
    "fat": 28.2,
    "pieceG": null,
    "density": 0.4,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Crèmerie"
   },
   {
    "code": "16400",
@@ -172,7 +182,8 @@
    "fat": 82.9,
    "pieceG": null,
    "density": 0.95,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Crèmerie"
   },
   {
    "code": "16402",
@@ -188,7 +199,8 @@
    "fat": 81.4,
    "pieceG": null,
    "density": 0.95,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Crèmerie"
   },
   {
    "code": "16412",
@@ -202,7 +214,8 @@
    "fat": 38.9,
    "pieceG": null,
    "density": 0.95,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Crèmerie"
   },
   {
    "code": "16615",
@@ -216,7 +229,8 @@
    "fat": 80.4,
    "pieceG": null,
    "density": 0.95,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Crèmerie"
   },
   {
    "code": "19593",
@@ -232,7 +246,8 @@
    "fat": 1.5,
    "pieceG": 125.0,
    "density": 1.03,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Crèmerie"
   },
   {
    "code": "19860",
@@ -247,7 +262,8 @@
    "fat": 9.22,
    "pieceG": 150.0,
    "density": 1.03,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Crèmerie"
   },
   {
    "code": "19646",
@@ -261,7 +277,8 @@
    "fat": 3.26,
    "pieceG": null,
    "density": 1.03,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Crèmerie"
   },
   {
    "code": "19644",
@@ -277,7 +294,8 @@
    "fat": 0.04,
    "pieceG": null,
    "density": 1.03,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Crèmerie"
   },
   {
    "code": "19664",
@@ -292,7 +310,8 @@
    "fat": 4.0,
    "pieceG": 60.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Crèmerie"
   },
   {
    "code": "19641",
@@ -306,7 +325,8 @@
    "fat": 5.5,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Crèmerie"
   },
   {
    "code": "19584",
@@ -320,7 +340,8 @@
    "fat": 39.0,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Crèmerie"
   },
   {
    "code": "19585",
@@ -334,7 +355,8 @@
    "fat": 11.9,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Crèmerie"
   },
   {
    "code": "19590",
@@ -348,7 +370,8 @@
    "fat": 17.7,
    "pieceG": 125.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Crèmerie"
   },
   {
    "code": "12115",
@@ -365,7 +388,8 @@
    "fat": 28.8,
    "pieceG": null,
    "density": 0.4,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Crèmerie"
   },
   {
    "code": "12114",
@@ -379,7 +403,8 @@
    "fat": 34.6,
    "pieceG": null,
    "density": 0.4,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Crèmerie"
   },
   {
    "code": "12110",
@@ -393,7 +418,8 @@
    "fat": 34.6,
    "pieceG": null,
    "density": 0.4,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Crèmerie"
   },
   {
    "code": "12120",
@@ -408,7 +434,8 @@
    "fat": 31.0,
    "pieceG": null,
    "density": 0.4,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Crèmerie"
   },
   {
    "code": "12726",
@@ -422,7 +449,8 @@
    "fat": 33.8,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Crèmerie"
   },
   {
    "code": "12066",
@@ -436,7 +464,8 @@
    "fat": 24.3,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Crèmerie"
   },
   {
    "code": "12804",
@@ -451,7 +480,8 @@
    "fat": 16.9,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Crèmerie"
   },
   {
    "code": "12812",
@@ -467,7 +497,8 @@
    "fat": 23.3,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Crèmerie"
   },
   {
    "code": "12006",
@@ -481,7 +512,8 @@
    "fat": 20.3,
    "pieceG": 250.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Crèmerie"
   },
   {
    "code": "12021",
@@ -495,7 +527,8 @@
    "fat": 20.7,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Crèmerie"
   },
   {
    "code": "12500",
@@ -509,7 +542,8 @@
    "fat": 33.9,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Crèmerie"
   },
   {
    "code": "12521",
@@ -524,7 +558,8 @@
    "fat": 28.4,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Crèmerie"
   },
   {
    "code": "12045",
@@ -538,7 +573,8 @@
    "fat": 27.4,
    "pieceG": 450.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Crèmerie"
   },
   {
    "code": "12749",
@@ -553,7 +589,8 @@
    "fat": 27.5,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Crèmerie"
   },
   {
    "code": "12735",
@@ -567,7 +604,8 @@
    "fat": 24.2,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Crèmerie"
   },
   {
    "code": "12300",
@@ -583,7 +621,8 @@
    "fat": 18.5,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Crèmerie"
   },
   {
    "code": "12758",
@@ -597,7 +636,8 @@
    "fat": 29.4,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Crèmerie"
   },
   {
    "code": "12743",
@@ -611,7 +651,8 @@
    "fat": 29.2,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Crèmerie"
   },
   {
    "code": "12039",
@@ -625,7 +666,8 @@
    "fat": 29.0,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Crèmerie"
   },
   {
    "code": "22000",
@@ -640,7 +682,8 @@
    "fat": 9.83,
    "pieceG": 55.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Crèmerie"
   },
   {
    "code": "22001",
@@ -656,7 +699,8 @@
    "fat": 0.19,
    "pieceG": 30.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Crèmerie"
   },
   {
    "code": "22002",
@@ -672,7 +716,8 @@
    "fat": 26.7,
    "pieceG": 18.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Crèmerie"
   },
   {
    "code": "22050",
@@ -686,7 +731,8 @@
    "fat": 11.1,
    "pieceG": 10.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Crèmerie"
   },
   {
    "code": "17270",
@@ -701,7 +747,8 @@
    "fat": 99.9,
    "pieceG": null,
    "density": 0.92,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "17440",
@@ -718,7 +765,8 @@
    "fat": 100.0,
    "pieceG": null,
    "density": 0.92,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "17130",
@@ -732,7 +780,8 @@
    "fat": 100.0,
    "pieceG": null,
    "density": 0.92,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "17040",
@@ -747,7 +796,8 @@
    "fat": 99.9,
    "pieceG": null,
    "density": 0.92,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "17400",
@@ -761,7 +811,8 @@
    "fat": 100.0,
    "pieceG": null,
    "density": 0.92,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "17220",
@@ -775,7 +826,8 @@
    "fat": 100.0,
    "pieceG": null,
    "density": 0.92,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "16060",
@@ -789,7 +841,8 @@
    "fat": 100.0,
    "pieceG": null,
    "density": 0.92,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "17350",
@@ -804,7 +857,8 @@
    "fat": 100.0,
    "pieceG": null,
    "density": 0.92,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "16128",
@@ -821,7 +875,8 @@
    "fat": 100.0,
    "pieceG": null,
    "density": 0.92,
-   "kind": "FRYING"
+   "kind": "FRYING",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "16520",
@@ -835,7 +890,8 @@
    "fat": 99.5,
    "pieceG": null,
    "density": 0.9,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "16550",
@@ -850,7 +906,8 @@
    "fat": 99.8,
    "pieceG": null,
    "density": 0.9,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "9440",
@@ -869,7 +926,8 @@
    "fat": 0.82,
    "pieceG": null,
    "density": 0.55,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "9436",
@@ -884,7 +942,8 @@
    "fat": 1.0,
    "pieceG": null,
    "density": 0.55,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "9435",
@@ -898,7 +957,8 @@
    "fat": 1.0,
    "pieceG": null,
    "density": 0.55,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "9445",
@@ -913,7 +973,8 @@
    "fat": 1.18,
    "pieceG": null,
    "density": 0.55,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "9415",
@@ -928,7 +989,8 @@
    "fat": 1.52,
    "pieceG": null,
    "density": 0.55,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "9437",
@@ -944,7 +1006,8 @@
    "fat": 1.0,
    "pieceG": null,
    "density": 0.55,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "9532",
@@ -958,7 +1021,8 @@
    "fat": 1.37,
    "pieceG": null,
    "density": 0.55,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "9540",
@@ -973,7 +1037,8 @@
    "fat": 2.19,
    "pieceG": null,
    "density": 0.55,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "9520",
@@ -987,7 +1052,8 @@
    "fat": 2.5,
    "pieceG": null,
    "density": 0.6,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "9545",
@@ -1001,7 +1067,8 @@
    "fat": 2.1,
    "pieceG": null,
    "density": 0.6,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "9580",
@@ -1015,7 +1082,8 @@
    "fat": 6.69,
    "pieceG": null,
    "density": 0.5,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "9570",
@@ -1029,7 +1097,8 @@
    "fat": 3.43,
    "pieceG": null,
    "density": 0.5,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "9510",
@@ -1045,7 +1114,8 @@
    "fat": 0.25,
    "pieceG": null,
    "density": 0.6,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "4090",
@@ -1060,7 +1130,8 @@
    "fat": 0.2,
    "pieceG": null,
    "density": 0.6,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "9313",
@@ -1077,7 +1148,8 @@
    "fat": 1.52,
    "pieceG": null,
    "density": 0.4,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "9610",
@@ -1094,7 +1166,8 @@
    "fat": 1.25,
    "pieceG": null,
    "density": 0.7,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "9690",
@@ -1109,7 +1182,8 @@
    "fat": 1.71,
    "pieceG": null,
    "density": 0.7,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "9340",
@@ -1123,7 +1197,8 @@
    "fat": 6.07,
    "pieceG": null,
    "density": 0.75,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "9614",
@@ -1138,7 +1213,8 @@
    "fat": 1.8,
    "pieceG": null,
    "density": 0.7,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "9100",
@@ -1158,7 +1234,8 @@
    "fat": 0.91,
    "pieceG": null,
    "density": 0.85,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "9102",
@@ -1172,7 +1249,8 @@
    "fat": 2.8,
    "pieceG": null,
    "density": 0.85,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "9119",
@@ -1187,7 +1265,8 @@
    "fat": 0.84,
    "pieceG": null,
    "density": 0.85,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "9810",
@@ -1217,7 +1296,8 @@
    "fat": 1.79,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "9870",
@@ -1232,7 +1312,8 @@
    "fat": 2.2,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "9821",
@@ -1247,7 +1328,8 @@
    "fat": 4.72,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "9815",
@@ -1264,7 +1346,8 @@
    "fat": 1.87,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "9900",
@@ -1279,7 +1362,8 @@
    "fat": 1.0,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "7500",
@@ -1294,7 +1378,8 @@
    "fat": 3.77,
    "pieceG": null,
    "density": 0.45,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "7200",
@@ -1308,7 +1393,8 @@
    "fat": 3.6,
    "pieceG": 25.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "7001",
@@ -1324,7 +1410,8 @@
    "fat": 1.4,
    "pieceG": 250.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "7110",
@@ -1338,7 +1425,8 @@
    "fat": 1.8,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "7100",
@@ -1352,7 +1440,8 @@
    "fat": 1.3,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "7259",
@@ -1369,7 +1458,8 @@
    "fat": 5.35,
    "pieceG": 60.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "7180",
@@ -1384,7 +1474,8 @@
    "fat": 0.92,
    "pieceG": 70.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "7815",
@@ -1400,7 +1491,8 @@
    "fat": 8.2,
    "pieceG": 40.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "7300",
@@ -1414,7 +1506,8 @@
    "fat": 5.9,
    "pieceG": 8.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "7740",
@@ -1428,7 +1521,8 @@
    "fat": 11.8,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "7602",
@@ -1442,7 +1536,8 @@
    "fat": 20.0,
    "pieceG": 55.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "23421",
@@ -1456,7 +1551,8 @@
    "fat": 27.4,
    "pieceG": 230.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Crèmerie"
   },
   {
    "code": "23410",
@@ -1470,7 +1566,8 @@
    "fat": 19.5,
    "pieceG": 230.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Crèmerie"
   },
   {
    "code": "23440",
@@ -1484,7 +1581,8 @@
    "fat": 19.6,
    "pieceG": 230.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Crèmerie"
   },
   {
    "code": "37001",
@@ -1498,7 +1596,8 @@
    "fat": 3.45,
    "pieceG": 250.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Crèmerie"
   },
   {
    "code": "23430",
@@ -1513,7 +1612,8 @@
    "fat": 1.76,
    "pieceG": 15.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Crèmerie"
   },
   {
    "code": "24430",
@@ -1528,7 +1628,8 @@
    "fat": 3.77,
    "pieceG": 5.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "24015",
@@ -1544,7 +1645,8 @@
    "fat": 12.1,
    "pieceG": 8.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "24009",
@@ -1558,7 +1660,8 @@
    "fat": 19.7,
    "pieceG": 7.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "32014",
@@ -1573,7 +1676,8 @@
    "fat": 1.05,
    "pieceG": null,
    "density": 0.15,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "32004",
@@ -1588,7 +1692,8 @@
    "fat": 12.2,
    "pieceG": null,
    "density": 0.4,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "31016",
@@ -1609,7 +1714,8 @@
    "fat": 0.0,
    "pieceG": null,
    "density": 0.85,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "31017",
@@ -1628,7 +1734,8 @@
    "fat": 0.0,
    "pieceG": null,
    "density": 0.8,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "31044",
@@ -1643,7 +1750,8 @@
    "fat": 0.33,
    "pieceG": null,
    "density": 0.85,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "31008",
@@ -1657,7 +1765,8 @@
    "fat": 0.0,
    "pieceG": null,
    "density": 1.4,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "31034",
@@ -1672,7 +1781,8 @@
    "fat": 0.06,
    "pieceG": null,
    "density": 1.32,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "31089",
@@ -1687,7 +1797,8 @@
    "fat": 0.5,
    "pieceG": null,
    "density": 1.35,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "31024",
@@ -1701,7 +1812,8 @@
    "fat": 0.5,
    "pieceG": null,
    "density": 1.3,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "31032",
@@ -1717,7 +1829,8 @@
    "fat": 32.4,
    "pieceG": null,
    "density": 1.2,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "31046",
@@ -1732,7 +1845,8 @@
    "fat": 0.0,
    "pieceG": null,
    "density": 1.3,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "31074",
@@ -1752,7 +1866,8 @@
    "fat": 46.3,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "31004",
@@ -1766,7 +1881,8 @@
    "fat": 30.8,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "31010",
@@ -1780,7 +1896,8 @@
    "fat": 34.2,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "18100",
@@ -1798,7 +1915,8 @@
    "fat": 20.6,
    "pieceG": null,
    "density": 0.45,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boissons"
   },
   {
    "code": "18101",
@@ -1813,7 +1931,8 @@
    "fat": 3.29,
    "pieceG": null,
    "density": 0.5,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boissons"
   },
   {
    "code": "15201",
@@ -1829,7 +1948,8 @@
    "fat": 13.5,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "15013",
@@ -1844,7 +1964,8 @@
    "fat": 0.67,
    "pieceG": null,
    "density": 1.3,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "11007",
@@ -1859,7 +1980,8 @@
    "fat": 0.1,
    "pieceG": 2.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "11084",
@@ -1875,7 +1997,8 @@
    "fat": 0.03,
    "pieceG": null,
    "density": 0.6,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "11046",
@@ -1891,7 +2014,8 @@
    "fat": 0.2,
    "pieceG": null,
    "density": 0.9,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "11010",
@@ -1909,7 +2033,8 @@
    "fat": 1.9,
    "pieceG": null,
    "density": 0.7,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "11507",
@@ -1925,7 +2050,8 @@
    "fat": 0.0,
    "pieceG": null,
    "density": 1.2,
-   "kind": "SEASONING"
+   "kind": "SEASONING",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "13620",
@@ -1942,7 +2068,8 @@
    "fat": 0.0,
    "pieceG": 150.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "13037",
@@ -1956,7 +2083,8 @@
    "fat": 0.27,
    "pieceG": 160.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "13005",
@@ -1970,7 +2098,8 @@
    "fat": 0.0,
    "pieceG": 120.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "13034",
@@ -1984,7 +2113,8 @@
    "fat": 0.0,
    "pieceG": 150.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "13009",
@@ -1999,7 +2129,8 @@
    "fat": 0.0,
    "pieceG": 120.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "13067",
@@ -2014,7 +2145,8 @@
    "fat": 0.0,
    "pieceG": 70.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "2007",
@@ -2029,7 +2161,8 @@
    "fat": 0.24,
    "pieceG": null,
    "density": 1.03,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boissons"
   },
   {
    "code": "2070",
@@ -2044,7 +2177,8 @@
    "fat": 0.11,
    "pieceG": null,
    "density": 1.04,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boissons"
   },
   {
    "code": "2074",
@@ -2058,7 +2192,8 @@
    "fat": 0.14,
    "pieceG": null,
    "density": 1.04,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boissons"
   },
   {
    "code": "13024",
@@ -2073,7 +2208,8 @@
    "fat": 0.0,
    "pieceG": 70.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "13040",
@@ -2087,7 +2223,8 @@
    "fat": 0.0,
    "pieceG": 250.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "13014",
@@ -2102,7 +2239,8 @@
    "fat": 0.0,
    "pieceG": 15.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "13015",
@@ -2116,7 +2254,8 @@
    "fat": 0.8,
    "pieceG": 4.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "13028",
@@ -2131,7 +2270,8 @@
    "fat": 0.33,
    "pieceG": null,
    "density": 0.6,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "13029",
@@ -2145,7 +2285,8 @@
    "fat": 0.7,
    "pieceG": 5.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "13007",
@@ -2159,7 +2300,8 @@
    "fat": 0.86,
    "pieceG": null,
    "density": 0.6,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "13019",
@@ -2173,7 +2315,8 @@
    "fat": 0.7,
    "pieceG": null,
    "density": 0.6,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "13008",
@@ -2187,7 +2330,8 @@
    "fat": 0.0,
    "pieceG": 7.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "13000",
@@ -2201,7 +2345,8 @@
    "fat": 0.0,
    "pieceG": 45.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "13193",
@@ -2215,7 +2360,8 @@
    "fat": 0.0,
    "pieceG": 150.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "13148",
@@ -2230,7 +2376,8 @@
    "fat": 0.0,
    "pieceG": 150.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "13041",
@@ -2246,7 +2393,8 @@
    "fat": 0.0,
    "pieceG": 35.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "13044",
@@ -2262,7 +2410,8 @@
    "fat": 0.0,
    "pieceG": 5.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "13046",
@@ -2278,7 +2427,8 @@
    "fat": 0.9,
    "pieceG": null,
    "density": 0.6,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "13002",
@@ -2292,7 +2442,8 @@
    "fat": 0.0,
    "pieceG": 900.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "13025",
@@ -2306,7 +2457,8 @@
    "fat": 0.0,
    "pieceG": 350.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "13021",
@@ -2320,7 +2472,8 @@
    "fat": 0.6,
    "pieceG": 75.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "13026",
@@ -2334,7 +2487,8 @@
    "fat": 0.0,
    "pieceG": 800.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "13036",
@@ -2348,7 +2502,8 @@
    "fat": 0.0,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "13016",
@@ -2363,7 +2518,8 @@
    "fat": 3.0,
    "pieceG": 35.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "13018",
@@ -2377,7 +2533,8 @@
    "fat": 1.2,
    "pieceG": 250.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "13012",
@@ -2391,7 +2548,8 @@
    "fat": 0.0,
    "pieceG": 50.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "13013",
@@ -2405,7 +2563,8 @@
    "fat": 0.87,
    "pieceG": 20.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "13011",
@@ -2419,7 +2578,8 @@
    "fat": 0.25,
    "pieceG": 8.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "13042",
@@ -2433,7 +2593,8 @@
    "fat": 0.4,
    "pieceG": 10.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "13001",
@@ -2447,7 +2608,8 @@
    "fat": 0.5,
    "pieceG": 8.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "13178",
@@ -2463,7 +2625,8 @@
    "fat": 1.0,
    "pieceG": null,
    "density": 0.6,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "13047",
@@ -2477,7 +2640,8 @@
    "fat": 0.23,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "13010",
@@ -2491,7 +2655,8 @@
    "fat": 0.1,
    "pieceG": 300.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "15006",
@@ -2505,7 +2670,8 @@
    "fat": 33.5,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "15007",
@@ -2522,7 +2688,8 @@
    "fat": 66.3,
    "pieceG": null,
    "density": 0.35,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "13004",
@@ -2536,7 +2703,8 @@
    "fat": 20.6,
    "pieceG": 200.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "13038",
@@ -2551,7 +2719,8 @@
    "fat": 0.21,
    "pieceG": null,
    "density": 1.05,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "13033",
@@ -2566,7 +2735,8 @@
    "fat": 15.7,
    "pieceG": 4.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "13131",
@@ -2580,7 +2750,8 @@
    "fat": 33.3,
    "pieceG": 4.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "4008",
@@ -2597,7 +2768,8 @@
    "fat": 0.18,
    "pieceG": 150.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "4101",
@@ -2611,7 +2783,8 @@
    "fat": 0.15,
    "pieceG": 250.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "20009",
@@ -2625,7 +2798,8 @@
    "fat": 0.0,
    "pieceG": 100.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "20034",
@@ -2641,7 +2815,8 @@
    "fat": 0.62,
    "pieceG": 100.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "20238",
@@ -2655,7 +2830,8 @@
    "fat": 0.4,
    "pieceG": 100.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "20097",
@@ -2669,7 +2845,8 @@
    "fat": 0.0,
    "pieceG": 25.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "11000",
@@ -2685,7 +2862,8 @@
    "fat": 0.0,
    "pieceG": 5.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "20039",
@@ -2699,7 +2877,8 @@
    "fat": 0.25,
    "pieceG": 150.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "20047",
@@ -2713,7 +2892,8 @@
    "fat": 0.26,
    "pieceG": 120.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "20172",
@@ -2727,7 +2907,8 @@
    "fat": 0.0,
    "pieceG": 15.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "20068",
@@ -2743,7 +2924,8 @@
    "fat": 0.53,
    "pieceG": null,
    "density": 1.1,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "20169",
@@ -2762,7 +2944,8 @@
    "fat": 0.0,
    "pieceG": null,
    "density": 1.0,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "20260",
@@ -2778,7 +2961,8 @@
    "fat": 0.2,
    "pieceG": null,
    "density": 1.0,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "11107",
@@ -2792,7 +2976,8 @@
    "fat": 4.18,
    "pieceG": null,
    "density": 1.0,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "20256",
@@ -2807,7 +2992,8 @@
    "fat": 11.7,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "20020",
@@ -2821,7 +3007,8 @@
    "fat": 0.26,
    "pieceG": 200.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "20053",
@@ -2835,7 +3022,8 @@
    "fat": 0.14,
    "pieceG": 300.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "20087",
@@ -2850,7 +3038,8 @@
    "fat": 0.0,
    "pieceG": 150.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "20085",
@@ -2864,7 +3053,8 @@
    "fat": 0.0,
    "pieceG": 150.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "20168",
@@ -2878,7 +3068,8 @@
    "fat": 0.3,
    "pieceG": 150.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "20210",
@@ -2892,7 +3083,8 @@
    "fat": 0.0,
    "pieceG": 300.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "20031",
@@ -2910,7 +3102,8 @@
    "fat": 0.2,
    "pieceG": 300.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "20099",
@@ -2924,7 +3117,8 @@
    "fat": 0.0,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "20217",
@@ -2938,7 +3132,8 @@
    "fat": 0.66,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "20026",
@@ -2953,7 +3148,8 @@
    "fat": 0.0,
    "pieceG": 120.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "20270",
@@ -2969,7 +3165,8 @@
    "fat": 0.4,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "20116",
@@ -2984,7 +3181,8 @@
    "fat": 0.6,
    "pieceG": 1000.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "20014",
@@ -2998,7 +3196,8 @@
    "fat": 0.0,
    "pieceG": 1000.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "20016",
@@ -3013,7 +3212,8 @@
    "fat": 0.7,
    "pieceG": 800.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "20057",
@@ -3027,7 +3227,8 @@
    "fat": 0.48,
    "pieceG": 400.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "20058",
@@ -3041,7 +3242,8 @@
    "fat": 0.4,
    "pieceG": 10.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "20218",
@@ -3058,7 +3260,8 @@
    "fat": 1.07,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "20055",
@@ -3073,7 +3276,8 @@
    "fat": 0.0,
    "pieceG": 600.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "20023",
@@ -3089,7 +3293,8 @@
    "fat": 0.0,
    "pieceG": 40.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "20028",
@@ -3103,7 +3308,8 @@
    "fat": 0.0,
    "pieceG": 250.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "20064",
@@ -3117,7 +3323,8 @@
    "fat": 0.1,
    "pieceG": 100.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "20045",
@@ -3131,7 +3338,8 @@
    "fat": 0.0,
    "pieceG": 8.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "20003",
@@ -3145,7 +3353,8 @@
    "fat": 0.4,
    "pieceG": 150.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "20070",
@@ -3159,7 +3368,8 @@
    "fat": 0.17,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "20072",
@@ -3174,7 +3384,8 @@
    "fat": 0.55,
    "pieceG": null,
    "density": 0.65,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "20066",
@@ -3190,7 +3401,8 @@
    "fat": 1.68,
    "pieceG": null,
    "density": 0.7,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "20056",
@@ -3206,7 +3418,8 @@
    "fat": 0.36,
    "pieceG": 20.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "20212",
@@ -3220,7 +3433,8 @@
    "fat": 0.22,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "20160",
@@ -3235,7 +3449,8 @@
    "fat": 0.43,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "20103",
@@ -3250,7 +3465,8 @@
    "fat": 0.78,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "20279",
@@ -3265,7 +3481,8 @@
    "fat": 0.27,
    "pieceG": 20.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "20052",
@@ -3280,7 +3497,8 @@
    "fat": 0.18,
    "pieceG": 300.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "20044",
@@ -3299,7 +3517,8 @@
    "fat": 0.1,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "20181",
@@ -3313,7 +3532,8 @@
    "fat": 0.4,
    "pieceG": 150.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "20196",
@@ -3327,7 +3547,8 @@
    "fat": 0.31,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "20183",
@@ -3342,7 +3563,8 @@
    "fat": 0.0,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "11074",
@@ -3357,7 +3579,8 @@
    "fat": 1.1,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "20151",
@@ -3373,7 +3596,8 @@
    "fat": 0.32,
    "pieceG": 10.0,
    "density": null,
-   "kind": "SEASONING"
+   "kind": "SEASONING",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "11097",
@@ -3387,7 +3611,8 @@
    "fat": 0.35,
    "pieceG": 10.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "11040",
@@ -3402,7 +3627,8 @@
    "fat": 0.86,
    "pieceG": null,
    "density": null,
-   "kind": "SEASONING"
+   "kind": "SEASONING",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "25220",
@@ -3416,7 +3642,8 @@
    "fat": 6.6,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Autres"
   },
   {
    "code": "20496",
@@ -3430,7 +3657,8 @@
    "fat": 0.7,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "20051",
@@ -3446,7 +3674,8 @@
    "fat": 0.28,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "25018",
@@ -3460,7 +3689,8 @@
    "fat": 3.15,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Autres"
   },
   {
    "code": "20585",
@@ -3476,7 +3706,8 @@
    "fat": 1.8,
    "pieceG": null,
    "density": 0.8,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "20535",
@@ -3490,7 +3721,8 @@
    "fat": 0.8,
    "pieceG": null,
    "density": 0.8,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "20532",
@@ -3505,7 +3737,8 @@
    "fat": 2.68,
    "pieceG": null,
    "density": 0.65,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "20524",
@@ -3519,7 +3752,8 @@
    "fat": 0.97,
    "pieceG": null,
    "density": 0.65,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "20511",
@@ -3535,7 +3769,8 @@
    "fat": 0.4,
    "pieceG": null,
    "density": 0.65,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "20508",
@@ -3549,7 +3784,8 @@
    "fat": 0.79,
    "pieceG": null,
    "density": 0.65,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "20515",
@@ -3564,7 +3800,8 @@
    "fat": 1.44,
    "pieceG": null,
    "density": 0.8,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "20541",
@@ -3578,7 +3815,8 @@
    "fat": 0.3,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "20904",
@@ -3592,7 +3830,8 @@
    "fat": 8.5,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "18900",
@@ -3607,7 +3846,8 @@
    "fat": 2.07,
    "pieceG": null,
    "density": 1.03,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boissons"
   },
   {
    "code": "18107",
@@ -3622,7 +3862,8 @@
    "fat": 3.2,
    "pieceG": null,
    "density": 1.03,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boissons"
   },
   {
    "code": "18905",
@@ -3637,7 +3878,8 @@
    "fat": 1.1,
    "pieceG": null,
    "density": 1.03,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boissons"
   },
   {
    "code": "15000",
@@ -3652,7 +3894,8 @@
    "fat": 51.3,
    "pieceG": 1.2,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "15041",
@@ -3674,7 +3917,8 @@
    "fat": 52.5,
    "pieceG": null,
    "density": 0.45,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "15004",
@@ -3690,7 +3934,8 @@
    "fat": 56.9,
    "pieceG": 1.5,
    "density": 0.45,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "15005",
@@ -3706,7 +3951,8 @@
    "fat": 67.3,
    "pieceG": 5.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "15054",
@@ -3721,7 +3967,8 @@
    "fat": 48.1,
    "pieceG": 1.5,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "15044",
@@ -3735,7 +3982,8 @@
    "fat": 47.4,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "15001",
@@ -3750,7 +3998,8 @@
    "fat": 49.1,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "15202",
@@ -3765,7 +4014,8 @@
    "fat": 52.5,
    "pieceG": null,
    "density": 1.1,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "15026",
@@ -3780,7 +4030,8 @@
    "fat": 72.6,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "15008",
@@ -3794,7 +4045,8 @@
    "fat": 66.1,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "15027",
@@ -3809,7 +4061,8 @@
    "fat": 75.8,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "15025",
@@ -3825,7 +4078,8 @@
    "fat": 65.0,
    "pieceG": null,
    "density": 0.6,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "15035",
@@ -3841,7 +4095,8 @@
    "fat": 56.1,
    "pieceG": null,
    "density": 0.6,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "15034",
@@ -3856,7 +4111,8 @@
    "fat": 36.6,
    "pieceG": null,
    "density": 0.65,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "15047",
@@ -3871,7 +4127,8 @@
    "fat": 30.7,
    "pieceG": null,
    "density": 0.65,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "15011",
@@ -3885,7 +4142,8 @@
    "fat": 55.5,
    "pieceG": null,
    "density": 0.55,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "15020",
@@ -3900,7 +4158,8 @@
    "fat": 1.38,
    "pieceG": 10.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "15203",
@@ -3916,7 +4175,8 @@
    "fat": 53.4,
    "pieceG": null,
    "density": 1.1,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "6254",
@@ -3934,7 +4194,8 @@
    "fat": 14.1,
    "pieceG": 100.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "6250",
@@ -3948,7 +4209,8 @@
    "fat": 4.59,
    "pieceG": 100.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "6103",
@@ -3967,7 +4229,8 @@
    "fat": 17.1,
    "pieceG": 200.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "6231",
@@ -3990,7 +4253,8 @@
    "fat": 7.5,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "6116",
@@ -4005,7 +4269,8 @@
    "fat": 4.95,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "6521",
@@ -4020,7 +4285,8 @@
    "fat": 2.6,
    "pieceG": 120.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "6550",
@@ -4037,7 +4303,8 @@
    "fat": 3.96,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "28204",
@@ -4053,7 +4320,8 @@
    "fat": 4.09,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "28100",
@@ -4069,7 +4337,8 @@
    "fat": 9.3,
    "pieceG": 180.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "28300",
@@ -4083,7 +4352,8 @@
    "fat": 6.86,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "28002",
@@ -4097,7 +4367,8 @@
    "fat": 20.5,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "28720",
@@ -4114,7 +4385,8 @@
    "fat": 22.6,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "28900",
@@ -4131,7 +4403,8 @@
    "fat": 4.28,
    "pieceG": 45.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "28800",
@@ -4149,7 +4422,8 @@
    "fat": 13.2,
    "pieceG": 15.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "28727",
@@ -4163,7 +4437,8 @@
    "fat": 2.6,
    "pieceG": 15.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "30110",
@@ -4178,7 +4453,8 @@
    "fat": 30.0,
    "pieceG": 110.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "30742",
@@ -4195,7 +4471,8 @@
    "fat": 25.9,
    "pieceG": 35.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "30315",
@@ -4209,7 +4486,8 @@
    "fat": 36.1,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "30150",
@@ -4223,7 +4501,8 @@
    "fat": 28.0,
    "pieceG": 60.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "30300",
@@ -4238,7 +4517,8 @@
    "fat": 34.5,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "16530",
@@ -4252,7 +4532,8 @@
    "fat": 88.7,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "30050",
@@ -4266,7 +4547,8 @@
    "fat": 29.1,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "21502",
@@ -4284,7 +4566,8 @@
    "fat": 5.13,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "21500",
@@ -4299,7 +4582,8 @@
    "fat": 34.5,
    "pieceG": 70.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "36017",
@@ -4318,7 +4602,8 @@
    "fat": 1.5,
    "pieceG": 130.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "36002",
@@ -4335,7 +4620,8 @@
    "fat": 13.5,
    "pieceG": 200.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "36016",
@@ -4350,7 +4636,8 @@
    "fat": 10.1,
    "pieceG": 1400.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "36304",
@@ -4366,7 +4653,8 @@
    "fat": 1.22,
    "pieceG": 130.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "36206",
@@ -4381,7 +4669,8 @@
    "fat": 29.4,
    "pieceG": 350.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "36203",
@@ -4397,7 +4686,8 @@
    "fat": 3.1,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "34001",
@@ -4411,7 +4701,8 @@
    "fat": 11.6,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "8328",
@@ -4425,7 +4716,8 @@
    "fat": 63.4,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "40108",
@@ -4440,7 +4732,8 @@
    "fat": 4.88,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "40700",
@@ -4454,7 +4747,8 @@
    "fat": 3.75,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "26036",
@@ -4470,7 +4764,8 @@
    "fat": 12.4,
    "pieceG": 150.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "26037",
@@ -4484,7 +4779,8 @@
    "fat": 9.49,
    "pieceG": 20.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "26064",
@@ -4499,7 +4795,8 @@
    "fat": 0.94,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "26039",
@@ -4516,7 +4813,8 @@
    "fat": 0.4,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "26180",
@@ -4530,7 +4828,8 @@
    "fat": 12.2,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "26043",
@@ -4547,7 +4846,8 @@
    "fat": 0.57,
    "pieceG": 150.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "26129",
@@ -4565,7 +4865,8 @@
    "fat": 0.51,
    "pieceG": 150.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "26058",
@@ -4579,7 +4880,8 @@
    "fat": 0.6,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "26109",
@@ -4594,7 +4896,8 @@
    "fat": 2.0,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "26001",
@@ -4609,7 +4912,8 @@
    "fat": 3.58,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "26092",
@@ -4623,7 +4927,8 @@
    "fat": 3.63,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "26051",
@@ -4637,7 +4942,8 @@
    "fat": 13.5,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "26065",
@@ -4651,7 +4957,8 @@
    "fat": 9.48,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "26034",
@@ -4666,7 +4973,8 @@
    "fat": 12.0,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "26000",
@@ -4680,7 +4988,8 @@
    "fat": 8.45,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "26090",
@@ -4694,7 +5003,8 @@
    "fat": 0.73,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "10007",
@@ -4711,7 +5021,8 @@
    "fat": 1.16,
    "pieceG": 10.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "10014",
@@ -4725,7 +5036,8 @@
    "fat": 1.82,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "10045",
@@ -4742,7 +5054,8 @@
    "fat": 0.84,
    "pieceG": 25.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "10001",
@@ -4759,7 +5072,8 @@
    "fat": 1.19,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "26046",
@@ -4774,7 +5088,8 @@
    "fat": 4.92,
    "pieceG": 15.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "10005",
@@ -4789,7 +5104,8 @@
    "fat": 1.8,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "10018",
@@ -4803,7 +5119,8 @@
    "fat": 0.5,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "11013",
@@ -4819,7 +5136,8 @@
    "fat": 11.2,
    "pieceG": null,
    "density": 1.05,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "11054",
@@ -4834,7 +5152,8 @@
    "fat": 75.2,
    "pieceG": null,
    "density": 0.95,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "11008",
@@ -4848,7 +5167,8 @@
    "fat": 0.19,
    "pieceG": null,
    "density": 1.1,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "11104",
@@ -4865,7 +5185,8 @@
    "fat": 0.1,
    "pieceG": null,
    "density": 1.1,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "11194",
@@ -4881,7 +5202,8 @@
    "fat": 0.0,
    "pieceG": null,
    "density": 1.2,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "11018",
@@ -4899,7 +5221,8 @@
    "fat": 0.1,
    "pieceG": null,
    "density": 1.0,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "11091",
@@ -4914,7 +5237,8 @@
    "fat": 0.0,
    "pieceG": null,
    "density": 1.05,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "11110",
@@ -4928,7 +5252,8 @@
    "fat": 52.4,
    "pieceG": null,
    "density": 0.95,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "11179",
@@ -4942,7 +5267,8 @@
    "fat": 35.4,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "11143",
@@ -4957,7 +5283,8 @@
    "fat": 10.6,
    "pieceG": null,
    "density": 1.0,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "11100",
@@ -4972,7 +5299,8 @@
    "fat": 0.6,
    "pieceG": null,
    "density": 1.1,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "X1",
@@ -4987,7 +5315,8 @@
    "fat": 0.0,
    "pieceG": null,
    "density": 1.0,
-   "kind": "SEASONING"
+   "kind": "SEASONING",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "11112",
@@ -5001,7 +5330,8 @@
    "fat": 2.9,
    "pieceG": null,
    "density": 1.0,
-   "kind": "SEASONING"
+   "kind": "SEASONING",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "X2",
@@ -5016,7 +5346,8 @@
    "fat": 0.0,
    "pieceG": null,
    "density": 1.1,
-   "kind": "SEASONING"
+   "kind": "SEASONING",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "11174",
@@ -5038,7 +5369,8 @@
    "fat": 11.5,
    "pieceG": 10.0,
    "density": null,
-   "kind": "SEASONING"
+   "kind": "SEASONING",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "11017",
@@ -5056,7 +5388,8 @@
    "fat": 0.0,
    "pieceG": null,
    "density": 1.2,
-   "kind": "SEASONING"
+   "kind": "SEASONING",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "11015",
@@ -5073,7 +5406,8 @@
    "fat": 7.5,
    "pieceG": null,
    "density": 0.5,
-   "kind": "SEASONING"
+   "kind": "SEASONING",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "11025",
@@ -5087,7 +5421,8 @@
    "fat": 1.22,
    "pieceG": null,
    "density": 0.5,
-   "kind": "SEASONING"
+   "kind": "SEASONING",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "11057",
@@ -5104,7 +5439,8 @@
    "fat": 0.0,
    "pieceG": null,
    "density": null,
-   "kind": "SEASONING"
+   "kind": "SEASONING",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "11048",
@@ -5119,7 +5455,8 @@
    "fat": 36.3,
    "pieceG": null,
    "density": 0.5,
-   "kind": "SEASONING"
+   "kind": "SEASONING",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "11042",
@@ -5133,7 +5470,8 @@
    "fat": 22.3,
    "pieceG": null,
    "density": 0.5,
-   "kind": "SEASONING"
+   "kind": "SEASONING",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "11005",
@@ -5149,7 +5487,8 @@
    "fat": 14.0,
    "pieceG": null,
    "density": 0.5,
-   "kind": "SEASONING"
+   "kind": "SEASONING",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "11049",
@@ -5166,7 +5505,8 @@
    "fat": 12.9,
    "pieceG": null,
    "density": 0.5,
-   "kind": "SEASONING"
+   "kind": "SEASONING",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "11006",
@@ -5181,7 +5521,8 @@
    "fat": 4.24,
    "pieceG": null,
    "density": 0.5,
-   "kind": "SEASONING"
+   "kind": "SEASONING",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "11052",
@@ -5196,7 +5537,8 @@
    "fat": 13.0,
    "pieceG": null,
    "density": 0.5,
-   "kind": "SEASONING"
+   "kind": "SEASONING",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "11060",
@@ -5219,7 +5561,8 @@
    "fat": 7.2,
    "pieceG": null,
    "density": 0.3,
-   "kind": "SEASONING"
+   "kind": "SEASONING",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "11014",
@@ -5235,7 +5578,8 @@
    "fat": 0.63,
    "pieceG": null,
    "density": 0.3,
-   "kind": "SEASONING"
+   "kind": "SEASONING",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "11033",
@@ -5249,7 +5593,8 @@
    "fat": 0.47,
    "pieceG": null,
    "density": 0.3,
-   "kind": "SEASONING"
+   "kind": "SEASONING",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "11003",
@@ -5263,7 +5608,8 @@
    "fat": 0.52,
    "pieceG": null,
    "density": 0.3,
-   "kind": "SEASONING"
+   "kind": "SEASONING",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "11094",
@@ -5277,7 +5623,8 @@
    "fat": 0.52,
    "pieceG": null,
    "density": 0.3,
-   "kind": "SEASONING"
+   "kind": "SEASONING",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "11027",
@@ -5291,7 +5638,8 @@
    "fat": 0.84,
    "pieceG": null,
    "density": 0.3,
-   "kind": "SEASONING"
+   "kind": "SEASONING",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "11093",
@@ -5305,7 +5653,8 @@
    "fat": 1.1,
    "pieceG": null,
    "density": 0.3,
-   "kind": "SEASONING"
+   "kind": "SEASONING",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "11092",
@@ -5320,7 +5669,8 @@
    "fat": 0.0,
    "pieceG": null,
    "density": 0.3,
-   "kind": "SEASONING"
+   "kind": "SEASONING",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "11039",
@@ -5334,7 +5684,8 @@
    "fat": 5.85,
    "pieceG": null,
    "density": null,
-   "kind": "SEASONING"
+   "kind": "SEASONING",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "X3",
@@ -5350,7 +5701,8 @@
    "fat": 0.0,
    "pieceG": null,
    "density": null,
-   "kind": "SEASONING"
+   "kind": "SEASONING",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "11056",
@@ -5369,7 +5721,8 @@
    "fat": 8.69,
    "pieceG": null,
    "density": 0.5,
-   "kind": "SEASONING"
+   "kind": "SEASONING",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "X4",
@@ -5384,7 +5737,8 @@
    "fat": 0.0,
    "pieceG": null,
    "density": 1.0,
-   "kind": "SEASONING"
+   "kind": "SEASONING",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "18066",
@@ -5403,7 +5757,8 @@
    "fat": 0.0,
    "pieceG": null,
    "density": 1.0,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boissons"
   },
   {
    "code": "5215",
@@ -5417,7 +5772,8 @@
    "fat": 0.0,
    "pieceG": null,
    "density": 0.99,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boissons"
   },
   {
    "code": "5214",
@@ -5432,7 +5788,8 @@
    "fat": 0.0,
    "pieceG": null,
    "density": 0.99,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boissons"
   },
   {
    "code": "5009",
@@ -5446,7 +5803,8 @@
    "fat": 0.0,
    "pieceG": null,
    "density": 1.0,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boissons"
   },
   {
    "code": "5007",
@@ -5460,7 +5818,8 @@
    "fat": 0.0,
    "pieceG": null,
    "density": 1.0,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boissons"
   },
   {
    "code": "1004",
@@ -5474,7 +5833,8 @@
    "fat": 0.0,
    "pieceG": null,
    "density": 0.95,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boissons"
   },
   {
    "code": "1023",
@@ -5492,7 +5852,8 @@
    "fat": 0.0,
    "pieceG": null,
    "density": 0.95,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boissons"
   },
   {
    "code": "1007",
@@ -5508,7 +5869,8 @@
    "fat": 0.0,
    "pieceG": null,
    "density": 1.0,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boissons"
   },
   {
    "code": "1003",
@@ -5526,7 +5888,8 @@
    "fat": 0.3,
    "pieceG": null,
    "density": 1.05,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boissons"
   },
   {
    "code": "18073",
@@ -5544,7 +5907,8 @@
    "fat": 0.0,
    "pieceG": null,
    "density": 1.0,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boissons"
   },
   {
    "code": "X5",
@@ -5561,7 +5925,8 @@
    "fat": 0.0,
    "pieceG": null,
    "density": 1.0,
-   "kind": "SEASONING"
+   "kind": "SEASONING",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "18018",
@@ -5577,7 +5942,8 @@
    "fat": 0.06,
    "pieceG": null,
    "density": 1.04,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boissons"
   },
   {
    "code": "18017",
@@ -5594,7 +5960,8 @@
    "fat": 0.0,
    "pieceG": null,
    "density": 1.3,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boissons"
   },
   {
    "code": "4047",
@@ -5609,7 +5976,8 @@
    "fat": 3.25,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "4032",
@@ -5624,7 +5992,8 @@
    "fat": 11.9,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Fruits et légumes"
   },
   {
    "code": "8937",
@@ -5638,7 +6007,8 @@
    "fat": 13.7,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Boucherie et poisson"
   },
   {
    "code": "25571",
@@ -5652,7 +6022,8 @@
    "fat": 14.4,
    "pieceG": 25.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Autres"
   },
   {
    "code": "25621",
@@ -5667,7 +6038,8 @@
    "fat": 23.9,
    "pieceG": null,
    "density": 1.0,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "25620",
@@ -5681,7 +6053,8 @@
    "fat": 16.5,
    "pieceG": null,
    "density": 1.0,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "11043",
@@ -5695,7 +6068,8 @@
    "fat": 23.0,
    "pieceG": null,
    "density": 1.0,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "39515",
@@ -5711,7 +6085,8 @@
    "fat": 8.4,
    "pieceG": null,
    "density": 0.55,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Surgelés"
   },
   {
    "code": "39528",
@@ -5725,7 +6100,8 @@
    "fat": 6.74,
    "pieceG": null,
    "density": 0.6,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Surgelés"
   },
   {
    "code": "39246",
@@ -5739,7 +6115,8 @@
    "fat": 3.69,
    "pieceG": null,
    "density": 1.05,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Crèmerie"
   },
   {
    "code": "39700",
@@ -5753,7 +6130,8 @@
    "fat": 2.5,
    "pieceG": null,
    "density": 1.05,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie salée"
   },
   {
    "code": "39710",
@@ -5767,7 +6145,8 @@
    "fat": 3.6,
    "pieceG": null,
    "density": 1.05,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Crèmerie"
   },
   {
    "code": "23200",
@@ -5782,7 +6161,8 @@
    "fat": 1.1,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "24520",
@@ -5796,7 +6176,8 @@
    "fat": 0.0,
    "pieceG": 5.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "31050",
@@ -5812,7 +6193,8 @@
    "fat": 1.42,
    "pieceG": 5.0,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "24685",
@@ -5826,7 +6208,8 @@
    "fat": 5.0,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "31027",
@@ -5843,7 +6226,8 @@
    "fat": 0.0,
    "pieceG": null,
    "density": null,
-   "kind": "NORMAL"
+   "kind": "NORMAL",
+   "aisle": "Épicerie sucrée"
   },
   {
    "code": "31021",
@@ -5860,7 +6244,26 @@
    "fat": 0.2,
    "pieceG": null,
    "density": null,
-   "kind": "SEASONING"
+   "kind": "SEASONING",
+   "aisle": "Épicerie sucrée"
+  },
+  {
+   "code": "19530",
+   "name": "Spécialité fromagère non affinée à tartiner environ 30-40 % MG aromatisée (ex: ail et fines herbes)",
+   "aliases": [
+    "boursin",
+    "fromage ail et fines herbes",
+    "fromage frais ail et fines herbes",
+    "fromage a tartiner ail et fines herbes"
+   ],
+   "kcal": 366.0,
+   "protein": 7.66,
+   "carbs": 4.24,
+   "fat": 35.3,
+   "pieceG": null,
+   "density": null,
+   "kind": "NORMAL",
+   "aisle": "Crèmerie"
   }
  ]
 }

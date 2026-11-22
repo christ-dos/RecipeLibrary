@@ -19,9 +19,35 @@ SELECTION = Path(__file__).resolve().parent / "selection.csv"
 OUTPUT = ROOT / "app" / "src" / "main" / "assets" / "nutrition" / "foods.json"
 SOURCE = "Anses, table de composition nutritionnelle des aliments Ciqual 2020"
 KINDS = {"NORMAL", "SEASONING", "FRYING"}
+AISLES = ["Fruits et légumes", "Crèmerie", "Boucherie et poisson", "Épicerie salée",
+          "Épicerie sucrée", "Surgelés", "Boissons", "Autres"]
+# Rayon par sous-groupe Ciqual (prioritaire), puis par groupe ; « Autres » sinon.
+AISLE_BY_SUBGROUP = {
+    "légumineuses": "Épicerie salée",
+    "fruits à coque et graines oléagineuses": "Épicerie sucrée",
+    "beurres": "Crèmerie",
+    "margarines": "Crèmerie",
+    "huiles et graisses végétales": "Épicerie salée",
+    "autres matières grasses": "Épicerie salée",
+    "œufs": "Crèmerie",
+    "plats composés": "Autres",
+}
+AISLE_BY_GROUP = {
+    "fruits, légumes, légumineuses et oléagineux": "Fruits et légumes",
+    "produits laitiers et assimilés": "Crèmerie",
+    "viandes, œufs, poissons et assimilés": "Boucherie et poisson",
+    "produits céréaliers": "Épicerie salée",
+    "aides culinaires et ingrédients divers": "Épicerie salée",
+    "matières grasses": "Épicerie salée",
+    "produits sucrés": "Épicerie sucrée",
+    "eaux et autres boissons": "Boissons",
+    "glaces et sorbets": "Surgelés",
+}
 
 COL_CODE = "alim_code"
 COL_NAME = "alim_nom_fr"
+COL_GROUP = "alim_grp_nom_fr"
+COL_SUBGROUP = "alim_ssgrp_nom_fr"
 COL_KCAL = "(kcal/100 g)"  # « Energie, Règlement UE N° 1169/2011 (kcal/100 g) » en priorité
 COL_PROT = "Protéines, N x facteur de Jones (g/100 g)"
 COL_CARB = "Glucides (g/100 g)"
@@ -57,6 +83,15 @@ def number(raw) -> float | None:
     return float(s)
 
 
+def aisle_for(forced: str, group: str, subgroup: str) -> str:
+    """Rayon : colonne « aisle » de selection.csv si remplie, sinon déduit du sous-groupe puis du groupe Ciqual."""
+    if forced:
+        if forced not in AISLES:
+            raise SystemExit(f"Rayon inconnu : {forced} (attendu : {', '.join(AISLES)})")
+        return forced
+    return AISLE_BY_SUBGROUP.get(subgroup.strip()) or AISLE_BY_GROUP.get(group.strip()) or "Autres"
+
+
 def find_col(header, needle, exact=False):
     for i, h in enumerate(header):
         if (h == needle) if exact else (needle in h):
@@ -69,6 +104,8 @@ def main(xls_path: str) -> None:
     header = [str(h) for h in sheet.row_values(0)]
     c_code = find_col(header, COL_CODE, exact=True)
     c_name = find_col(header, COL_NAME, exact=True)
+    c_group = find_col(header, COL_GROUP, exact=True)
+    c_subgroup = find_col(header, COL_SUBGROUP, exact=True)
     kcal_cols = [i for i, h in enumerate(header) if h.endswith(COL_KCAL)]  # 1169/2011 d'abord, puis Jones
     c_prot, c_carb, c_fat, c_fibre, c_alc = (find_col(header, n) for n in (COL_PROT, COL_CARB, COL_FAT, COL_FIBRE, COL_ALCOHOL))
 
@@ -91,13 +128,15 @@ def main(xls_path: str) -> None:
                 seen_alias[key] = code
             piece = float(line["pieceG"]) if line["pieceG"].strip() else None
             density = float(line["density"]) if line["density"].strip() else None
+            forced_aisle = (line.get("aisle") or "").strip()
             if code == "-":
                 if kind != "SEASONING":
                     raise SystemExit(f"Aliment sans code Ciqual autorisé seulement pour SEASONING : {aliases[0]}")
                 synthetic += 1
                 foods.append({"code": f"X{synthetic}", "name": aliases[0].capitalize(), "aliases": aliases,
                               "kcal": 0.0, "protein": 0.0, "carbs": 0.0, "fat": 0.0,
-                              "pieceG": piece, "density": density, "kind": kind})
+                              "pieceG": piece, "density": density, "kind": kind,
+                              "aisle": aisle_for(forced_aisle, "", "")})
                 continue
             if code not in rows:
                 raise SystemExit(f"Code Ciqual introuvable : {code}")
@@ -114,7 +153,8 @@ def main(xls_path: str) -> None:
                 warnings.append(f"{code} {v[c_name]} : énergie calculée = {kcal}")
             foods.append({"code": code, "name": str(v[c_name]).strip(), "aliases": aliases,
                           "kcal": round(kcal, 1), "protein": round(prot, 2), "carbs": round(carb, 2),
-                          "fat": round(fat, 2), "pieceG": piece, "density": density, "kind": kind})
+                          "fat": round(fat, 2), "pieceG": piece, "density": density, "kind": kind,
+                          "aisle": aisle_for(forced_aisle, str(v[c_group]), str(v[c_subgroup]))})
 
     codes = [f["code"] for f in foods]
     if len(codes) != len(set(codes)):

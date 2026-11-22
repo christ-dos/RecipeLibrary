@@ -107,6 +107,28 @@ Dans le formulaire d'ajout ou de modification, l'utilisatrice peut indiquer le n
 
 ---
 
+### User Story 6 - Aliment de remplacement (Priority: P2)
+
+*(Ajout du 2026-11-21, tâche T046, décidé par l'utilisatrice. Numérotée 6 : le numéro 5 est déjà pris par le nombre de parts.)*
+
+Dans le détail des calories, un ingrédient « aliment non reconnu » (ex. « 150 g de skyr ») propose « Choisir l'aliment ». L'utilisatrice cherche un aliment de la table de référence (ex. « fromage blanc 0 % ») et le choisit. Ce choix est retenu **pour toutes ses recettes**, existantes et futures : partout où le même texte apparaît, l'ingrédient est compté avec l'aliment choisi. Les choix sont consultables et annulables dans un écran « Aliments de remplacement ». La liste de courses (spec 002) s'en sert aussi pour regrouper les ingrédients.
+
+**Why this priority**: Un aliment absent de la table rend la ligne non comptée dans toutes les recettes où il apparaît ; un seul choix les corrige toutes, sans toucher aux recettes.
+
+**Independent Test**: Deux recettes contiennent « skyr » (non reconnu) ; dans le détail de l'une, choisir « fromage blanc » pour « skyr » ; les deux recettes comptent désormais le skyr comme du fromage blanc, la liste de courses regroupe skyr et fromage blanc, et annuler le choix ramène l'état d'avant.
+
+**Acceptance Scenarios**:
+
+1. **Given** une ligne « aliment non reconnu » dans le détail, **When** l'utilisatrice touche « Choisir l'aliment », **Then** une fenêtre propose le texte à reconnaître (prérempli avec le texte de l'aliment, ex. « skyr nature ») et une recherche parmi les aliments de la table.
+2. **Given** la fenêtre ouverte, **When** elle saisit « fromage » puis touche « Fromage blanc… », **Then** le choix est enregistré, la fenêtre se ferme, la ligne passe dans « Comptés » avec le poids lu comme avant, l'aliment choisi et la mention « Aliment de remplacement pour « skyr nature » », et le total se met à jour.
+3. **Given** un choix fait depuis une recette, **When** elle ouvre une autre recette (existante ou importée plus tard) contenant le même texte, **Then** l'ingrédient y est compté avec le même aliment, sans nouvelle saisie.
+4. **Given** le texte prérempli « skyr nature », **When** elle le raccourcit en « skyr », **Then** le choix vaut pour toute ligne contenant le mot « skyr » (« 200 g de skyr », « 1 pot de skyr à la vanille »).
+5. **Given** un texte à reconnaître qui ne figure pas dans la ligne (ex. « yaourt » pour « 150 g de skyr »), **When** elle touche un aliment, **Then** rien n'est enregistré et un message indique que le texte doit figurer dans l'ingrédient.
+6. **Given** des choix enregistrés, **When** elle ouvre « Aliments de remplacement » (depuis le détail des calories), **Then** elle voit chaque texte et l'aliment choisi, et « Annuler » supprime le choix : les lignes concernées redeviennent « aliment non reconnu » partout, aucune recette n'étant modifiée.
+7. **Given** un choix « skyr → fromage blanc », **When** le menu contient une recette avec « 200 g de skyr » et une autre avec « 100 g de fromage blanc », **Then** la liste de courses montre un seul article « fromage blanc » de 300 g.
+
+---
+
 ### Edge Cases
 
 - Quantité en fourchette (« 2 à 3 pommes », « 100-150 g ») : on retient la moyenne.
@@ -118,6 +140,15 @@ Dans le formulaire d'ajout ou de modification, l'utilisatrice peut indiquer le n
 - Huile de friture : comptée mais signalée comme approximative (la quantité absorbée n'est pas connue).
 - Ingrédient mentionné deux fois : compté deux fois, comme écrit.
 - Trop de lignes non comptées, parts estimées très élevées ou valeur aberrante : avertissements définis par FR-013 et FR-017.
+- Aliment de remplacement (story 6) :
+  - Un aliment reconnu par la table n'est jamais remplacé : le choix ne s'applique qu'aux lignes sans aliment reconnu.
+  - Plusieurs choix s'appliquent à une ligne (« skyr » et « skyr vanille ») : le texte le plus long l'emporte (même règle que les variantes de nom de la table).
+  - Le texte retenu se compare mot à mot, après normalisation (minuscules, accents et pluriels retirés) : « Skyrs » = « skyr », mais « skyrella » ne contient pas « skyr ».
+  - Le texte de l'unité n'est jamais pris pour l'aliment (« 2 c. à soupe » ne peut pas être retenu comme « soupe »).
+  - Refaire un choix pour le même texte remplace l'ancien.
+  - Aliment choisi devenu absent de la table (mise à jour de `foods.json`) : le choix est ignoré, la ligne redevient « non reconnu » ; l'écran le signale « aliment introuvable » et permet de l'annuler.
+  - Choix d'un assaisonnement (sel, épices) : la ligne est ignorée comme un assaisonnement.
+  - Quantités : la lecture de la quantité et de l'unité ne change pas ; seul l'aliment change. Les conversions qui dépendent de l'aliment (masse volumique pour un volume, poids d'une pièce) utilisent l'aliment choisi. Un poids corrigé à la main reste prioritaire.
 
 ## Requirements *(mandatory)*
 
@@ -145,11 +176,18 @@ Dans le formulaire d'ajout ou de modification, l'utilisatrice peut indiquer le n
 - **FR-020**: Le PC MUST renvoyer, pour ces ingrédients, un poids estimé (et un nombre de parts si la recette le permet) ; seuls ces ingrédients sont mis à jour, jamais une quantité écrite, une correction à la main, ni le texte de la recette.
 - **FR-021**: Un ingrédient déjà estimé MUST ne pas être renvoyé tant que son texte ne change pas.
 - **FR-022**: Le rattrapage MUST être retenté plus tard en cas d'échec, sans message bloquant, et sa progression MUST être visible tant qu'il est en cours.
+- **FR-023** (story 6): Le détail des calories MUST proposer « Choisir l'aliment » sur chaque ligne « aliment non reconnu », avec une recherche parmi les aliments de la table embarquée (`foods.json`), insensible à la casse et aux accents, chaque mot saisi devant commencer un mot du nom ou d'une variante.
+- **FR-024** (story 6): Le choix MUST être enregistré comme une équivalence « texte normalisé → code Ciqual », le texte étant normalisé par les règles communes (`Normalize`) ; il est prérempli avec le texte de l'aliment de la ligne et peut être raccourci, à condition de s'appliquer encore à cette ligne.
+- **FR-025** (story 6): Une équivalence MUST s'appliquer à toutes les recettes, existantes et futures, à toute ligne dont l'aliment n'est pas reconnu par la table et dont le texte contient le texte retenu en mots entiers ; aucune recette n'est modifiée.
+- **FR-026** (story 6): La lecture de la quantité et de l'unité MUST rester inchangée ; seul l'aliment est remplacé. Le détail MUST signaler une ligne comptée grâce à une équivalence.
+- **FR-027** (story 6): Un écran « Aliments de remplacement », accessible depuis le détail des calories, MUST lister les équivalences (texte, aliment) et permettre d'annuler chacune ; l'annulation prend effet partout immédiatement.
+- **FR-028** (story 6, révisé le 2026-11-22 par l'utilisatrice) : dans la liste de courses (spec 002), une ligne remplacée MUST garder le nom écrit dans la recette (« skyr »), y compris pour Chronodrive ; les lignes de même texte sont additionnées entre elles, sans être fusionnées avec l'aliment choisi ; seul le rayon vient de l'aliment choisi.
 
 ### Key Entities
 
 - **Recette** : gagne un nombre de parts (facultatif) et, par ingrédient, un poids estimé à l'import et un poids corrigé à la main (tous deux facultatifs).
 - **Aliment de référence** : nom, variantes de nom, kcal, protéines, glucides et lipides pour 100 g, poids moyen d'une pièce (facultatif), masse volumique (facultative). Données en lecture seule fournies avec l'application.
+- **Aliment de remplacement** (story 6) : texte d'ingrédient normalisé → code d'un aliment de référence, choisi par l'utilisatrice ; vaut pour toutes les recettes ; annulable.
 - **Estimation** : calculée à l'affichage, jamais saisie : total, valeur par part (kcal, protéines, glucides, lipides), ingrédients comptés (poids, provenance, kcal), ingrédients non comptés (raison), avertissements.
 
 ## Success Criteria *(mandatory)*

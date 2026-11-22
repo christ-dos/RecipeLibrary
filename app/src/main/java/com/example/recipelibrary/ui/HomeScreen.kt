@@ -45,6 +45,8 @@ fun HomeScreen(
     onNavigateToEdit: (String) -> Unit,
     onDeleteRecipe: (String) -> Unit,
     modifier: Modifier = Modifier,
+    /** Nombre d'entrées du menu qui visent la recette (avertissement avant suppression, FR-005). */
+    menuCountOf: (String) -> Int = { 0 },
 ) {
     var query by remember { mutableStateOf("") }
     var selectedCategory by remember { mutableStateOf("Toutes") }
@@ -70,7 +72,11 @@ fun HomeScreen(
             onDismissRequest = { recipeToDelete = null },
             title = { Text("Supprimer cette recette ?") },
             text = {
-                Text("\"${recipe.title.normTitle()}\" sera définitivement supprimée.")
+                val n = menuCountOf(recipe.id)
+                Text(
+                    "\"${recipe.title.normTitle()}\" sera définitivement supprimée." +
+                        if (n > 0) " Elle est au menu ($n fois) et en sera retirée." else ""
+                )
             },
             confirmButton = {
                 TextButton(onClick = {

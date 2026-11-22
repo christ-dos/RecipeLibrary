@@ -22,8 +22,29 @@ data class ParsedIngredient(
     val food: Food?,
     /** Poids lu dans le texte, en grammes. */
     val grams: Double?,
-    val issue: IngredientIssue?
+    val issue: IngredientIssue?,
+    /** Quantité additionnable pour la liste de courses (g, ml, pièces, sachets) ; null si vague ou absente. */
+    val amount: Amount? = null,
+    /** Quantité vague telle qu'écrite (« 1 boîte », « 2 brins ») ; null si `amount` est rempli ou sans quantité. */
+    val looseQuantity: LooseQuantity? = null,
+    /**
+     * Texte normalisé de l'aliment de remplacement appliqué (story 6) : la table ne reconnaissait
+     * rien et l'utilisatrice a choisi [food] pour ce texte ; null sinon.
+     */
+    val substitutionKey: String? = null
 )
+
+/** Nature d'une quantité additionnable. */
+enum class AmountKind { MASS, VOLUME, PIECE, SACHET }
+
+/** Quantité additionnable : `value` en g (MASS), ml (VOLUME), pièces ou sachets. */
+data class Amount(val kind: AmountKind, val value: Double)
+
+/**
+ * Quantité vague gardée telle qu'écrite : nombre et unité (« boite », « botte »…, sans accent).
+ * Deux quantités de même unité s'additionnent (« 1 boîte » + « 1 boîte » → « 2 boîtes »).
+ */
+data class LooseQuantity(val count: Double, val unit: String)
 
 /**
  * Lecture des quantités par règles fixes (R2) : quantité, unité, aliment, conversion en grammes.
@@ -75,7 +96,12 @@ class IngredientParser(private val table: FoodTable) {
         }
         rest = rest.replace(LEADING_DE, "").trim()
 
-        val food = table.match(rest) ?: table.match(s)
+        // Sans aliment dans le reste, relire la ligne, mais jamais le texte de l'unité (« c. à café » n'est pas du café).
+        val direct = table.match(rest) ?: if (unit == null) table.match(s) else null
+        // Aliment de remplacement choisi par l'utilisatrice : seulement si la table ne reconnaît rien.
+        val substitution = if (direct != null) null
+            else table.matchSubstitution(rest) ?: if (unit == null) table.matchSubstitution(s) else null
+        val food = direct ?: substitution?.second
         val vagueWords = VAGUE_WORDS.containsMatchIn(s)
 
         var grams: Double? = null
@@ -105,7 +131,29 @@ class IngredientParser(private val table: FoodTable) {
         }
         if (food == null) issue = IngredientIssue.UNKNOWN_FOOD
         val unitLabel = unit?.label ?: if (q != null && q > 0) "piece" else null
-        return ParsedIngredient(line, quantity, unitLabel, rest, food, grams, issue)
+        val (amount, loose) = shoppingAmount(q, unit, rest, parenGrams, vagueWords)
+        return ParsedIngredient(line, quantity, unitLabel, rest, food, grams, issue, amount, loose, substitution?.first)
+    }
+
+    /**
+     * Quantité pour la liste de courses (spec 002) : ce qu'on achète, sans conversion en grammes
+     * d'un volume ou d'une pièce. Un contenant avec un poids écrit (« 1 boîte de 400 g ») devient une masse.
+     */
+    private fun shoppingAmount(
+        q: Double?, unit: UnitDef?, rest: String, parenGrams: Double?, vagueWords: Boolean
+    ): Pair<Amount?, LooseQuantity?> {
+        if (q == null || q <= 0) return null to null
+        val inner = innerGrams(rest)
+        return when {
+            unit?.kind == Kind.MASS -> Amount(AmountKind.MASS, q * unit.factor) to null
+            unit?.kind == Kind.VOLUME -> Amount(AmountKind.VOLUME, q * unit.factor) to null
+            inner != null -> Amount(AmountKind.MASS, q * inner) to null
+            parenGrams != null -> Amount(AmountKind.MASS, parenGrams) to null
+            unit?.kind == Kind.SACHET -> Amount(AmountKind.SACHET, q) to null
+            unit == null && vagueWords -> null to null
+            unit == null || unit.label == "piece" -> Amount(AmountKind.PIECE, q) to null
+            else -> null to LooseQuantity(q, unit.label) // gousse, pot, boîte, botte, pincée…
+        }
     }
 
     /** « 200 g », « 25 cl »… → grammes (eau : 1 g/ml) ; sinon null. */

@@ -16,7 +16,7 @@ Abréviations de chemins :
 ## Format: `[ID] [P?] [Story] Description`
 
 - **[P]** : peut être fait en parallèle (fichiers différents, pas de dépendance sur une tâche en cours)
-- **[Story]** : user story concernée (US1 à US5)
+- **[Story]** : user story concernée (US1 à US6)
 
 ---
 
@@ -145,6 +145,15 @@ Abréviations de chemins :
 - [ ] T043 Mesurer SC-002 et SC-003 sur une copie de la sauvegarde des recettes (jamais sur la base du téléphone) avec un test JVM ou un script dans `tools/ciqual/measure_coverage.py` : pourcentage de lignes comptées avant et après rattrapage ; compléter `selection.csv` si besoin et regénérer `foods.json`
 - [ ] T044 Exécuter `quickstart.md` en entier : tests unitaires, tests Hermes, sauvegarde vérifiée (non vide) de `url_import.xml`, `adb install -r` des deux APK, `am instrument`, restauration des réglages, vérification manuelle §4
 - [ ] T045 Lancer `/verifie-tests` et rendre compte à l'utilisatrice ; ne rien committer sans sa demande
+- [X] T046 (Ajout du 2026-11-21, décidé par l'utilisatrice) Aliment de remplacement pour un ingrédient « aliment non reconnu » : bouton « Choisir l'aliment » dans le détail des calories, recherche parmi les aliments de la table ; le choix (texte de l'aliment → code Ciqual) est retenu **pour toutes les recettes** (existantes et futures), consultable et annulable ; utilisé aussi par la liste de courses (spec 002) pour regrouper les ingrédients. Spécifié : story 6 de `spec.md` (FR-023 à FR-028), `plan.md`, `data-model.md`.
+  - [X] T046a [US6] Spécifier la story 6 dans `spec.md` (scénarios, FR-023 à FR-028, cas limites) et le stockage dans `plan.md` et `data-model.md`
+  - [X] T046b [US6] Créer `APP/data/FoodSubstitution.kt` (entité `food_substitutions` + `FoodSubstitutionDao`), passer la base en version 8 dans `APP/data/AppDatabase.kt`, ajouter `MIGRATION_7_8` (CREATE TABLE seulement) dans `APP/data/Migrations.kt` et l'enregistrer dans `APP/data/DatabaseProvider.kt`
+  - [X] T046c [US6] Dans `APP/data/nutrition/FoodTable.kt` : `substitutions`, `withSubstitutions`, `matchSubstitution`, `food(code)` ; dans `APP/data/nutrition/IngredientParser.kt` : équivalence consultée seulement si aucun aliment reconnu, `ParsedIngredient.substitutionKey`
+  - [X] T046d [P] [US6] Créer `APP/data/nutrition/FoodSubstitutions.kt` : texte proposé, validation du texte retenu, recherche dans la table
+  - [X] T046e [US6] Dans `APP/ui/NutritionDetailSheet.kt` : bouton « Choisir l'aliment » sur les lignes « aliment non reconnu », fenêtre `FoodPickerDialog`, mention sur les lignes remplacées, lien « Aliments de remplacement » ; paramètres relayés par `APP/ui/RecipeDetailScreen.kt`
+  - [X] T046f [US6] Créer `APP/ui/FoodSubstitutionsScreen.kt` (liste, « Annuler ») et, dans `APP/MainActivity.kt`, la route `substitutions`, la table effective (table + équivalences) passée à la fiche et à `MenuViewModel` (liste de courses), l'enregistrement et l'annulation
+  - [X] T046g [P] [US6] Tests JVM `UT/nutrition/FoodSubstitutionTest.kt` : remplacement, quantités inchangées, jamais à la place d'un aliment reconnu, code absent, plus long texte, calcul, liste de courses regroupée, texte proposé et validé, recherche
+  - [X] T046h [P] [US6] Tests instrumentés : `IT/FoodSubstitutionDaoTest.kt` (DAO), `IT/FoodSubstitutionUiTest.kt` (choix, texte raccourci ou refusé, écran et annulation), migration 7 → 8 ajoutée dans `IT/DatabaseMigrationTest.kt`
 
 ---
 

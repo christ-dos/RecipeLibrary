@@ -10,24 +10,56 @@ import com.google.gson.annotations.SerializedName
  * Appariement (R3) : la variante de nom la plus longue (en nombre de mots) contenue dans le
  * texte, en mots entiers ; à égalité, la plus à gauche, puis la plus longue en caractères.
  */
-class FoodTable(val foods: List<Food>, val source: String = "") {
+class FoodTable(
+    val foods: List<Food>,
+    val source: String = "",
+    /**
+     * Aliments de remplacement choisis par l'utilisatrice (story 6) : texte normalisé → code Ciqual.
+     * Utilisés seulement quand la table ne reconnaît aucun aliment ; un code absent de la table est ignoré.
+     */
+    val substitutions: Map<String, String> = emptyMap()
+) {
 
-    private class Alias(val words: List<String>, val chars: Int, val food: Food)
+    private class Alias(val words: List<String>, val chars: Int, val food: Food, val key: String = "")
 
     /** Variantes indexées par leur premier mot. */
     private val byFirstWord: Map<String, List<Alias>> = foods
         .flatMap { f -> f.aliases.map { a -> Normalize.words(a) }.filter { it.isNotEmpty() }.distinct().map { Alias(it, it.sumOf { w -> w.length }, f) } }
         .groupBy { it.words.first() }
 
+    private val byCode: Map<String, Food> by lazy { foods.associateBy { it.code } }
+
+    /** Remplacements indexés comme les variantes de nom (même règle d'appariement). */
+    private val substitutionsByFirstWord: Map<String, List<Alias>> by lazy {
+        substitutions.mapNotNull { (key, code) ->
+            val food = byCode[code] ?: return@mapNotNull null
+            val words = Normalize.words(key).takeIf { it.isNotEmpty() } ?: return@mapNotNull null
+            Alias(words, words.sumOf { it.length }, food, words.joinToString(" "))
+        }.groupBy { it.words.first() }
+    }
+
     val size: Int get() = foods.size
 
+    /** Aliment de code [code], ou null. */
+    fun food(code: String): Food? = byCode[code]
+
+    /** Même table avec ces remplacements (texte normalisé → code). */
+    fun withSubstitutions(map: Map<String, String>): FoodTable =
+        if (map == substitutions) this else FoodTable(foods, source, map)
+
     /** Aliment reconnu dans [text], ou null. */
-    fun match(text: String): Food? {
+    fun match(text: String): Food? = best(byFirstWord, text)?.food
+
+    /** Remplacement qui s'applique à [text] : texte retenu et aliment, ou null. */
+    fun matchSubstitution(text: String): Pair<String, Food>? =
+        if (substitutions.isEmpty()) null else best(substitutionsByFirstWord, text)?.let { it.key to it.food }
+
+    private fun best(index: Map<String, List<Alias>>, text: String): Alias? {
         val words = Normalize.words(text)
         var best: Alias? = null
         var bestPos = 0
         for (i in words.indices) {
-            val candidates = byFirstWord[words[i]] ?: continue
+            val candidates = index[words[i]] ?: continue
             for (a in candidates) {
                 if (i + a.words.size > words.size) continue
                 if (!a.words.indices.all { k -> words[i + k] == a.words[k] }) continue
@@ -39,7 +71,7 @@ class FoodTable(val foods: List<Food>, val source: String = "") {
                 if (better) { best = a; bestPos = i }
             }
         }
-        return best?.food
+        return best
     }
 
     private class FileJson(

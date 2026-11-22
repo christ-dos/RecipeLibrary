@@ -1,5 +1,6 @@
 package com.example.recipelibrary.ui
 
+import androidx.compose.foundation.layout.aspectRatio
 import android.content.Context
 import android.widget.Toast
 import androidx.compose.foundation.Image
@@ -27,6 +28,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -75,7 +77,10 @@ fun UrlImportScreen(
     onQueue: ((String) -> Unit)? = null,
     /** Contenu de la file, pour afficher le lien vers l'écran de la file d'attente. */
     pending: List<PendingImport> = emptyList(),
-    onOpenQueue: () -> Unit = {}
+    onOpenQueue: () -> Unit = {},
+    /** Lien partagé vers l'app (Instagram, Chrome…) : collé et importé tout de suite. */
+    sharedUrl: String? = null,
+    onSharedUrlConsumed: () -> Unit = {}
 ) {
     val context = LocalContext.current
     val prefs = remember(context) {
@@ -100,18 +105,94 @@ fun UrlImportScreen(
     val normalizedServerUrl = remember(serverUrlInput) { normalizeExtractorBaseUrl(serverUrlInput) }
     val serverAddress = normalizedServerUrl?.let(::extractorDisplayAddress) ?: "adresse invalide"
 
+    fun startImport() {
+        val activeServerUrl = normalizedServerUrl
+        if (activeServerUrl == null) {
+            error = "Adresse Hermes invalide."
+            return
+        }
+        val videoUrl = url.trim()
+
+        error = null
+        info = null
+        loading = true
+        scope.launch(Dispatchers.IO) {
+            val outcome = importer.run(videoUrl, activeServerUrl) { isWaking ->
+                withContext(Dispatchers.Main) { waking = isWaking }
+            }
+
+            withContext(Dispatchers.Main) {
+                loading = false
+                // L'importeur a pu changer l'adresse du serveur ou apprendre l'adresse MAC du PC
+                if (outcome.successUrl != null && outcome.successUrl != activeServerUrl) {
+                    serverUrlInput = outcome.successUrl
+                }
+                serverMac = prefs.getString(HermesPrefs.SERVER_MAC, null)
+
+                outcome.result.onSuccess { json ->
+                    val recipe = parseJson(json)
+                    if (recipe != null) {
+                        onImport(recipe)
+                    } else {
+                        error = "Impossible de parser la recette recue."
+                    }
+                }.onFailure { e ->
+                    if (onQueue != null && isConnectionError(e)) {
+                        onQueue(videoUrl)
+                        url = ""
+                        info = QUEUED_MESSAGE
+                        return@onFailure
+                    }
+                    val triedAddresses = outcome.triedUrls.joinToString(", ") { extractorDisplayAddress(it) }
+                    val msg = e.message ?: ""
+                    error = when {
+                        e is java.net.ConnectException &&
+                            (msg.contains("ECONNREFUSED") || msg.contains("Connection refused")) ->
+                            "Connexion refusee ($triedAddresses)\n\nHermes n'est pas demarre sur le PC.\nLance hermes.py sur ton PC et reessaie."
+
+                        e is java.net.ConnectException &&
+                            (msg.contains("ETIMEDOUT") || msg.contains("timed out") || msg.contains("ENETUNREACH")) ->
+                            "PC injoignable ($triedAddresses)\n\nVerifie que :\n- Le telephone est bien sur le WiFi du PC\n- Le PC n'est pas en veille\n- Le pare-feu Windows autorise Hermes"
+
+                        e is java.net.ConnectException ->
+                            "Connexion impossible ($triedAddresses)\n\n${msg.substringAfterLast(":").trim().ifBlank { msg }}\n\nVerifie le WiFi et que Hermes tourne sur le PC."
+
+                        e is java.net.SocketTimeoutException ->
+                            "Hermes ne repond pas ($triedAddresses)\n\nLa connexion a ete etablie mais l'extraction depasse le delai. Reessaie ou redemarre hermes.py."
+
+                        else -> e.message ?: "Erreur inconnue"
+                    }
+                }
+            }
+        }
+    }
+
+    // Lien partagé depuis une autre app : on le colle et on lance l'import directement
+    LaunchedEffect(sharedUrl) {
+        val shared = sharedUrl ?: return@LaunchedEffect
+        onSharedUrlConsumed()
+        if (loading) return@LaunchedEffect
+        url = shared
+        startImport()
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
-            .padding(horizontal = 24.dp, vertical = 24.dp),
+            // Haut à 32 dp comme les pages Fichier et Photo : l'icône est au même niveau
+            .padding(start = 24.dp, end = 24.dp, top = 32.dp, bottom = 24.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
+        val headerIcon = painterResource(R.drawable.ic_nav_url)
         Image(
-            painter = painterResource(R.drawable.ic_nav_url),
+            painter = headerIcon,
             contentDescription = null,
-            modifier = Modifier.size(96.dp)
+            // Emblème avec un nœud en bas : 128 dp pour que son cadre ait la taille des tuiles
+            // Fichier et Photo (96 dp) ; largeur selon le dessin
+            modifier = Modifier.height(128.dp)
+                .aspectRatio(headerIcon.intrinsicSize.width / headerIcon.intrinsicSize.height)
         )
         Text(
             "Importer depuis une URL",
@@ -241,67 +322,7 @@ fun UrlImportScreen(
         }
 
         Button(
-            onClick = {
-                val activeServerUrl = normalizedServerUrl
-                if (activeServerUrl == null) {
-                    error = "Adresse Hermes invalide."
-                    return@Button
-                }
-                val videoUrl = url.trim()
-
-                error = null
-                info = null
-                loading = true
-                scope.launch(Dispatchers.IO) {
-                    val outcome = importer.run(videoUrl, activeServerUrl) { isWaking ->
-                        withContext(Dispatchers.Main) { waking = isWaking }
-                    }
-
-                    withContext(Dispatchers.Main) {
-                        loading = false
-                        // L'importeur a pu changer l'adresse du serveur ou apprendre l'adresse MAC du PC
-                        if (outcome.successUrl != null && outcome.successUrl != activeServerUrl) {
-                            serverUrlInput = outcome.successUrl
-                        }
-                        serverMac = prefs.getString(HermesPrefs.SERVER_MAC, null)
-
-                        outcome.result.onSuccess { json ->
-                            val recipe = parseJson(json)
-                            if (recipe != null) {
-                                onImport(recipe)
-                            } else {
-                                error = "Impossible de parser la recette recue."
-                            }
-                        }.onFailure { e ->
-                            if (onQueue != null && isConnectionError(e)) {
-                                onQueue(videoUrl)
-                                url = ""
-                                info = QUEUED_MESSAGE
-                                return@onFailure
-                            }
-                            val triedAddresses = outcome.triedUrls.joinToString(", ") { extractorDisplayAddress(it) }
-                            val msg = e.message ?: ""
-                            error = when {
-                                e is java.net.ConnectException &&
-                                    (msg.contains("ECONNREFUSED") || msg.contains("Connection refused")) ->
-                                    "Connexion refusee ($triedAddresses)\n\nHermes n'est pas demarre sur le PC.\nLance hermes.py sur ton PC et reessaie."
-
-                                e is java.net.ConnectException &&
-                                    (msg.contains("ETIMEDOUT") || msg.contains("timed out") || msg.contains("ENETUNREACH")) ->
-                                    "PC injoignable ($triedAddresses)\n\nVerifie que :\n- Le telephone est bien sur le WiFi du PC\n- Le PC n'est pas en veille\n- Le pare-feu Windows autorise Hermes"
-
-                                e is java.net.ConnectException ->
-                                    "Connexion impossible ($triedAddresses)\n\n${msg.substringAfterLast(":").trim().ifBlank { msg }}\n\nVerifie le WiFi et que Hermes tourne sur le PC."
-
-                                e is java.net.SocketTimeoutException ->
-                                    "Hermes ne repond pas ($triedAddresses)\n\nLa connexion a ete etablie mais l'extraction depasse le delai. Reessaie ou redemarre hermes.py."
-
-                                else -> e.message ?: "Erreur inconnue"
-                            }
-                        }
-                    }
-                }
-            },
+            onClick = { startImport() },
             enabled = url.trim().startsWith("http") && normalizedServerUrl != null && !loading && !detecting,
             shape = RoundedCornerShape(24.dp),
             colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF7A2CF6)),
