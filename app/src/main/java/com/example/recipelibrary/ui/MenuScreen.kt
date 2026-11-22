@@ -1,6 +1,17 @@
 package com.example.recipelibrary.ui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.border
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Edit
+import androidx.compose.ui.draw.clip
+import androidx.compose.material.TabRowDefaults.tabIndicatorOffset
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import coil.compose.AsyncImage
+import com.example.recipelibrary.R
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
@@ -16,15 +27,13 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.MoreVert
-import androidx.compose.material.icons.filled.Share
-import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
@@ -51,6 +60,9 @@ private val Violet = Color(0xFF4A16C6)
 private val VioletLight = Color(0xFFF3ECFF)
 private val Grey = Color(0xFF625B70)
 private val Pink = Color(0xFFEC4899)
+private val Lavender = Color(0xFFEFE5FF)
+private val VioletBorder = Color(0xFFC9B3F5)
+private val Ink = Color(0xFF1F1A2E)
 
 /** Actions du menu, branchées sur [MenuViewModel] par l'activité et sur des faux dans les tests. */
 class MenuActions(
@@ -105,11 +117,16 @@ fun MenuScreen(
 ) {
     var tab by rememberSaveable { mutableStateOf(0) }
     Column(modifier.fillMaxSize()) {
-        TabRow(selectedTabIndex = tab, backgroundColor = Color.White, contentColor = Violet) {
+        TabRow(
+            selectedTabIndex = tab, backgroundColor = Color.White, contentColor = Violet,
+            indicator = { pos -> TabRowDefaults.Indicator(Modifier.tabIndicatorOffset(pos[tab]).padding(horizontal = 24.dp), height = 3.dp, color = Violet) }
+        ) {
             Tab(selected = tab == 0, onClick = { tab = 0 }, modifier = Modifier.testTag("menu_tab"),
-                text = { Text("Menu (${entries.size})") })
+                selectedContentColor = Violet, unselectedContentColor = VioletBorder,
+                text = { Text("Menu (${entries.size})", fontSize = 18.sp, fontWeight = FontWeight.Bold) })
             Tab(selected = tab == 1, onClick = { tab = 1 }, modifier = Modifier.testTag("courses_tab"),
-                text = { Text("Courses") })
+                selectedContentColor = Violet, unselectedContentColor = VioletBorder,
+                text = { Text("Courses", fontSize = 18.sp, fontWeight = FontWeight.Bold) })
         }
         if (tab == 0) MenuView(entries, recipesById, allRecipes, actions)
         else ShoppingListView(shopping, extras, menuEmpty = entries.isEmpty(), recipeCount = entries.size, actions = shoppingActions)
@@ -121,6 +138,8 @@ private fun MenuView(entries: List<MenuEntry>, recipesById: Map<String, Recipe>,
     var showAdd by remember { mutableStateOf(false) }
     var showClear by remember { mutableStateOf(false) }
     var servingsFor by remember { mutableStateOf<MenuEntry?>(null) }
+    /** Jours repliés (0 = « Sans jour ») : tout est déplié par défaut. */
+    val folded = remember { mutableStateMapOf<Int, Boolean>() }
 
     if (showAdd) AddRecipeDialog(allRecipes, onDismiss = { showAdd = false }, onPick = { actions.onAdd(it); showAdd = false })
     if (showClear) {
@@ -147,20 +166,26 @@ private fun MenuView(entries: List<MenuEntry>, recipesById: Map<String, Recipe>,
     }
 
     Column(Modifier.fillMaxSize()) {
-        Row(Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp), verticalAlignment = Alignment.CenterVertically) {
+        Row(Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 12.dp), verticalAlignment = Alignment.CenterVertically) {
             Button(
                 onClick = { showAdd = true },
                 colors = ButtonDefaults.buttonColors(backgroundColor = Violet),
-                shape = RoundedCornerShape(16.dp),
-                modifier = Modifier.testTag("add_recipe")
+                shape = RoundedCornerShape(26.dp),
+                elevation = ButtonDefaults.elevation(defaultElevation = 3.dp),
+                modifier = Modifier.weight(1f).height(52.dp).testTag("add_recipe")
             ) {
                 Icon(Icons.Default.Add, null, tint = Color.White)
-                Spacer(Modifier.width(6.dp))
-                Text("Ajouter une recette", color = Color.White)
+                Spacer(Modifier.width(8.dp))
+                Text("Ajouter une recette", color = Color.White, fontSize = 17.sp, fontWeight = FontWeight.SemiBold)
             }
-            Spacer(Modifier.weight(1f))
             if (entries.isNotEmpty()) {
-                TextButton(onClick = { showClear = true }, modifier = Modifier.testTag("clear_menu")) { Text("Vider le menu", color = Grey) }
+                Spacer(Modifier.width(12.dp))
+                OutlinedButton(
+                    onClick = { showClear = true },
+                    shape = RoundedCornerShape(16.dp), border = BorderStroke(1.5.dp, VioletBorder),
+                    contentPadding = PaddingValues(0.dp),
+                    modifier = Modifier.size(52.dp).testTag("clear_menu")
+                ) { Icon(painterResource(R.drawable.ic_corbeille), contentDescription = "Vider le menu", tint = Color.Unspecified, modifier = Modifier.size(28.dp)) }
             }
         }
         if (entries.isEmpty()) {
@@ -171,65 +196,138 @@ private fun MenuView(entries: List<MenuEntry>, recipesById: Map<String, Recipe>,
             return
         }
         val groups = MenuLogic.groupByDay(entries)
-        LazyColumn(Modifier.fillMaxSize().testTag("menu_list"), contentPadding = PaddingValues(bottom = 24.dp)) {
+        LazyColumn(Modifier.fillMaxSize().testTag("menu_list"), contentPadding = PaddingValues(start = 16.dp, end = 16.dp, bottom = 24.dp)) {
             groups.forEach { group ->
+                val day = group.day ?: 0
+                val open = folded[day] != true
                 item(key = "day_${group.day}") {
-                    Text(
-                        MenuLogic.dayName(group.day), fontWeight = FontWeight.Bold, color = Violet,
-                        modifier = Modifier.padding(start = 16.dp, top = 12.dp, bottom = 4.dp).testTag("group_${group.day ?: 0}")
-                    )
+                    SectionHeader(
+                        open = open, onToggle = { folded[day] = open }, tag = "group_$day",
+                        modifier = Modifier.padding(top = 12.dp)
+                    ) {
+                        Icon(painterResource(R.drawable.ic_calendrier), null, tint = Color.Unspecified, modifier = Modifier.size(28.dp))
+                        Spacer(Modifier.width(10.dp))
+                        Text(
+                            MenuLogic.dayName(group.day), fontWeight = FontWeight.Bold, color = Violet, fontSize = 19.sp
+                        )
+                        Spacer(Modifier.width(10.dp))
+                        val n = group.entries.size
+                        Text(
+                            if (n > 1) "$n recettes" else "1 recette", color = Grey, fontSize = 13.sp,
+                            // Le badge est décoratif : le bandeau se lit « Mardi » (le nombre se voit dans la liste)
+                            modifier = Modifier.border(1.dp, VioletBorder, RoundedCornerShape(50)).padding(horizontal = 10.dp, vertical = 3.dp)
+                                .clearAndSetSemantics {}
+                        )
+                    }
                 }
-                items(group.entries, key = { it.id }) { entry ->
-                    EntryCard(entry, recipesById[entry.recipeId], actions, onAskRecipeServings = { servingsFor = entry })
+                if (open) {
+                    itemsIndexed(group.entries, key = { _, e -> e.id }) { i, entry ->
+                        EntryCard(
+                            entry, recipesById[entry.recipeId], actions,
+                            last = i == group.entries.lastIndex,
+                            onAskRecipeServings = { servingsFor = entry }
+                        )
+                    }
                 }
             }
         }
     }
 }
 
+/** Bandeau lavande repliable (jour du menu, rayon des courses) ; [content] = partie gauche. */
 @Composable
-private fun EntryCard(entry: MenuEntry, recipe: Recipe?, actions: MenuActions, onAskRecipeServings: () -> Unit) {
-    Card(
-        shape = RoundedCornerShape(12.dp), elevation = 1.dp,
-        modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 4.dp).testTag("entry_${entry.id}")
+private fun SectionHeader(
+    open: Boolean,
+    onToggle: () -> Unit,
+    modifier: Modifier = Modifier,
+    trailing: String? = null,
+    /** Étiquette de test du bandeau entier (il est cliquable, donc fusionné en un seul élément). */
+    tag: String,
+    content: @Composable RowScope.() -> Unit
+) {
+    val shape = if (open) RoundedCornerShape(topStart = 18.dp, topEnd = 18.dp) else RoundedCornerShape(18.dp)
+    Row(
+        modifier.fillMaxWidth().clip(shape).background(Lavender).clickable(onClick = onToggle)
+            .padding(horizontal = 14.dp, vertical = 10.dp).testTag(tag),
+        verticalAlignment = Alignment.CenterVertically
     ) {
-        Column(Modifier.padding(12.dp)) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Text(
-                    recipe?.title ?: "Recette supprimée",
-                    fontWeight = FontWeight.SemiBold, fontSize = 16.sp,
-                    modifier = Modifier.weight(1f).then(if (recipe != null) Modifier.clickable { actions.onOpenRecipe(recipe) } else Modifier)
-                )
-                IconButton(onClick = { actions.onRemove(entry.id) }, modifier = Modifier.testTag("remove_${entry.id}")) {
-                    Icon(Icons.Default.Close, contentDescription = "Retirer du menu", tint = Grey)
-                }
-            }
-            if (recipe == null) return@Column
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                val servings = entry.servings
-                if (servings != null) {
-                    Stepper(
-                        value = servings, range = Recipe.MIN_SERVINGS..Recipe.MAX_SERVINGS,
-                        label = if (servings > 1) "$servings parts" else "1 part",
-                        tag = "servings_${entry.id}", onChange = { actions.onServings(entry.id, it) }
+        content()
+        Spacer(Modifier.weight(1f))
+        if (trailing != null) {
+            Text(trailing, color = Grey, fontSize = 15.sp, fontWeight = FontWeight.SemiBold)
+            Spacer(Modifier.width(8.dp))
+        }
+        Icon(
+            painterResource(if (open) R.drawable.ic_chevron_haut else R.drawable.ic_chevron_bas),
+            contentDescription = if (open) "Replier" else "Déplier", tint = Color.Unspecified, modifier = Modifier.size(24.dp)
+        )
+    }
+}
+
+@Composable
+private fun EntryCard(entry: MenuEntry, recipe: Recipe?, actions: MenuActions, last: Boolean, onAskRecipeServings: () -> Unit) {
+    val shape = if (last) RoundedCornerShape(bottomStart = 18.dp, bottomEnd = 18.dp) else RoundedCornerShape(0.dp)
+    Column(
+        Modifier.fillMaxWidth().clip(shape).background(Color.White).testTag("entry_${entry.id}")
+    ) {
+        Row(Modifier.padding(12.dp), verticalAlignment = Alignment.Top) {
+            AsyncImage(
+                model = recipe?.imageUrl,
+                contentDescription = null,
+                contentScale = ContentScale.Crop,
+                placeholder = painterResource(R.drawable.ic_recipe_placeholder),
+                error = painterResource(R.drawable.ic_recipe_placeholder),
+                fallback = painterResource(R.drawable.ic_recipe_placeholder),
+                modifier = Modifier.size(84.dp).clip(RoundedCornerShape(14.dp))
+                    .then(if (recipe != null) Modifier.clickable { actions.onOpenRecipe(recipe) } else Modifier)
+            )
+            Spacer(Modifier.width(12.dp))
+            Column(Modifier.weight(1f)) {
+                Row(verticalAlignment = Alignment.Top) {
+                    Text(
+                        recipe?.title ?: "Recette supprimée",
+                        fontWeight = FontWeight.Bold, fontSize = 16.sp, color = Ink,
+                        modifier = Modifier.weight(1f).padding(top = 4.dp)
+                            .then(if (recipe != null) Modifier.clickable { actions.onOpenRecipe(recipe) } else Modifier)
                     )
-                } else {
-                    Stepper(
-                        value = entry.times, range = MenuEntry.MIN_TIMES..MenuEntry.MAX_TIMES,
-                        label = "× ${entry.times} recette", tag = "times_${entry.id}",
-                        onChange = { actions.onTimes(entry.id, it) }
-                    )
+                    IconButton(onClick = { actions.onRemove(entry.id) }, modifier = Modifier.size(36.dp).testTag("remove_${entry.id}")) {
+                        Icon(Icons.Default.Close, contentDescription = "Retirer du menu", tint = Grey)
+                    }
                 }
-                Spacer(Modifier.weight(1f))
-                DayPicker(entry, onDay = { actions.onDay(entry.id, it) })
-            }
-            if (entry.servings == null) {
-                Text(
-                    "Indiquer les parts de la recette", color = Violet, fontSize = 13.sp,
-                    modifier = Modifier.padding(top = 4.dp).clickable(onClick = onAskRecipeServings).testTag("set_recipe_servings_${entry.id}")
-                )
+                if (recipe != null) {
+                    Row(Modifier.padding(top = 6.dp), verticalAlignment = Alignment.CenterVertically) {
+                        val servings = entry.servings
+                        if (servings != null) {
+                            Stepper(
+                                value = servings, range = Recipe.MIN_SERVINGS..Recipe.MAX_SERVINGS,
+                                label = if (servings > 1) "$servings parts" else "1 part",
+                                tag = "servings_${entry.id}", onChange = { actions.onServings(entry.id, it) }
+                            )
+                        } else {
+                            Stepper(
+                                value = entry.times, range = MenuEntry.MIN_TIMES..MenuEntry.MAX_TIMES,
+                                label = "× ${entry.times} recette", tag = "times_${entry.id}",
+                                onChange = { actions.onTimes(entry.id, it) }
+                            )
+                        }
+                        Spacer(Modifier.weight(1f))
+                        DayPicker(entry, onDay = { actions.onDay(entry.id, it) })
+                    }
+                    if (entry.servings == null) {
+                        OutlinedButton(
+                            onClick = onAskRecipeServings,
+                            shape = RoundedCornerShape(50), border = BorderStroke(1.5.dp, VioletBorder),
+                            modifier = Modifier.align(Alignment.End).padding(top = 6.dp).testTag("set_recipe_servings_${entry.id}")
+                        ) {
+                            Icon(Icons.Default.Edit, null, tint = Violet, modifier = Modifier.size(18.dp))
+                            Spacer(Modifier.width(6.dp))
+                            Text("Définir les parts", color = Violet, fontWeight = FontWeight.SemiBold)
+                        }
+                    }
+                }
             }
         }
+        if (!last) Divider(color = Lavender, modifier = Modifier.padding(horizontal = 12.dp))
     }
 }
 
@@ -238,22 +336,26 @@ private fun Stepper(value: Int, range: IntRange, label: String, tag: String, onC
     Row(verticalAlignment = Alignment.CenterVertically) {
         OutlinedButton(
             onClick = { if (value - 1 in range) onChange(value - 1) }, enabled = value - 1 in range,
-            contentPadding = PaddingValues(0.dp), modifier = Modifier.size(36.dp).testTag("${tag}_minus")
-        ) { Text("−") }
-        Text(label, modifier = Modifier.padding(horizontal = 10.dp).testTag("${tag}_value"))
+            shape = RoundedCornerShape(12.dp), border = BorderStroke(1.5.dp, VioletBorder),
+            contentPadding = PaddingValues(0.dp), modifier = Modifier.size(40.dp).testTag("${tag}_minus")
+        ) { Text("−", color = Violet, fontSize = 20.sp, fontWeight = FontWeight.Bold) }
+        Text(label, fontWeight = FontWeight.SemiBold, fontSize = 15.sp, color = Ink,
+            modifier = Modifier.padding(horizontal = 10.dp).testTag("${tag}_value"))
         OutlinedButton(
             onClick = { if (value + 1 in range) onChange(value + 1) }, enabled = value + 1 in range,
-            contentPadding = PaddingValues(0.dp), modifier = Modifier.size(36.dp).testTag("${tag}_plus")
-        ) { Text("+") }
+            shape = RoundedCornerShape(12.dp), border = BorderStroke(1.5.dp, VioletBorder),
+            contentPadding = PaddingValues(0.dp), modifier = Modifier.size(40.dp).testTag("${tag}_plus")
+        ) { Text("+", color = Violet, fontSize = 20.sp, fontWeight = FontWeight.Bold) }
     }
 }
 
+/** Changer le jour d'une recette : icône calendrier, liste des jours. */
 @Composable
 private fun DayPicker(entry: MenuEntry, onDay: (Int?) -> Unit) {
     var open by remember { mutableStateOf(false) }
     Box {
-        TextButton(onClick = { open = true }, modifier = Modifier.testTag("day_${entry.id}")) {
-            Text(MenuLogic.dayName(entry.day), color = Violet)
+        IconButton(onClick = { open = true }, modifier = Modifier.size(40.dp).testTag("day_${entry.id}")) {
+            Icon(painterResource(R.drawable.ic_calendrier), contentDescription = "Jour : ${MenuLogic.dayName(entry.day)}", tint = Color.Unspecified, modifier = Modifier.size(26.dp))
         }
         DropdownMenu(expanded = open, onDismissRequest = { open = false }) {
             (1..7).forEach { d ->
@@ -364,7 +466,8 @@ fun ShoppingListView(
     var picking by remember { mutableStateOf<ChronoPick?>(null) }
     /** Appui long : choisir à la main le produit de l'article (clé de choix, nom). */
     var choosing by remember { mutableStateOf<Pair<String, String>?>(null) }
-    var menuOpen by remember { mutableStateOf(false) }
+    /** Rayons repliés : tout est déplié par défaut. */
+    val folded = remember { mutableStateMapOf<String, Boolean>() }
     val scope = rememberCoroutineScope()
     val listState = rememberLazyListState()
 
@@ -404,35 +507,33 @@ fun ShoppingListView(
     }
 
     Column(modifier.fillMaxSize()) {
-        Row(Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 6.dp), verticalAlignment = Alignment.CenterVertically) {
-            Text(
-                "Coche ce que tu as déjà ou ce que tu as mis au panier.",
-                color = Grey, fontSize = 12.sp, modifier = Modifier.weight(1f)
-            )
-            Button(
+        Row(Modifier.fillMaxWidth().padding(start = 16.dp, end = 16.dp, top = 12.dp, bottom = 4.dp), horizontalArrangement = Arrangement.End) {
+            OutlinedButton(
                 onClick = { shareText?.let(actions.onShare) }, enabled = shareText != null,
-                colors = ButtonDefaults.buttonColors(backgroundColor = Violet),
-                shape = RoundedCornerShape(16.dp), modifier = Modifier.testTag("share")
+                shape = RoundedCornerShape(50), border = BorderStroke(1.5.dp, VioletBorder),
+                colors = ButtonDefaults.outlinedButtonColors(backgroundColor = Color.White),
+                contentPadding = PaddingValues(horizontal = 18.dp, vertical = 10.dp),
+                modifier = Modifier.testTag("share")
             ) {
-                Icon(Icons.Default.Share, null, tint = Color.White, modifier = Modifier.size(18.dp))
-                Spacer(Modifier.width(4.dp))
-                Text("Partager", color = Color.White)
-            }
-            if (actions.onOpenProducts != null) {
-                Box {
-                    IconButton(onClick = { menuOpen = true }, modifier = Modifier.testTag("shopping_more")) {
-                        Icon(Icons.Default.MoreVert, contentDescription = "Plus d'options", tint = Violet)
-                    }
-                    DropdownMenu(expanded = menuOpen, onDismissRequest = { menuOpen = false }) {
-                        DropdownMenuItem(
-                            onClick = { menuOpen = false; actions.onOpenProducts.invoke() },
-                            modifier = Modifier.testTag("open_products")
-                        ) { Text("Mes produits Chronodrive") }
-                    }
-                }
+                Icon(painterResource(R.drawable.ic_partager), null, tint = Color.Unspecified, modifier = Modifier.size(24.dp))
+                Spacer(Modifier.width(8.dp))
+                Text("Partager", color = Violet, fontWeight = FontWeight.Bold, fontSize = 16.sp)
             }
         }
         AddExtraField(onAdd = actions.onAddExtra)
+        if (actions.onOpenProducts != null) {
+            Row(
+                Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 6.dp).clip(RoundedCornerShape(18.dp))
+                    .background(Lavender).clickable { actions.onOpenProducts.invoke() }
+                    .padding(horizontal = 16.dp, vertical = 12.dp).testTag("open_products"),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(painterResource(R.drawable.ic_favori), null, tint = Color.Unspecified, modifier = Modifier.size(30.dp))
+                Spacer(Modifier.width(12.dp))
+                Text("Mes produits Chronodrive", color = Violet, fontWeight = FontWeight.Bold, fontSize = 16.sp, modifier = Modifier.weight(1f))
+                Icon(painterResource(R.drawable.ic_fleche_droite), null, tint = Color.Unspecified, modifier = Modifier.size(22.dp))
+            }
+        }
 
         if (!menuEmpty && items == null) {
             Box(Modifier.fillMaxWidth().padding(24.dp), contentAlignment = Alignment.Center) {
@@ -445,79 +546,150 @@ fun ShoppingListView(
         val openExtras = extras.filter { !it.checked }
         val doneExtras = extras.filter { it.checked }
 
-        LazyColumn(Modifier.fillMaxSize().testTag("shopping_list"), state = listState, contentPadding = PaddingValues(bottom = 24.dp)) {
+        // Story 4 : articles groupés par rayon (titres seulement si au moins un rayon est connu).
+        // Les ajouts à la main vont à la fin, donc dans « Autres » (dernier rayon) quand les rayons sont affichés.
+        val showAisles = Aisles.showHeaders(openItems)
+        val sections = Aisles.group(openItems).let { s ->
+            if (showAisles && openExtras.isNotEmpty() && s.none { it.first == Aisles.OTHER }) s + (Aisles.OTHER to emptyList()) else s
+        }
+        val totals = Aisles.group(calc).associate { (a, l) -> a to l.size }
+        val dones = Aisles.group(doneItems).associate { (a, l) -> a to l.size }
+
+        LazyColumn(
+            Modifier.fillMaxSize().testTag("shopping_list"), state = listState,
+            contentPadding = PaddingValues(start = 16.dp, end = 16.dp, bottom = 24.dp)
+        ) {
             if (menuEmpty) {
                 item(key = "empty") {
-                    Text("Ajoute d'abord des recettes au menu", color = Grey, modifier = Modifier.padding(16.dp).testTag("shopping_empty"))
+                    Text("Ajoute d'abord des recettes au menu", color = Grey, modifier = Modifier.padding(vertical = 16.dp).testTag("shopping_empty"))
                 }
             }
-            // Story 4 : articles groupés par rayon (titres seulement si au moins un rayon est connu)
-            val showAisles = Aisles.showHeaders(openItems)
-            val sections = Aisles.group(openItems).let { s ->
-                if (showAisles && openExtras.isNotEmpty() && s.none { it.first == Aisles.OTHER }) s + (Aisles.OTHER to emptyList()) else s
-            }
-            for ((aisle, sectionItems) in sections) {
-            if (showAisles) {
-                item(key = "aisle_$aisle") {
-                    Text(
-                        aisle, color = Violet, fontWeight = FontWeight.SemiBold, fontSize = 14.sp,
-                        modifier = Modifier.padding(start = 16.dp, top = 12.dp, bottom = 2.dp).testTag("aisle_$aisle")
-                    )
+            sections.forEachIndexed { si, (aisle, sectionItems) ->
+                val lastSection = si == sections.lastIndex
+                val withExtras = if (showAisles) aisle == Aisles.OTHER else lastSection
+                val rows: List<Any> = sectionItems + (if (withExtras) openExtras else emptyList())
+                val open = !showAisles || folded[aisle] != true
+                if (showAisles) {
+                    item(key = "aisle_$aisle") {
+                        val extrasCount = if (aisle == Aisles.OTHER) extras.size else 0
+                        val doneCount = (dones[aisle] ?: 0) + (if (aisle == Aisles.OTHER) doneExtras.size else 0)
+                        SectionHeader(
+                            open = open && rows.isNotEmpty(), onToggle = { folded[aisle] = open },
+                            trailing = "$doneCount / ${(totals[aisle] ?: 0) + extrasCount}", tag = "aisle_$aisle",
+                            modifier = Modifier.padding(top = 12.dp)
+                        ) {
+                            Icon(painterResource(aisleIcon(aisle)), null, tint = Color.Unspecified, modifier = Modifier.size(34.dp))
+                            Spacer(Modifier.width(10.dp))
+                            Text(aisle, color = Violet, fontWeight = FontWeight.Bold, fontSize = 18.sp)
+                        }
+                    }
+                } else if (si == 0 && rows.isNotEmpty()) {
+                    item(key = "list_top") { Spacer(Modifier.height(8.dp)) }
+                }
+                if (open) {
+                    rows.forEachIndexed { i, row ->
+                        val shape = rowShape(first = !showAisles && i == 0, last = i == rows.lastIndex)
+                        when (row) {
+                            is ShoppingItem -> item(key = row.key) {
+                                ItemRow(
+                                    key = row.key, label = row.label, qty = itemQty(row), checked = false, shape = shape,
+                                    highlighted = sentKey == row.key,
+                                    sources = if (openKey == row.key) sourcesText(row) else null,
+                                    onToggleSources = { openKey = if (openKey == row.key) null else row.key },
+                                    onCheck = { c -> actions.onCheck(row.key, c); if (c && sentKey == row.key) sentKey = null },
+                                    onChronodrive = { sentKey = row.key; chrono(ChronodriveSearch.choiceKey(row), row.label, ChronodriveSearch.term(row)) },
+                                    onLongPress = { choosing = ChronodriveSearch.choiceKey(row) to row.label }
+                                )
+                            }
+                            is ShoppingExtra -> item(key = "extra:${row.id}") {
+                                ItemRow(
+                                    key = "extra:${row.id}", label = row.text, qty = "", checked = false, shape = shape,
+                                    highlighted = sentKey == "extra:${row.id}", sources = null,
+                                    onToggleSources = { editExtra = row },
+                                    onCheck = { c -> actions.onExtraChecked(row.id, c); if (c && sentKey == "extra:${row.id}") sentKey = null },
+                                    onChronodrive = {
+                                        sentKey = "extra:${row.id}"
+                                        chrono(ChronodriveSearch.choiceKeyForExtra(row.text), ChronodriveSearch.termForExtra(row.text), ChronodriveSearch.termForExtra(row.text))
+                                    },
+                                    onRemove = { actions.onRemoveExtra(row.id) },
+                                    onLongPress = { choosing = ChronodriveSearch.choiceKeyForExtra(row.text) to ChronodriveSearch.termForExtra(row.text) }
+                                )
+                            }
+                        }
+                    }
                 }
             }
-            items(sectionItems, key = { it.key }) { item ->
-                ItemRow(
-                    key = item.key, label = item.label, qty = itemQty(item), checked = false,
-                    highlighted = sentKey == item.key,
-                    sources = if (openKey == item.key) sourcesText(item) else null,
-                    onToggleSources = { openKey = if (openKey == item.key) null else item.key },
-                    onCheck = { c -> actions.onCheck(item.key, c); if (c && sentKey == item.key) sentKey = null },
-                    onChronodrive = { sentKey = item.key; chrono(ChronodriveSearch.choiceKey(item), item.label, ChronodriveSearch.term(item)) },
-                    onLongPress = { choosing = ChronodriveSearch.choiceKey(item) to item.label }
-                )
-            }
-            }
-            // Ajouts à la main : à la fin, donc dans « Autres » (dernier rayon) quand les rayons sont affichés
-            items(openExtras, key = { "extra:${it.id}" }) { x ->
-                ItemRow(
-                    key = "extra:${x.id}", label = x.text, qty = "", checked = false,
-                    highlighted = sentKey == "extra:${x.id}", sources = null,
-                    onToggleSources = { editExtra = x },
-                    onCheck = { c -> actions.onExtraChecked(x.id, c); if (c && sentKey == "extra:${x.id}") sentKey = null },
-                    onChronodrive = {
-                        sentKey = "extra:${x.id}"
-                        chrono(ChronodriveSearch.choiceKeyForExtra(x.text), ChronodriveSearch.termForExtra(x.text), ChronodriveSearch.termForExtra(x.text))
-                    },
-                    onRemove = { actions.onRemoveExtra(x.id) },
-                    onLongPress = { choosing = ChronodriveSearch.choiceKeyForExtra(x.text) to ChronodriveSearch.termForExtra(x.text) }
-                )
+            if (sections.isEmpty() && openExtras.isNotEmpty()) {
+                item(key = "list_top") { Spacer(Modifier.height(8.dp)) }
+                openExtras.forEachIndexed { i, x ->
+                    item(key = "extra:${x.id}") {
+                        ItemRow(
+                            key = "extra:${x.id}", label = x.text, qty = "", checked = false,
+                            shape = rowShape(first = i == 0, last = i == openExtras.lastIndex),
+                            highlighted = sentKey == "extra:${x.id}", sources = null,
+                            onToggleSources = { editExtra = x },
+                            onCheck = { c -> actions.onExtraChecked(x.id, c); if (c && sentKey == "extra:${x.id}") sentKey = null },
+                            onChronodrive = {
+                                sentKey = "extra:${x.id}"
+                                chrono(ChronodriveSearch.choiceKeyForExtra(x.text), ChronodriveSearch.termForExtra(x.text), ChronodriveSearch.termForExtra(x.text))
+                            },
+                            onRemove = { actions.onRemoveExtra(x.id) },
+                            onLongPress = { choosing = ChronodriveSearch.choiceKeyForExtra(x.text) to ChronodriveSearch.termForExtra(x.text) }
+                        )
+                    }
+                }
             }
             if (doneItems.isNotEmpty() || doneExtras.isNotEmpty()) {
                 item(key = "done_header") {
                     Text(
-                        "Déjà à la maison ou dans le panier", color = Grey, fontWeight = FontWeight.SemiBold, fontSize = 13.sp,
-                        modifier = Modifier.padding(start = 16.dp, top = 16.dp, bottom = 4.dp).testTag("done_header")
+                        "Déjà à la maison ou dans le panier", color = Grey, fontWeight = FontWeight.SemiBold, fontSize = 14.sp,
+                        modifier = Modifier.padding(start = 4.dp, top = 20.dp, bottom = 6.dp).testTag("done_header")
                     )
                 }
             }
-            items(doneItems, key = { it.key }) { item ->
-                ItemRow(
-                    key = item.key, label = item.label, qty = itemQty(item), checked = true, highlighted = false,
-                    sources = if (openKey == item.key) sourcesText(item) else null,
-                    onToggleSources = { openKey = if (openKey == item.key) null else item.key },
-                    onCheck = { c -> actions.onCheck(item.key, c) }, onChronodrive = null
-                )
+            val doneCount = doneItems.size + doneExtras.size
+            doneItems.forEachIndexed { i, it0 ->
+                item(key = it0.key) {
+                    ItemRow(
+                        key = it0.key, label = it0.label, qty = itemQty(it0), checked = true, highlighted = false,
+                        shape = rowShape(first = i == 0, last = i == doneCount - 1),
+                        sources = if (openKey == it0.key) sourcesText(it0) else null,
+                        onToggleSources = { openKey = if (openKey == it0.key) null else it0.key },
+                        onCheck = { c -> actions.onCheck(it0.key, c) }, onChronodrive = null
+                    )
+                }
             }
-            items(doneExtras, key = { "extra:${it.id}" }) { x ->
-                ItemRow(
-                    key = "extra:${x.id}", label = x.text, qty = "", checked = true, highlighted = false, sources = null,
-                    onToggleSources = { editExtra = x },
-                    onCheck = { c -> actions.onExtraChecked(x.id, c) }, onChronodrive = null,
-                    onRemove = { actions.onRemoveExtra(x.id) }
-                )
+            doneExtras.forEachIndexed { i, x ->
+                val idx = doneItems.size + i
+                item(key = "extra:${x.id}") {
+                    ItemRow(
+                        key = "extra:${x.id}", label = x.text, qty = "", checked = true, highlighted = false, sources = null,
+                        shape = rowShape(first = idx == 0, last = idx == doneCount - 1),
+                        onToggleSources = { editExtra = x },
+                        onCheck = { c -> actions.onExtraChecked(x.id, c) }, onChronodrive = null,
+                        onRemove = { actions.onRemoveExtra(x.id) }
+                    )
+                }
             }
         }
     }
+}
+
+/** Coins arrondis d'une ligne dans sa carte (haut si première sans bandeau, bas si dernière). */
+private fun rowShape(first: Boolean, last: Boolean): RoundedCornerShape = RoundedCornerShape(
+    topStart = if (first) 18.dp else 0.dp, topEnd = if (first) 18.dp else 0.dp,
+    bottomStart = if (last) 18.dp else 0.dp, bottomEnd = if (last) 18.dp else 0.dp
+)
+
+/** Illustration du rayon (les rayons sucré et salé partagent l'épicerie ; « Autres » = le panier). */
+private fun aisleIcon(aisle: String): Int = when (aisle) {
+    "Fruits et légumes" -> R.drawable.ic_rayon_fruits_legumes
+    "Crèmerie" -> R.drawable.ic_rayon_cremerie
+    "Boucherie et poisson" -> R.drawable.ic_rayon_viandes_poissons
+    "Épicerie salée", "Épicerie sucrée" -> R.drawable.ic_rayon_epicerie
+    "Surgelés" -> R.drawable.ic_rayon_surgeles
+    "Boissons" -> R.drawable.ic_rayon_boissons
+    else -> R.drawable.ic_panier
 }
 
 private fun itemQty(item: ShoppingItem): String = if (item.seasoning) "à vérifier" else QuantityFormat.of(item)
@@ -539,34 +711,35 @@ private fun ItemRow(
     onChronodrive: (() -> Unit)?,
     onRemove: (() -> Unit)? = null,
     /** Spec 003 : appui long = choisir le produit Chronodrive de l'article. */
-    onLongPress: (() -> Unit)? = null
+    onLongPress: (() -> Unit)? = null,
+    shape: RoundedCornerShape = RoundedCornerShape(0.dp)
 ) {
-    val textColor = if (checked) Grey else Color(0xFF1F2937)
+    val textColor = if (checked) Grey else Ink
     val deco = if (checked) TextDecoration.LineThrough else null
     Column(
-        Modifier.fillMaxWidth()
-            .background(if (highlighted) VioletLight else Color.Transparent)
+        Modifier.fillMaxWidth().clip(shape)
+            .background(if (highlighted) VioletLight else Color.White)
             .testTag("item_$key")
     ) {
-        Row(Modifier.fillMaxWidth().padding(start = 4.dp, end = 4.dp), verticalAlignment = Alignment.CenterVertically) {
+        Row(Modifier.fillMaxWidth().padding(start = 6.dp, end = 4.dp), verticalAlignment = Alignment.CenterVertically) {
             Checkbox(
                 checked = checked, onCheckedChange = onCheck,
-                colors = CheckboxDefaults.colors(checkedColor = Violet),
+                colors = CheckboxDefaults.colors(checkedColor = Violet, uncheckedColor = VioletBorder),
                 modifier = Modifier.testTag("check_$key")
             )
             Column(
                 Modifier.weight(1f)
                     .combinedClickable(onClick = onToggleSources, onLongClick = onLongPress)
-                    .padding(vertical = 10.dp)
+                    .padding(vertical = 12.dp)
                     .semantics(mergeDescendants = true) {}.testTag("label_$key")
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    Text(label, fontSize = 16.sp, color = textColor, textDecoration = deco, modifier = Modifier.weight(1f, fill = false))
+                    Text(label, fontSize = 17.sp, color = textColor, textDecoration = deco, modifier = Modifier.weight(1f, fill = false))
                     if (qty.isNotEmpty()) {
-                        Spacer(Modifier.width(8.dp))
+                        Spacer(Modifier.width(10.dp))
                         Text(
-                            qty, fontSize = if (qty == "à vérifier") 13.sp else 15.sp, textDecoration = deco,
-                            fontWeight = if (qty == "à vérifier") FontWeight.Normal else FontWeight.SemiBold,
+                            qty, fontSize = if (qty == "à vérifier") 13.sp else 16.sp, textDecoration = deco,
+                            fontWeight = if (qty == "à vérifier") FontWeight.Normal else FontWeight.Bold,
                             color = if (checked || qty == "à vérifier") Grey else Violet
                         )
                     }
@@ -578,18 +751,13 @@ private fun ItemRow(
                 }
             }
             if (onChronodrive != null) {
-                TextButton(
-                    onClick = onChronodrive, contentPadding = PaddingValues(horizontal = 6.dp),
-                    modifier = Modifier.testTag("chrono_$key")
-                ) {
-                    Icon(Icons.Default.ShoppingCart, contentDescription = "Chercher sur Chronodrive", tint = Pink, modifier = Modifier.size(20.dp))
-                    Spacer(Modifier.width(2.dp))
-                    Text("Chrono", color = Pink, fontSize = 12.sp)
+                IconButton(onClick = onChronodrive, modifier = Modifier.testTag("chrono_$key")) {
+                    Icon(painterResource(R.drawable.ic_panier), contentDescription = "Chercher sur Chronodrive", tint = Color.Unspecified, modifier = Modifier.size(28.dp))
                 }
             }
         }
         if (highlighted && !checked) {
-            Row(Modifier.fillMaxWidth().padding(start = 52.dp, end = 12.dp, bottom = 8.dp), verticalAlignment = Alignment.CenterVertically) {
+            Row(Modifier.fillMaxWidth().padding(start = 54.dp, end = 12.dp, bottom = 8.dp), verticalAlignment = Alignment.CenterVertically) {
                 Text("Mis au panier ?", color = Violet, fontSize = 13.sp, modifier = Modifier.weight(1f))
                 Button(
                     onClick = { onCheck(true) }, colors = ButtonDefaults.buttonColors(backgroundColor = Violet),
@@ -600,30 +768,38 @@ private fun ItemRow(
         if (sources != null) {
             Text(
                 sources, color = Grey, fontSize = 13.sp,
-                modifier = Modifier.padding(start = 52.dp, end = 16.dp, bottom = 8.dp)
+                modifier = Modifier.padding(start = 54.dp, end = 16.dp, bottom = 8.dp)
                     .background(VioletLight, RoundedCornerShape(6.dp)).padding(6.dp).testTag("sources_$key")
             )
         }
-        Divider()
+        if (shape.bottomEndIsSquare()) Divider(color = Lavender, modifier = Modifier.padding(start = 54.dp, end = 12.dp))
     }
 }
+
+/** Vrai si la ligne n'est pas la dernière de sa carte (pas de coin arrondi en bas). */
+private fun RoundedCornerShape.bottomEndIsSquare(): Boolean = this.bottomEnd == androidx.compose.foundation.shape.CornerSize(0.dp)
 
 @Composable
 private fun AddExtraField(onAdd: (String) -> Unit) {
     var text by rememberSaveable { mutableStateOf("") }
     val submit = { if (text.isNotBlank()) { onAdd(text); text = "" } }
-    Row(Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 4.dp), verticalAlignment = Alignment.CenterVertically) {
-        OutlinedTextField(
-            value = text, onValueChange = { text = it.take(ShoppingExtra.MAX_LENGTH) }, singleLine = true,
-            placeholder = { Text("Ajouter un article (ex. 2 papier toilette)") },
-            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
-            keyboardActions = KeyboardActions(onDone = { submit() }),
-            modifier = Modifier.weight(1f).testTag("extra_field")
-        )
-        IconButton(onClick = submit, enabled = text.isNotBlank(), modifier = Modifier.testTag("extra_add")) {
-            Icon(Icons.Default.Add, contentDescription = "Ajouter l'article", tint = if (text.isNotBlank()) Violet else Grey)
-        }
-    }
+    OutlinedTextField(
+        value = text, onValueChange = { text = it.take(ShoppingExtra.MAX_LENGTH) }, singleLine = true,
+        placeholder = { Text("Ajouter un article (ex. 2 papier toilette)", color = Grey) },
+        leadingIcon = { Icon(painterResource(R.drawable.ic_plus), null, tint = Color.Unspecified, modifier = Modifier.size(26.dp)) },
+        trailingIcon = {
+            IconButton(onClick = submit, enabled = text.isNotBlank(), modifier = Modifier.testTag("extra_add")) {
+                Icon(Icons.Default.Check, contentDescription = "Ajouter l'article", tint = if (text.isNotBlank()) Violet else VioletBorder)
+            }
+        },
+        shape = RoundedCornerShape(18.dp),
+        colors = TextFieldDefaults.outlinedTextFieldColors(
+            backgroundColor = Color.White, unfocusedBorderColor = VioletBorder, focusedBorderColor = Violet
+        ),
+        keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
+        keyboardActions = KeyboardActions(onDone = { submit() }),
+        modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 6.dp).testTag("extra_field")
+    )
 }
 
 @Composable

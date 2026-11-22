@@ -5,6 +5,8 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.test.*
+import androidx.compose.ui.test.hasTestTag
+import androidx.compose.ui.test.performScrollToNode
 import androidx.compose.ui.test.junit4.StateRestorationTester
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -220,9 +222,11 @@ class ShoppingListScreenTest {
         val other = rule.onNodeWithTag("aisle_Autres").fetchSemanticsNode().boundsInRoot.top
         val creamery = rule.onNodeWithTag("aisle_Crèmerie").fetchSemanticsNode().boundsInRoot.top
         assert(other > creamery)
-        // L'ajout à la main est sous le titre « Autres »
+        // L'ajout à la main est sous le titre « Autres » (refonte 006 : lignes plus hautes, on fait défiler jusqu'à lui)
+        rule.onNodeWithTag("shopping_list").performScrollToNode(hasTestTag("label_extra:x0"))
+        val otherAfterScroll = rule.onNodeWithTag("aisle_Autres").fetchSemanticsNode().boundsInRoot.top
         val extra = rule.onNodeWithTag("label_extra:x0").fetchSemanticsNode().boundsInRoot.top
-        assert(extra > other)
+        assert(extra > otherAfterScroll)
     }
 
     // ── Spec 003 : « Mes produits Chronodrive » (T017, T018, T033) ──
@@ -261,14 +265,14 @@ class ShoppingListScreenTest {
         favorites = favorites
     )
 
-    @Test fun moreMenu_absentWhenOnOpenProductsNull() {
+    // Refonte 006 : le menu « ⋮ » est remplacé par la carte « Mes produits Chronodrive » (un seul appui)
+    @Test fun productsCard_absentWhenOnOpenProductsNull() {
         showShopping(chronoActions(ChronodriveResolution.None, withProducts = false))
-        rule.onNodeWithTag("shopping_more").assertDoesNotExist()
+        rule.onNodeWithTag("open_products").assertDoesNotExist()
     }
 
-    @Test fun moreMenu_present_andOpenProductsCallsCallback() {
+    @Test fun productsCard_present_andCallsCallback() {
         showShopping(chronoActions(ChronodriveResolution.None))
-        rule.onNodeWithTag("shopping_more").assertIsDisplayed().performClick()
         rule.onNodeWithTag("open_products").assertIsDisplayed().performClick()
         rule.waitForIdle()
         assertEquals(1, productsOpened)
@@ -330,7 +334,7 @@ class ShoppingListScreenTest {
 
     @Test fun defaultActions_keepFeature002Behaviour() {
         showShopping(ShoppingActions(onChronodrive = { chronoTerms += it }))
-        rule.onNodeWithTag("shopping_more").assertDoesNotExist()
+        rule.onNodeWithTag("open_products").assertDoesNotExist()
         rule.onNodeWithTag("chrono_food:9440").performClick()
         rule.waitForIdle()
         assertEquals(listOf("farine"), chronoTerms)
