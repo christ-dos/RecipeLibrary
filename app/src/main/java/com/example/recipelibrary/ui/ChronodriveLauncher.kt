@@ -33,6 +33,23 @@ object ChronodriveLauncher {
         if (!opened) Toast.makeText(context, "Impossible d'ouvrir Chronodrive", Toast.LENGTH_SHORT).show()
     }
 
+    /**
+     * Spec 003 (contracts/chrono-link.md) : copie le nom de l'article puis ouvre la fiche du produit
+     * retenu dans l'application, sinon sur le site, sinon retombe sur [open]. Ne touche jamais au panier.
+     */
+    fun openProduct(context: Context, productId: Long, productName: String, itemName: String) {
+        val appUri = ChronodriveSearch.productAppUri(productId)
+        val webUrl = ChronodriveSearch.productWebUrl(productId)
+        if (appUri == null || webUrl == null) { open(context, itemName); return }
+        val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        clipboard.setPrimaryClip(ClipData.newPlainText("Chronodrive", itemName))
+        val opened = start(context, Intent(Intent.ACTION_VIEW, Uri.parse(appUri))
+                .setPackage(ChronodriveSearch.PACKAGE).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)) ||
+            start(context, Intent(Intent.ACTION_VIEW, Uri.parse(webUrl)).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+        if (opened) Toast.makeText(context, "Fiche de « $productName » : appuie sur +", Toast.LENGTH_LONG).show()
+        else open(context, itemName)
+    }
+
     private fun start(context: Context, intent: Intent): Boolean =
         try { context.startActivity(intent); true } catch (_: ActivityNotFoundException) { false }
 }

@@ -1,5 +1,6 @@
 package com.example.recipelibrary.data.shopping
 
+import com.example.recipelibrary.data.nutrition.Normalize
 import java.net.URLEncoder
 
 /** Terme et adresse de secours du bouton « Chronodrive » (contracts/chronodrive-search.md). */
@@ -19,6 +20,21 @@ object ChronodriveSearch {
     /** Adresse de recherche du site, ouverte dans le navigateur seulement si l'application n'est pas installée. */
     fun searchUrl(term: String): String =
         "https://www.chronodrive.com/search/" + URLEncoder.encode(term, "UTF-8").replace("+", "%20")
+
+    /** Fiche d'un produit dans l'application (spec 003, contracts/chrono-link.md) ; null si numéro invalide. */
+    fun productAppUri(id: Long): String? = if (id > 0) "chronodrive://product/$id" else null
+
+    /** Fiche d'un produit sur le site, ouverte si l'application refuse le lien ; null si numéro invalide. */
+    fun productWebUrl(id: Long): String? = if (id > 0) "https://www.chronodrive.com/product/$id" else null
+
+    /** Clé sous laquelle le produit choisi pour un article calculé est mémorisé : celle des coches. */
+    fun choiceKey(item: ShoppingItem): String = item.key
+
+    /**
+     * Clé d'un article ajouté à la main (research R4) : jamais `extra:<id>`, qui disparaît avec
+     * l'ajout ; « 2 papier toilette » partage la clé de l'article « papier toilette ».
+     */
+    fun choiceKeyForExtra(text: String): String = "txt:" + Normalize.text(termForExtra(text))
 
     private fun clean(s: String): String = SPACES.replace(s, " ").trim().take(MAX).trim()
 

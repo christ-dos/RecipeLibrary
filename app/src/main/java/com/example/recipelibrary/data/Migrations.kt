@@ -85,3 +85,21 @@ val MIGRATION_7_8 = object : Migration(7, 8) {
         )
     }
 }
+
+/** Spec 003 : favoris Chronodrive et produit retenu par article ; aucune table existante touchée. */
+val MIGRATION_8_9 = object : Migration(8, 9) {
+    override fun migrate(database: SupportSQLiteDatabase) {
+        database.execSQL(
+            "CREATE TABLE IF NOT EXISTS `chronodrive_products` (`product_id` INTEGER NOT NULL, `name` TEXT NOT NULL, " +
+                "`brand` TEXT, `aisle` TEXT NOT NULL, `still_favorite` INTEGER NOT NULL DEFAULT 1, " +
+                "`imported_at` INTEGER NOT NULL, PRIMARY KEY(`product_id`))"
+        )
+        database.execSQL(
+            "CREATE TABLE IF NOT EXISTS `product_choices` (`item_key` TEXT NOT NULL, `product_id` INTEGER NOT NULL, " +
+                "`chosen_at` INTEGER NOT NULL, PRIMARY KEY(`item_key`))"
+        )
+        database.execSQL(
+            "CREATE INDEX IF NOT EXISTS `index_product_choices_product_id` ON `product_choices` (`product_id`)"
+        )
+    }
+}

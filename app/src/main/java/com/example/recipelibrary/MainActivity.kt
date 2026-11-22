@@ -301,6 +301,10 @@ class MainActivity : ComponentActivity() {
         val menuVm  = ViewModelProvider(
             this, MenuViewModel.Factory(com.example.recipelibrary.data.menu.MenuRepository(db.menuDao()), listVm.recipes)
         ).get(MenuViewModel::class.java)
+        // Produits Chronodrive (spec 003) : favoris importés et produit retenu par article
+        val chronoVm = ViewModelProvider(
+            this, ChronodriveViewModel.Factory(com.example.recipelibrary.data.chronodrive.ChronodriveRepository(db))
+        ).get(ChronodriveViewModel::class.java)
         val queueFlow = db.pendingImportDao().observeAll()
         // Aliments de remplacement (spec 001, story 6) : valables pour toutes les recettes.
         val substitutionDao = db.foodSubstitutionDao()
@@ -545,6 +549,7 @@ class MainActivity : ComponentActivity() {
                         val byId by menuVm.recipesById.collectAsState()
                         val shopping by menuVm.shopping.collectAsState()
                         val extras by menuVm.extras.collectAsState()
+                        val chronoFavorites by chronoVm.products.collectAsState()
                         Scaffold(
                             backgroundColor = ScreenBg,
                             topBar = { RecipeTopBar("Menu") }
@@ -584,8 +589,42 @@ class MainActivity : ComponentActivity() {
                                         }
                                         context.startActivity(Intent.createChooser(send, "Partager la liste de courses"))
                                     },
-                                    onChronodrive = { term -> ChronodriveLauncher.open(context, term) }
+                                    onChronodrive = { term -> ChronodriveLauncher.open(context, term) },
+                                    onOpenProducts = { navController.navigate("chronodrive_products") },
+                                    resolveChrono = { key, term -> chronoVm.resolveChrono(key, term) },
+                                    onOpenProduct = { product, name ->
+                                        ChronodriveLauncher.openProduct(context, product.productId, product.name, name)
+                                    },
+                                    onChooseProduct = { key, id -> chronoVm.setChoice(key, id) },
+                                    favorites = chronoFavorites
                                 )
+                            )
+                        }
+                    }
+
+                    // ── Mes produits Chronodrive (spec 003) ──────────────────
+                    composable("chronodrive_products") {
+                        val products by chronoVm.products.collectAsState()
+                        val choices by chronoVm.choices.collectAsState()
+                        val message by chronoVm.message.collectAsState()
+                        val shopping by menuVm.shopping.collectAsState()
+                        val labels = remember(shopping) { shopping.orEmpty().associate { it.key to it.label } }
+                        val picker = androidx.activity.compose.rememberLauncherForActivityResult(
+                            androidx.activity.result.contract.ActivityResultContracts.OpenDocument()
+                        ) { uri -> if (uri != null) chronoVm.import(contentResolver, uri) }
+                        Scaffold(
+                            backgroundColor = ScreenBg,
+                            topBar = { RecipeTopBar("Mes produits Chronodrive", showBack = true) { navController.popBackStack() } }
+                        ) { innerPadding ->
+                            com.example.recipelibrary.ui.ChronodriveProductsScreen(
+                                products = products,
+                                choices = choices,
+                                labelOf = { key -> com.example.recipelibrary.data.chronodrive.ChoiceLabel.of(key, labels, effectiveFoodTable) },
+                                message = message,
+                                onImport = { picker.launch(arrayOf("text/*")) },
+                                onChange = { key, id -> chronoVm.setChoice(key, id) },
+                                onForget = { key -> chronoVm.forgetChoice(key) },
+                                modifier = Modifier.padding(innerPadding)
                             )
                         }
                     }

@@ -17,6 +17,9 @@ import com.example.recipelibrary.ui.MenuActions
 import com.example.recipelibrary.ui.MenuScreen
 import com.example.recipelibrary.ui.MenuViewModel
 import com.example.recipelibrary.ui.ShoppingActions
+import com.example.recipelibrary.ui.ShoppingListView
+import com.example.recipelibrary.data.chronodrive.ChronodriveProduct
+import com.example.recipelibrary.data.chronodrive.ChronodriveResolution
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Rule
@@ -220,5 +223,153 @@ class ShoppingListScreenTest {
         // L'ajout à la main est sous le titre « Autres »
         val extra = rule.onNodeWithTag("label_extra:x0").fetchSemanticsNode().boundsInRoot.top
         assert(extra > other)
+    }
+
+    // ── Spec 003 : « Mes produits Chronodrive » (T017, T018, T033) ──
+
+    private val bananeA = ChronodriveProduct(365920, "banane", null, "Fruits et légumes", true, 0)
+    private val bananeB = ChronodriveProduct(305254, "banane", "auchan", "Fruits et légumes", true, 0)
+    private val farineP = ChronodriveProduct(123456, "farine de ble t55", "francine", "Epicerie", true, 0)
+    private val openedProducts = mutableListOf<Pair<ChronodriveProduct, String>>()
+    private val chosen = mutableListOf<Pair<String, Long>>()
+    private val resolved = mutableListOf<Pair<String, String>>()
+    private var productsOpened = 0
+
+    /** Affiche directement la vue Courses (menu de deux recettes + extras éventuels) avec les actions données. */
+    private fun showShopping(actions: ShoppingActions) {
+        menuOfTwo()
+        rule.setContent {
+            MaterialTheme {
+                val list = remember { MenuViewModel.buildList(entries.toList(), byId, table) }
+                ShoppingListView(
+                    items = list, extras = extras.toList(), menuEmpty = false, recipeCount = 2, actions = actions
+                )
+            }
+        }
+    }
+
+    private fun chronoActions(
+        resolution: ChronodriveResolution,
+        withProducts: Boolean = true,
+        favorites: List<ChronodriveProduct> = emptyList()
+    ) = ShoppingActions(
+        onChronodrive = { chronoTerms += it },
+        onOpenProducts = if (withProducts) ({ productsOpened++ }) else null,
+        resolveChrono = { k, t -> resolved += k to t; resolution },
+        onOpenProduct = { p, n -> openedProducts += p to n },
+        onChooseProduct = { k, id -> chosen += k to id },
+        favorites = favorites
+    )
+
+    @Test fun moreMenu_absentWhenOnOpenProductsNull() {
+        showShopping(chronoActions(ChronodriveResolution.None, withProducts = false))
+        rule.onNodeWithTag("shopping_more").assertDoesNotExist()
+    }
+
+    @Test fun moreMenu_present_andOpenProductsCallsCallback() {
+        showShopping(chronoActions(ChronodriveResolution.None))
+        rule.onNodeWithTag("shopping_more").assertIsDisplayed().performClick()
+        rule.onNodeWithTag("open_products").assertIsDisplayed().performClick()
+        rule.waitForIdle()
+        assertEquals(1, productsOpened)
+    }
+
+    @Test fun chrono_retained_opensProduct_noDialog() {
+        showShopping(chronoActions(ChronodriveResolution.Retained(farineP)))
+        rule.onNodeWithTag("chrono_food:9440").performClick()
+        rule.waitForIdle()
+        assertEquals(listOf(farineP), openedProducts.map { it.first })
+        assertEquals(listOf("food:9440"), resolved.map { it.first })
+        rule.onNodeWithTag("product_picker").assertDoesNotExist()
+        assertEquals(emptyList<String>(), chronoTerms)
+        assertEquals(emptyList<Pair<String, Long>>(), chosen)
+    }
+
+    @Test fun chrono_several_showsDialog_pickChoosesThenOpens() {
+        showShopping(chronoActions(ChronodriveResolution.Several(listOf(bananeA, bananeB))))
+        rule.onNodeWithTag("chrono_food:9440").performClick()
+        rule.waitForIdle()
+        rule.onNodeWithTag("product_picker").assertIsDisplayed()
+        rule.onNodeWithTag("product_305254").performClick()
+        rule.waitForIdle()
+        assertEquals(listOf("food:9440" to 305254L), chosen)
+        assertEquals(listOf(bananeB), openedProducts.map { it.first })
+        assertEquals(emptyList<String>(), chronoTerms)
+    }
+
+    @Test fun chrono_several_none_callsOnChronodrive_notOnChooseProduct() {
+        showShopping(chronoActions(ChronodriveResolution.Several(listOf(bananeA, bananeB))))
+        rule.onNodeWithTag("chrono_food:9440").performClick()
+        rule.waitForIdle()
+        rule.onNodeWithTag("picker_none").performClick()
+        rule.waitForIdle()
+        assertEquals(listOf("farine"), chronoTerms)
+        assertEquals(emptyList<Pair<String, Long>>(), chosen)
+        assertEquals(emptyList<Pair<ChronodriveProduct, String>>(), openedProducts)
+    }
+
+    @Test fun chrono_several_cancel_doesNothing() {
+        showShopping(chronoActions(ChronodriveResolution.Several(listOf(bananeA, bananeB))))
+        rule.onNodeWithTag("chrono_food:9440").performClick()
+        rule.waitForIdle()
+        rule.onNodeWithTag("picker_cancel").performClick()
+        rule.waitForIdle()
+        assertEquals(emptyList<String>(), chronoTerms)
+        assertEquals(emptyList<Pair<String, Long>>(), chosen)
+        assertEquals(emptyList<Pair<ChronodriveProduct, String>>(), openedProducts)
+    }
+
+    @Test fun chrono_none_callsOnChronodriveOnly() {
+        showShopping(chronoActions(ChronodriveResolution.None))
+        rule.onNodeWithTag("chrono_food:9440").performClick()
+        rule.waitForIdle()
+        assertEquals(listOf("farine"), chronoTerms)
+        assertEquals(emptyList<Pair<String, Long>>(), chosen)
+        assertEquals(emptyList<Pair<ChronodriveProduct, String>>(), openedProducts)
+    }
+
+    @Test fun defaultActions_keepFeature002Behaviour() {
+        showShopping(ShoppingActions(onChronodrive = { chronoTerms += it }))
+        rule.onNodeWithTag("shopping_more").assertDoesNotExist()
+        rule.onNodeWithTag("chrono_food:9440").performClick()
+        rule.waitForIdle()
+        assertEquals(listOf("farine"), chronoTerms)
+    }
+
+    @Test fun chrono_manualItem_usesTxtKey_withoutQuantity() {
+        extras += ShoppingExtra(id = "x0", text = "2 papier toilette")
+        showShopping(chronoActions(ChronodriveResolution.None))
+        rule.onNodeWithTag("shopping_list").performScrollToNode(hasTestTag("chrono_extra:x0"))
+        rule.onNodeWithTag("chrono_extra:x0").performClick()
+        rule.waitForIdle()
+        assertEquals(listOf("txt:papier toilette" to "papier toilette"), resolved)
+        assertEquals(listOf("papier toilette"), chronoTerms)
+    }
+
+    @Test fun longPress_opensFavoritesDialog_pickChoosesWithoutOpeningProduct() {
+        showShopping(chronoActions(ChronodriveResolution.None, favorites = listOf(bananeA, farineP)))
+        rule.onNodeWithTag("label_food:9440").performTouchInput { longClick() }
+        rule.waitForIdle()
+        rule.onNodeWithTag("favorites_picker").assertIsDisplayed()
+        rule.onNodeWithTag("product_123456").performClick()
+        rule.waitForIdle()
+        assertEquals(listOf("food:9440" to 123456L), chosen)
+        assertEquals(emptyList<Pair<ChronodriveProduct, String>>(), openedProducts)
+        assertEquals(emptyList<String>(), chronoTerms)
+        assertEquals(emptyList<Pair<String, String>>(), resolved)
+    }
+
+    @Test fun longPress_withoutFavorites_showsEmptyMessage() {
+        showShopping(chronoActions(ChronodriveResolution.None))
+        rule.onNodeWithTag("label_food:9440").performTouchInput { longClick() }
+        rule.waitForIdle()
+        rule.onNodeWithTag("favorites_empty").assertIsDisplayed()
+    }
+
+    @Test fun shortTapOnLabel_stillShowsSourceRecipes() {
+        showShopping(chronoActions(ChronodriveResolution.None, favorites = listOf(farineP)))
+        rule.onNodeWithTag("label_food:22000").performClick()
+        rule.onNodeWithTag("sources_food:22000").assertTextEquals("Pour : Crepes, Quiche")
+        rule.onNodeWithTag("favorites_picker").assertDoesNotExist()
     }
 }

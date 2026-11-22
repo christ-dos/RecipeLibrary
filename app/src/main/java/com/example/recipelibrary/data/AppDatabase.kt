@@ -10,9 +10,11 @@ import androidx.room.TypeConverters
         com.example.recipelibrary.data.menu.MenuEntry::class,
         com.example.recipelibrary.data.menu.ShoppingCheck::class,
         com.example.recipelibrary.data.menu.ShoppingExtra::class,
-        FoodSubstitution::class
+        FoodSubstitution::class,
+        com.example.recipelibrary.data.chronodrive.ChronodriveProduct::class,
+        com.example.recipelibrary.data.chronodrive.ProductChoice::class
     ],
-    version = 8
+    version = 9
 )
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
@@ -20,4 +22,5 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun pendingImportDao(): PendingImportDao
     abstract fun menuDao(): com.example.recipelibrary.data.menu.MenuDao
     abstract fun foodSubstitutionDao(): FoodSubstitutionDao
+    abstract fun chronodriveDao(): com.example.recipelibrary.data.chronodrive.ChronodriveDao
 }

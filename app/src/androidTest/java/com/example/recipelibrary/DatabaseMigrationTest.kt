@@ -11,6 +11,7 @@ import com.example.recipelibrary.data.MIGRATION_4_5
 import com.example.recipelibrary.data.MIGRATION_5_6
 import com.example.recipelibrary.data.MIGRATION_6_7
 import com.example.recipelibrary.data.MIGRATION_7_8
+import com.example.recipelibrary.data.MIGRATION_8_9
 import com.example.recipelibrary.data.IngredientWeight
 import com.example.recipelibrary.data.PendingImport
 import com.example.recipelibrary.data.Recipe
@@ -163,7 +164,7 @@ class DatabaseMigrationTest {
         }
 
         val migrated = Room.databaseBuilder(ctx, AppDatabase::class.java, name)
-            .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7, MIGRATION_7_8)
+            .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7, MIGRATION_7_8, MIGRATION_8_9)
             .allowMainThreadQueries()
             .build()
         try {
@@ -213,7 +214,7 @@ class DatabaseMigrationTest {
         }
 
         val migrated = Room.databaseBuilder(ctx, AppDatabase::class.java, name)
-            .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7, MIGRATION_7_8)
+            .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7, MIGRATION_7_8, MIGRATION_8_9)
             .allowMainThreadQueries()
             .build()
         try {
@@ -303,7 +304,7 @@ class DatabaseMigrationTest {
         }
 
         val migrated = Room.databaseBuilder(ctx, AppDatabase::class.java, name)
-            .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7, MIGRATION_7_8)
+            .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7, MIGRATION_7_8, MIGRATION_8_9)
             .allowMainThreadQueries()
             .build()
         try {
@@ -370,7 +371,7 @@ class DatabaseMigrationTest {
         }
 
         val migrated = Room.databaseBuilder(ctx, AppDatabase::class.java, name)
-            .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7, MIGRATION_7_8)
+            .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7, MIGRATION_7_8, MIGRATION_8_9)
             .allowMainThreadQueries()
             .build()
         try {
@@ -398,6 +399,81 @@ class DatabaseMigrationTest {
             // La nouvelle table est utilisable
             subs.upsert(com.example.recipelibrary.data.FoodSubstitution("skyr", "19590"))
             assertEquals("19590", subs.getAll().single().foodCode)
+        } finally {
+            migrated.close()
+            ctx.deleteDatabase(name)
+        }
+    }
+
+    // ── 12. Migration 8 → 9 : tout est conservé, tables Chronodrive créées et vides (spec 003) ──
+
+    @Test
+    fun migration_8_to_9_keepsEverything_chronodriveTablesEmpty() = runBlocking {
+        val ctx = InstrumentationRegistry.getInstrumentation().targetContext
+        val name = "migration-test-v8.db"
+        ctx.deleteDatabase(name)
+
+        // Base au format v8, telle que Room la créait avant Chronodrive
+        ctx.openOrCreateDatabase(name, android.content.Context.MODE_PRIVATE, null).use { raw ->
+            raw.execSQL("CREATE TABLE IF NOT EXISTS `recipes` (`id` TEXT NOT NULL, `title` TEXT NOT NULL, `source_url` TEXT, `description` TEXT, `ingredients` TEXT NOT NULL, `steps` TEXT NOT NULL, `category` TEXT, `tags` TEXT NOT NULL, `notes` TEXT, `image_url` TEXT, `created_at` INTEGER NOT NULL, `updated_at` INTEGER NOT NULL, PRIMARY KEY(`id`))")
+            raw.execSQL("ALTER TABLE recipes ADD COLUMN servings INTEGER")
+            raw.execSQL("ALTER TABLE recipes ADD COLUMN servings_source TEXT")
+            raw.execSQL("ALTER TABLE recipes ADD COLUMN ingredient_weights TEXT NOT NULL DEFAULT '{}'")
+            raw.execSQL("CREATE TABLE IF NOT EXISTS `pending_imports` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `url` TEXT NOT NULL, `status` TEXT NOT NULL, `recipe_json` TEXT, `error` TEXT, `created_at` INTEGER NOT NULL)")
+            raw.execSQL("CREATE TABLE IF NOT EXISTS `menu_entries` (`id` TEXT NOT NULL, `recipe_id` TEXT NOT NULL, `servings` INTEGER, `times` INTEGER NOT NULL DEFAULT 1, `day` INTEGER, `position` INTEGER NOT NULL, `created_at` INTEGER NOT NULL, PRIMARY KEY(`id`))")
+            raw.execSQL("CREATE INDEX IF NOT EXISTS `index_menu_entries_recipe_id` ON `menu_entries` (`recipe_id`)")
+            raw.execSQL("CREATE TABLE IF NOT EXISTS `shopping_checks` (`item_key` TEXT NOT NULL, `checked_at` INTEGER NOT NULL, PRIMARY KEY(`item_key`))")
+            raw.execSQL("CREATE TABLE IF NOT EXISTS `shopping_extras` (`id` TEXT NOT NULL, `text` TEXT NOT NULL, `checked` INTEGER NOT NULL DEFAULT 0, `position` INTEGER NOT NULL, `created_at` INTEGER NOT NULL, PRIMARY KEY(`id`))")
+            raw.execSQL("CREATE TABLE IF NOT EXISTS `food_substitutions` (`text_key` TEXT NOT NULL, `food_code` TEXT NOT NULL, `created_at` INTEGER NOT NULL, PRIMARY KEY(`text_key`))")
+            raw.execSQL(
+                "INSERT INTO recipes VALUES ('v8-full', 'Bananes rôties', NULL, 'Dessert', " +
+                    "'[\"4 bananes\",\"20 g de beurre\"]', '[\"Rôtir\"]', 'Desserts', " +
+                    "'[\"rapide\"]', NULL, NULL, 1000, 2000, 4, 'USER', " +
+                    "'{\"4 bananes\":{\"g\":480.0,\"src\":\"USER\"}}')"
+            )
+            raw.execSQL("INSERT INTO pending_imports (url, status, created_at) VALUES ('https://insta/reel/5', 'WAITING', 5000)")
+            raw.execSQL("INSERT INTO menu_entries (id, recipe_id, servings, times, day, position, created_at) VALUES ('m1', 'v8-full', 4, 1, 3, 0, 6000)")
+            raw.execSQL("INSERT INTO shopping_checks (item_key, checked_at) VALUES ('txt:farine', 7000)")
+            raw.execSQL("INSERT INTO shopping_extras (id, text, checked, position, created_at) VALUES ('x1', 'Papier toilette', 0, 0, 8000)")
+            raw.execSQL("INSERT INTO food_substitutions (text_key, food_code, created_at) VALUES ('skyr', '19590', 9000)")
+            raw.version = 8
+        }
+
+        // Room vérifie à l'ouverture que les tables créées par la migration ont exactement le schéma attendu
+        val migrated = Room.databaseBuilder(ctx, AppDatabase::class.java, name)
+            .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7, MIGRATION_7_8, MIGRATION_8_9)
+            .allowMainThreadQueries()
+            .build()
+        try {
+            assertEquals(
+                Recipe(
+                    id = "v8-full", title = "Bananes rôties", description = "Dessert",
+                    ingredients = listOf("4 bananes", "20 g de beurre"), steps = listOf("Rôtir"),
+                    category = "Desserts", tags = listOf("rapide"), createdAt = 1000L, updatedAt = 2000L,
+                    servings = 4, servingsSource = Recipe.SERVINGS_USER,
+                    ingredientWeights = mapOf("4 bananes" to IngredientWeight(480.0, IngredientWeight.USER))
+                ),
+                migrated.recipeDao().getById("v8-full")
+            )
+            assertEquals("https://insta/reel/5", migrated.pendingImportDao().nextWaiting()?.url)
+            val menu = migrated.menuDao()
+            assertEquals(3, menu.entries().single().day)
+            assertEquals(listOf("txt:farine"), menu.observeCheckedKeys().first())
+            assertEquals(listOf("Papier toilette"), menu.observeExtras().first().map { it.text })
+            assertEquals("19590", migrated.foodSubstitutionDao().getAll().single().foodCode)
+
+            val chrono = migrated.chronodriveDao()
+            assertEquals(0, chrono.products().size)
+            assertEquals(0, chrono.observeChoices().first().size)
+            // L'index des choix existe
+            migrated.openHelper.readableDatabase.query(
+                "SELECT name FROM sqlite_master WHERE type = 'index' AND name = 'index_product_choices_product_id'"
+            ).use { assertEquals(1, it.count) }
+            // Les nouvelles tables sont utilisables
+            chrono.upsertProducts(listOf(com.example.recipelibrary.data.chronodrive.ChronodriveProduct(365920, "banane", null, "Fruits", true, 1)))
+            chrono.setChoice(com.example.recipelibrary.data.chronodrive.ProductChoice("food:13005", 365920, 2))
+            assertEquals(365920L, chrono.getChoice("food:13005")?.productId)
+            assertEquals(true, chrono.getById(365920)?.stillFavorite)
         } finally {
             migrated.close()
             ctx.deleteDatabase(name)

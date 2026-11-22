@@ -1,7 +1,9 @@
 package com.example.recipelibrary.ui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -14,6 +16,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.runtime.*
@@ -37,9 +40,12 @@ import com.example.recipelibrary.data.menu.ShoppingExtra
 import com.example.recipelibrary.data.nutrition.Normalize
 import com.example.recipelibrary.data.shopping.Aisles
 import com.example.recipelibrary.data.shopping.ChronodriveSearch
+import com.example.recipelibrary.data.chronodrive.ChronodriveProduct
+import com.example.recipelibrary.data.chronodrive.ChronodriveResolution
 import com.example.recipelibrary.data.shopping.QuantityFormat
 import com.example.recipelibrary.data.shopping.ShoppingItem
 import com.example.recipelibrary.data.shopping.ShoppingText
+import kotlinx.coroutines.launch
 
 private val Violet = Color(0xFF4A16C6)
 private val VioletLight = Color(0xFFF3ECFF)
@@ -68,7 +74,18 @@ class ShoppingActions(
     val onRemoveExtra: (id: String) -> Unit = {},
     val onShare: (String) -> Unit = {},
     /** Copie le terme et ouvre Chronodrive (contracts/chronodrive-search.md). */
-    val onChronodrive: (term: String) -> Unit = {}
+    val onChronodrive: (term: String) -> Unit = {},
+    // ── Spec 003 : produits Chronodrive (valeurs par défaut = comportement 002) ──
+    /** Ouvre « Mes produits Chronodrive ». */
+    val onOpenProducts: (() -> Unit)? = null,
+    /** Que faire pour cet article : produit retenu, un ou plusieurs candidats, aucun. */
+    val resolveChrono: suspend (key: String, term: String) -> ChronodriveResolution = { _, _ -> ChronodriveResolution.None },
+    /** Ouvre la fiche du produit et copie le nom de l'article. */
+    val onOpenProduct: (product: ChronodriveProduct, itemName: String) -> Unit = { _, _ -> },
+    /** Retient (ou remplace) le produit d'un article. */
+    val onChooseProduct: (key: String, productId: Long) -> Unit = { _, _ -> },
+    /** Favoris importés, pour l'appui long « Choisir mon produit Chronodrive ». */
+    val favorites: List<ChronodriveProduct> = emptyList()
 )
 
 /**
@@ -343,7 +360,42 @@ fun ShoppingListView(
     /** Dernier article envoyé à Chronodrive (clé `food:…`, `txt:…` ou `extra:<id>`). */
     var sentKey by rememberSaveable { mutableStateOf<String?>(null) }
     var editExtra by remember { mutableStateOf<ShoppingExtra?>(null) }
+    /** Plusieurs favoris pour l'article : (clé de choix, nom, terme, candidats). */
+    var picking by remember { mutableStateOf<ChronoPick?>(null) }
+    /** Appui long : choisir à la main le produit de l'article (clé de choix, nom). */
+    var choosing by remember { mutableStateOf<Pair<String, String>?>(null) }
+    var menuOpen by remember { mutableStateOf(false) }
+    val scope = rememberCoroutineScope()
     val listState = rememberLazyListState()
+
+    /** « Chrono » (contracts/chrono-link.md) : fiche du produit retenu, choix, ou comportement 002. */
+    fun chrono(choiceKey: String, name: String, term: String) {
+        scope.launch {
+            when (val r = actions.resolveChrono(choiceKey, term)) {
+                is ChronodriveResolution.Retained -> actions.onOpenProduct(r.product, name)
+                is ChronodriveResolution.Single -> actions.onOpenProduct(r.product, name)
+                is ChronodriveResolution.Several -> picking = ChronoPick(choiceKey, name, term, r.candidates)
+                ChronodriveResolution.None -> actions.onChronodrive(term)
+            }
+        }
+    }
+
+    picking?.let { p ->
+        ProductPickerDialog(
+            itemName = p.name, candidates = p.candidates,
+            onPick = { product -> picking = null; actions.onChooseProduct(p.key, product.productId); actions.onOpenProduct(product, p.name) },
+            onNone = { picking = null; actions.onChronodrive(p.term) },
+            onCancel = { picking = null }
+        )
+    }
+    choosing?.let { (key, name) ->
+        FavoritesPickerDialog(
+            title = "Mon produit Chronodrive pour « $name »",
+            favorites = actions.favorites,
+            onPick = { product -> choosing = null; actions.onChooseProduct(key, product.productId) },
+            onCancel = { choosing = null }
+        )
+    }
     val calc = items.orEmpty()
     val shareText = ShoppingText.build(calc, extras, recipeCount)
 
@@ -365,6 +417,19 @@ fun ShoppingListView(
                 Icon(Icons.Default.Share, null, tint = Color.White, modifier = Modifier.size(18.dp))
                 Spacer(Modifier.width(4.dp))
                 Text("Partager", color = Color.White)
+            }
+            if (actions.onOpenProducts != null) {
+                Box {
+                    IconButton(onClick = { menuOpen = true }, modifier = Modifier.testTag("shopping_more")) {
+                        Icon(Icons.Default.MoreVert, contentDescription = "Plus d'options", tint = Violet)
+                    }
+                    DropdownMenu(expanded = menuOpen, onDismissRequest = { menuOpen = false }) {
+                        DropdownMenuItem(
+                            onClick = { menuOpen = false; actions.onOpenProducts.invoke() },
+                            modifier = Modifier.testTag("open_products")
+                        ) { Text("Mes produits Chronodrive") }
+                    }
+                }
             }
         }
         AddExtraField(onAdd = actions.onAddExtra)
@@ -407,7 +472,8 @@ fun ShoppingListView(
                     sources = if (openKey == item.key) sourcesText(item) else null,
                     onToggleSources = { openKey = if (openKey == item.key) null else item.key },
                     onCheck = { c -> actions.onCheck(item.key, c); if (c && sentKey == item.key) sentKey = null },
-                    onChronodrive = { sentKey = item.key; actions.onChronodrive(ChronodriveSearch.term(item)) }
+                    onChronodrive = { sentKey = item.key; chrono(ChronodriveSearch.choiceKey(item), item.label, ChronodriveSearch.term(item)) },
+                    onLongPress = { choosing = ChronodriveSearch.choiceKey(item) to item.label }
                 )
             }
             }
@@ -418,8 +484,12 @@ fun ShoppingListView(
                     highlighted = sentKey == "extra:${x.id}", sources = null,
                     onToggleSources = { editExtra = x },
                     onCheck = { c -> actions.onExtraChecked(x.id, c); if (c && sentKey == "extra:${x.id}") sentKey = null },
-                    onChronodrive = { sentKey = "extra:${x.id}"; actions.onChronodrive(ChronodriveSearch.termForExtra(x.text)) },
-                    onRemove = { actions.onRemoveExtra(x.id) }
+                    onChronodrive = {
+                        sentKey = "extra:${x.id}"
+                        chrono(ChronodriveSearch.choiceKeyForExtra(x.text), ChronodriveSearch.termForExtra(x.text), ChronodriveSearch.termForExtra(x.text))
+                    },
+                    onRemove = { actions.onRemoveExtra(x.id) },
+                    onLongPress = { choosing = ChronodriveSearch.choiceKeyForExtra(x.text) to ChronodriveSearch.termForExtra(x.text) }
                 )
             }
             if (doneItems.isNotEmpty() || doneExtras.isNotEmpty()) {
@@ -455,6 +525,7 @@ private fun itemQty(item: ShoppingItem): String = if (item.seasoning) "à vérif
 private fun sourcesText(item: ShoppingItem): String =
     "Pour : " + item.sources.joinToString(", ") { if (it.count > 1) "${it.title} ×${it.count}" else it.title }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun ItemRow(
     key: String,
@@ -466,7 +537,9 @@ private fun ItemRow(
     onToggleSources: () -> Unit,
     onCheck: (Boolean) -> Unit,
     onChronodrive: (() -> Unit)?,
-    onRemove: (() -> Unit)? = null
+    onRemove: (() -> Unit)? = null,
+    /** Spec 003 : appui long = choisir le produit Chronodrive de l'article. */
+    onLongPress: (() -> Unit)? = null
 ) {
     val textColor = if (checked) Grey else Color(0xFF1F2937)
     val deco = if (checked) TextDecoration.LineThrough else null
@@ -482,7 +555,9 @@ private fun ItemRow(
                 modifier = Modifier.testTag("check_$key")
             )
             Column(
-                Modifier.weight(1f).clickable(onClick = onToggleSources).padding(vertical = 10.dp)
+                Modifier.weight(1f)
+                    .combinedClickable(onClick = onToggleSources, onLongClick = onLongPress)
+                    .padding(vertical = 10.dp)
                     .semantics(mergeDescendants = true) {}.testTag("label_$key")
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
@@ -567,3 +642,6 @@ private fun TextDialog(title: String, initial: String, onDismiss: () -> Unit, on
         dismissButton = { TextButton(onClick = onDismiss) { Text("Annuler") } }
     )
 }
+
+/** Article en attente de choix parmi plusieurs favoris. */
+private data class ChronoPick(val key: String, val name: String, val term: String, val candidates: List<ChronodriveProduct>)
